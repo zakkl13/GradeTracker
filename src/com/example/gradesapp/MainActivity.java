@@ -1,6 +1,6 @@
 package com.example.gradesapp;
 //edited by zakk
-//also edited by Tanner
+//also edited by tanner
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.v7.app.ActionBarActivity;
