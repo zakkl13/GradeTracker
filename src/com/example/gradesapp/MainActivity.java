@@ -16,53 +16,53 @@ public class MainActivity
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
     }
-    public void class1Clicked()
+    public void class1()
     {
         Intent intent = new Intent(this, AddActivity.class);
         startActivity(intent);
 
     }
-    public void class2Clicked()
-    {
-        Intent intent = new Intent(this, AddActivity.class);
-        startActivity(intent);
-
-    }
-
-    public void class3Clicked()
+    public void class2()
     {
         Intent intent = new Intent(this, AddActivity.class);
         startActivity(intent);
 
     }
 
-    public void class4Clicked()
+    public void class3()
     {
         Intent intent = new Intent(this, AddActivity.class);
         startActivity(intent);
 
     }
-    public void newClass1Clicked()
+
+    public void class4()
+    {
+        Intent intent = new Intent(this, AddActivity.class);
+        startActivity(intent);
+
+    }
+    public void newClass1()
     {
         Intent intent = new Intent(this, Class1Activity.class);
         startActivity(intent);
 
     }
-    public void newClass2Clicked()
+    public void newClass2()
     {
         Intent intent = new Intent(this, Class2Activity.class);
         startActivity(intent);
 
     }
 
-    public void newClass3Clicked()
+    public void newClass3()
     {
         Intent intent = new Intent(this, Class3Activity.class);
         startActivity(intent);
 
     }
 
-    public void newClass4Clicked()
+    public void newClass4()
     {
         Intent intent = new Intent(this, Class4Activity.class);
         startActivity(intent);
