@@ -21,7 +21,7 @@
         android:layout_below="@+id/textView1"
         android:layout_marginTop="40dp"
         android:layout_toRightOf="@+id/textView2"
-        android:onClick="class1"
+        android:onClick="Class1"
         android:text="Class 1" />
 
     <TextView
@@ -41,7 +41,7 @@
         android:layout_alignLeft="@+id/Class1"
         android:layout_below="@+id/Class1"
         android:layout_marginTop="27dp"
-        android:onClick="class2"
+        android:onClick="Class2"
         android:text="Class 2" />
 
     <Button
@@ -51,7 +51,7 @@
         android:layout_alignLeft="@+id/Class2"
         android:layout_below="@+id/Class2"
         android:layout_marginTop="26dp"
-        android:onClick="class3"
+        android:onClick="Class3"
         android:text="Class 3" />
 
     <Button
@@ -61,7 +61,7 @@
         android:layout_alignLeft="@+id/Class3"
         android:layout_below="@+id/Class3"
         android:layout_marginTop="29dp"
-        android:onClick="class4"
+        android:onClick="Class4"
         android:text="Class 4" />
 
     <Button

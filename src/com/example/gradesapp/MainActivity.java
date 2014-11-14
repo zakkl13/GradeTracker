@@ -1,6 +1,8 @@
 package com.example.gradesapp;
 //edited by zakk
 //also edited by Tanner
+import android.view.View;
+import android.widget.EditText;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.v7.app.ActionBarActivity;
@@ -10,6 +12,8 @@ import android.view.MenuItem;
 public class MainActivity
     extends ActionBarActivity
 {
+    public final static String EXTRA_MESSAGE = "com.example.myfirstapp.MESSAGE";
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState)
@@ -17,53 +21,53 @@ public class MainActivity
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
     }
-    public void class1()
+    public void Class1(View view)
     {
         Intent intent = new Intent(this, AddActivity.class);
         startActivity(intent);
 
     }
-    public void class2()
-    {
-        Intent intent = new Intent(this, AddActivity.class);
-        startActivity(intent);
-
-    }
-
-    public void class3()
+    public void Class2(View view)
     {
         Intent intent = new Intent(this, AddActivity.class);
         startActivity(intent);
 
     }
 
-    public void class4()
+    public void Class3(View view)
     {
         Intent intent = new Intent(this, AddActivity.class);
         startActivity(intent);
 
     }
-    public void newClass1()
+
+    public void Class4(View view)
+    {
+        Intent intent = new Intent(this, AddActivity.class);
+        startActivity(intent);
+
+    }
+    public void newClass1(View view)
     {
         Intent intent = new Intent(this, Class1Activity.class);
         startActivity(intent);
 
     }
-    public void newClass2()
+    public void newClass2(View view)
     {
         Intent intent = new Intent(this, Class2Activity.class);
         startActivity(intent);
 
     }
 
-    public void newClass3()
+    public void newClass3(View view)
     {
         Intent intent = new Intent(this, Class3Activity.class);
         startActivity(intent);
 
     }
 
-    public void newClass4()
+    public void newClass4(View view)
     {
         Intent intent = new Intent(this, Class4Activity.class);
         startActivity(intent);

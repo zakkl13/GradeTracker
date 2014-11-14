@@ -14,16 +14,6 @@
         android:layout_height="wrap_content"
         android:text="Add some new grades" />
 
-    <Spinner
-        android:id="@+id/spinner1"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_alignRight="@+id/textView1"
-        android:layout_below="@+id/textView1"
-        android:layout_marginRight="29dp"
-        android:layout_marginTop="102dp"
-        android:entries="@string/hello_world" />
-
     <Button
         android:id="@+id/button1"
         android:layout_width="wrap_content"
@@ -47,7 +37,6 @@
         android:id="@+id/editText1"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_alignBottom="@+id/spinner1"
         android:layout_toRightOf="@+id/button1"
         android:ems="10"
         android:hint="Grade"
