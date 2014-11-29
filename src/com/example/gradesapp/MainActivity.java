@@ -1,80 +1,67 @@
 package com.example.gradesapp;
 //edited by zakk
 //also edited by Tanner
+import java.util.Observable;
+import java.util.Observer;
+
 import android.view.View;
+import android.widget.ArrayAdapter;
 import android.widget.EditText;
+import android.widget.Spinner;
+import android.content.Context;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.support.v7.app.ActionBarActivity;
 import android.view.Menu;
 import android.view.MenuItem;
 
 public class MainActivity
-    extends ActionBarActivity
+    extends ActionBarActivity implements Observer
 {
     public final static String EXTRA_MESSAGE = "com.example.myfirstapp.MESSAGE";
+    private Classes clss;
 
 
     @Override
     protected void onCreate(Bundle savedInstanceState)
     {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_main);
+        setContentView(R.layout.activity_main);  
+        
+		SharedPreferences classesPref = this.getSharedPreferences("Classes", Context.MODE_PRIVATE);
+        clss = new Classes();
+        clss.addObserver(this);
+        
+        int numClasses = classesPref.getInt("size", 0);
+        
+        for (int i = 0; i < numClasses; i++)
+        {
+        	clss.addClass(this.getSharedPreferences(classesPref.getString(Integer.toString(i), null), Context.MODE_PRIVATE));
+        }
+
+        Spinner spinner = (Spinner) findViewById(R.id.classSpinner);
+	    ArrayAdapter<String> adapter = new ArrayAdapter<String>(this, android.R.layout.simple_spinner_item, clss.getNameArray());
+	    adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+	    spinner.setAdapter(adapter);
+        
     }
-    public void Class1(View view)
+    public void addClass(View view)
     {
-        Intent intent = new Intent(this, AddActivity.class);
+    	Intent intent = new Intent(this, AddClass.class);
         startActivity(intent);
-
     }
-    public void Class2(View view)
+    
+    public void goToClass(View view)
     {
-        Intent intent = new Intent(this, AddActivity.class);
-        startActivity(intent);
-
+    	Spinner spinner = (Spinner)findViewById(R.id.classSpinner);
+    	String text = spinner.getSelectedItem().toString();
+    	clss.setCurClass(text);
+    	
+//    	Intent intent = new Intent(this, AddClass.class);
+//    	intent.putExtra("class", clss.getCurClass());
+//        startActivity(intent);
     }
-
-    public void Class3(View view)
-    {
-        Intent intent = new Intent(this, AddActivity.class);
-        startActivity(intent);
-
-    }
-
-    public void Class4(View view)
-    {
-        Intent intent = new Intent(this, AddActivity.class);
-        startActivity(intent);
-
-    }
-    public void newClass1(View view)
-    {
-        Intent intent = new Intent(this, Class1Activity.class);
-        startActivity(intent);
-
-    }
-    public void newClass2(View view)
-    {
-        Intent intent = new Intent(this, Class2Activity.class);
-        startActivity(intent);
-
-    }
-
-    public void newClass3(View view)
-    {
-        Intent intent = new Intent(this, Class3Activity.class);
-        startActivity(intent);
-
-    }
-
-    public void newClass4(View view)
-    {
-        Intent intent = new Intent(this, Class4Activity.class);
-        startActivity(intent);
-
-    }
-
-
 
     @Override
     public boolean onCreateOptionsMenu(Menu menu)
@@ -98,4 +85,9 @@ public class MainActivity
         }
         return super.onOptionsItemSelected(item);
     }
+	@Override
+	public void update(Observable arg0, Object arg1) {
+		// TODO Auto-generated method stub
+		
+	}
 }

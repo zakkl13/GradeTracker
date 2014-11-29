@@ -9,13 +9,13 @@
     tools:context="com.example.gradesapp.AddActivity" >
 
     <TextView
-        android:id="@+id/textView1"
+        android:id="@+id/clsName"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="Add some new grades" />
 
     <Button
-        android:id="@+id/button1"
+        android:id="@+id/addClass"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_alignParentBottom="true"
@@ -27,17 +27,17 @@
         android:id="@+id/button2"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_alignBaseline="@+id/button1"
-        android:layout_alignBottom="@+id/button1"
+        android:layout_alignBaseline="@+id/addClass"
+        android:layout_alignBottom="@+id/addClass"
         android:layout_alignParentRight="true"
         android:layout_marginRight="40dp"
         android:text="Calc" />
 
     <EditText
-        android:id="@+id/editText1"
+        android:id="@+id/className"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_toRightOf="@+id/button1"
+        android:layout_toRightOf="@+id/addClass"
         android:ems="10"
         android:hint="Grade"
         android:inputType="numberDecimal" >

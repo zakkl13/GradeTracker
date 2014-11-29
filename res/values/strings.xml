@@ -11,5 +11,7 @@
     <string name="title_activity_grade_calculator">GradeCalculatorActivity</string>
     <string name="title_activity_add">AddActivity</string>
     <string name="title_activity_view">ViewActivity</string>
+    <string name="title_activity_add_class">AddClass</string>
+    <string name="title_activity_class_display">ClassDisplay</string>
 
 </resources>

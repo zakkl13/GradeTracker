@@ -9,18 +9,18 @@
     tools:context="com.example.gradesapp.GradeCalculatorActivity" >
 
     <TextView
-        android:id="@+id/textView1"
+        android:id="@+id/clsName"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="Time to Calculate" />
 
     <TextView
-        android:id="@+id/textView2"
+        android:id="@+id/curGrade"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_alignParentLeft="true"
-        android:layout_alignRight="@+id/textView1"
-        android:layout_below="@+id/textView1"
+        android:layout_alignRight="@+id/clsName"
+        android:layout_below="@+id/clsName"
         android:layout_marginTop="50dp"
         android:text="Average 1 and what needed to maintain or raise"
         android:textAppearance="?android:attr/textAppearanceMedium" />
@@ -30,7 +30,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_alignParentLeft="true"
-        android:layout_below="@+id/textView2"
+        android:layout_below="@+id/curGrade"
         android:layout_marginTop="42dp"
         android:text="Average 2..."
         android:textAppearance="?android:attr/textAppearanceMedium" />
@@ -46,20 +46,20 @@
         android:textAppearance="?android:attr/textAppearanceMedium" />
 
     <Button
-        android:id="@+id/button1"
+        android:id="@+id/addClass"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_alignBottom="@+id/textView2"
+        android:layout_alignBottom="@+id/curGrade"
         android:layout_marginBottom="18dp"
         android:layout_marginLeft="33dp"
-        android:layout_toRightOf="@+id/textView2"
+        android:layout_toRightOf="@+id/curGrade"
         android:text="View" />
 
     <Button
         android:id="@+id/button2"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_alignRight="@+id/button1"
+        android:layout_alignRight="@+id/addClass"
         android:layout_alignTop="@+id/textView3"
         android:text="View" />
 

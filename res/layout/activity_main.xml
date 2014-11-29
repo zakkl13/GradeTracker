@@ -9,101 +9,35 @@
     tools:context="com.example.gradesapp.MainActivity" >
 
     <TextView
-        android:id="@+id/textView1"
+        android:id="@+id/clsName"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="Grades App" />
 
-    <Button
-        android:id="@+id/Class1"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_below="@+id/textView1"
-        android:layout_marginTop="40dp"
-        android:layout_toRightOf="@+id/textView2"
-        android:onClick="Class1"
-        android:text="Class 1" />
-
     <TextView
-        android:id="@+id/textView2"
+        android:id="@+id/curGrade"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_alignParentLeft="true"
-        android:layout_below="@+id/textView1"
+        android:layout_below="@+id/clsName"
         android:layout_marginTop="20dp"
         android:text="Choose your class"
         android:textAppearance="?android:attr/textAppearanceMedium" />
 
-    <Button
-        android:id="@+id/Class2"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_alignLeft="@+id/Class1"
-        android:layout_below="@+id/Class1"
-        android:layout_marginTop="27dp"
-        android:onClick="Class2"
-        android:text="Class 2" />
-
-    <Button
-        android:id="@+id/Class3"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_alignLeft="@+id/Class2"
-        android:layout_below="@+id/Class2"
-        android:layout_marginTop="26dp"
-        android:onClick="Class3"
-        android:text="Class 3" />
-
-    <Button
-        android:id="@+id/Class4"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_alignLeft="@+id/Class3"
-        android:layout_below="@+id/Class3"
-        android:layout_marginTop="29dp"
-        android:onClick="Class4"
-        android:text="Class 4" />
-
-    <Button
-        android:id="@+id/newClass1"
+    <Spinner
+        android:id="@+id/classSpinner"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_alignLeft="@+id/textView2"
-        android:layout_alignRight="@+id/newClass3"
-        android:layout_below="@+id/textView2"
-        android:onClick="newClass1"
-        android:text="New Class 1" />
+        android:layout_alignLeft="@+id/curGrade"
+        android:layout_below="@+id/curGrade" />
 
     <Button
-        android:id="@+id/newClass2"
+        android:id="@+id/addClass"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_alignBottom="@+id/Class2"
-        android:layout_alignLeft="@+id/button1"
-        android:layout_alignRight="@+id/button1"
-        android:onClick="newClass2"
-        android:text="New Class2" />
-
-    <Button
-        android:id="@+id/newClass3"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_alignBaseline="@+id/Class3"
-        android:layout_alignBottom="@+id/Class3"
-        android:layout_alignLeft="@+id/button2"
-        android:layout_alignRight="@+id/button2"
-        android:onClick="newClass3"
-        android:text="New Class 3" />
-
-    <Button
-        android:id="@+id/newClass4"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_alignBaseline="@+id/Class4"
-        android:layout_alignBottom="@+id/Class4"
-        android:layout_alignLeft="@+id/button3"
-        android:layout_alignRight="@+id/button3"
-        android:onClick="newClass4"
-        android:text="New Class 4" />
+        android:layout_alignLeft="@+id/classSpinner"
+        android:layout_below="@+id/classSpinner"
+        android:onClick="addClass"
+        android:text="Add Class" />
 
 </RelativeLayout>

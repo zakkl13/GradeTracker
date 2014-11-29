@@ -50,6 +50,14 @@
             android:name=".ViewActivity"
             android:label="@string/title_activity_view" >
         </activity>
+        <activity
+            android:name=".AddClass"
+            android:label="@string/title_activity_add_class" >
+        </activity>
+        <activity
+            android:name=".ClassDisplay"
+            android:label="@string/title_activity_class_display" >
+        </activity>
     </application>
 
 </manifest>
