@@ -9,7 +9,7 @@ import android.view.MenuItem;
 
 // -------------------------------------------------------------------------
 /**
- *  Description of class
+ *  Description of class.
  *
  *  @author Zakk Lefkowitz
  *  @author Jason Barrett

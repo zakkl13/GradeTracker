@@ -21,8 +21,10 @@ import android.widget.RadioGroup;
  *  @author Tanner Hudson
  *  @version 2014.11.30
  */
+/**
+ */
 public class AddClassActivity extends ActionBarActivity {
-	RadioGroup RadioGroup;
+	private RadioGroup RadioGroup;
 
 	/**
 	 * Description of onCreate method.
