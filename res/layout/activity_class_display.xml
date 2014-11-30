@@ -6,17 +6,7 @@
     android:paddingLeft="@dimen/activity_horizontal_margin"
     android:paddingRight="@dimen/activity_horizontal_margin"
     android:paddingTop="@dimen/activity_vertical_margin"
-    tools:context="com.example.gradesapp.ClassDisplay" >
-
-    <TextView
-        android:id="@+id/clsName"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_alignParentTop="true"
-        android:layout_centerHorizontal="true"
-        android:layout_marginTop="29dp"
-        android:text="Large Text"
-        android:textAppearance="?android:attr/textAppearanceLarge" />
+    tools:context="com.example.gradesapp.ClassDisplayActivity" >
 
     <Button
         android:id="@+id/addAssignment"
@@ -48,5 +38,24 @@
         android:layout_toRightOf="@+id/textView1"
         android:text="Medium Text"
         android:textAppearance="?android:attr/textAppearanceMedium" />
+
+    <TextView
+        android:id="@+id/clsName"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentTop="true"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="39dp"
+        android:text="Large Text"
+        android:textAppearance="?android:attr/textAppearanceLarge" />
+
+    <TextView
+        android:id="@+id/hours"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/clsName"
+        android:layout_centerHorizontal="true"
+        android:text="Credit Hours:"
+        android:textAppearance="?android:attr/textAppearanceSmall" />
 
 </RelativeLayout>

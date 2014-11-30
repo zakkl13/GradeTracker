@@ -1,47 +1,32 @@
 package com.example.gradesapp;
 
 import java.util.Observable;
-import java.util.Observer;
 
-import android.support.v7.app.ActionBarActivity;
-import android.os.Bundle;
-import android.view.Menu;
-import android.view.MenuItem;
+import android.content.SharedPreferences;
 
-public class ClassDisplay extends ActionBarActivity implements Observer {
-	Classes clss;
+/**
+ * Model for the class display activity
+ * 
+ * @author Zakk
+ *
+ */
+public class ClassDisplay extends Observable {
+	private Class thisClass;
+	private SharedPreferences classPref;
 
-	@Override
-	protected void onCreate(Bundle savedInstanceState) {
-		super.onCreate(savedInstanceState);
-		setContentView(R.layout.activity_class_display);
-		clss = new Classes();
-		clss.addObserver(this);
-		
+	public ClassDisplay (SharedPreferences classPref)
+	{
+		this.classPref = classPref;
+		thisClass = new Class(classPref.getInt("crHrs", 0), classPref.getBoolean("passFail", false), classPref.getString("name", null));
+		thisClass.setGrade(classPref.getFloat("grade", 0));
 	}
-
-	@Override
-	public boolean onCreateOptionsMenu(Menu menu) {
-		// Inflate the menu; this adds items to the action bar if it is present.
-		getMenuInflater().inflate(R.menu.class_display, menu);
-		return true;
+	
+	public Class rtrnClass()
+	{
+		return thisClass;
 	}
-
-	@Override
-	public boolean onOptionsItemSelected(MenuItem item) {
-		// Handle action bar item clicks here. The action bar will
-		// automatically handle clicks on the Home/Up button, so long
-		// as you specify a parent activity in AndroidManifest.xml.
-		int id = item.getItemId();
-		if (id == R.id.action_settings) {
-			return true;
-		}
-		return super.onOptionsItemSelected(item);
-	}
-
-	@Override
-	public void update(Observable arg0, Object arg1) {
-		// TODO Auto-generated method stub
-		
-	}
+	
+	
+	
+	
 }

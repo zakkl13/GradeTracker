@@ -8,6 +8,7 @@ public class Class {
 	boolean passFail;
 	String name;
 	ArrayList<Assignment> assignments;
+	float grade;
 	
 	public Class(int numCrHrs, boolean passFail, String name)
 	{
@@ -17,6 +18,13 @@ public class Class {
 		assignments = new ArrayList<Assignment>();
 	}
 	
+	public void addAssignment(Assignment assgn)
+	{
+		
+	}
+	
+	
+	//Getters and Setters
 	public int getNumCrHrs() {
 		return numCrHrs;
 	}
@@ -47,6 +55,16 @@ public class Class {
 
 	public void setAssignments(ArrayList<Assignment> assignments) {
 		this.assignments = assignments;
+	}
+	
+	public void setGrade(float grade)
+	{
+		this.grade = grade;
+	}
+	
+	public float getGrade()
+	{
+		return grade;
 	}
 
 }

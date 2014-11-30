@@ -40,4 +40,14 @@
         android:onClick="addClass"
         android:text="Add Class" />
 
+    <Button
+        android:id="@+id/button1"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignRight="@+id/classSpinner"
+        android:layout_alignTop="@+id/classSpinner"
+        android:layout_marginRight="33dp"
+        android:onClick="goToClass"
+        android:text="Go" />
+
 </RelativeLayout>

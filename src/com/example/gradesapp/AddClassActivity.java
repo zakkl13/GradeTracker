@@ -13,7 +13,7 @@ import android.widget.EditText;
 import android.widget.RadioButton;
 import android.widget.RadioGroup;
 
-public class AddClass extends ActionBarActivity {
+public class AddClassActivity extends ActionBarActivity {
 	RadioGroup RadioGroup;
 
 	@Override
@@ -43,25 +43,32 @@ public class AddClass extends ActionBarActivity {
 	
 	public void clsAdd(View v)
 	{
-//		RadioGroup = (RadioGroup) findViewById(R.id.radioGroup1);
-//		int selectedId = RadioGroup.getCheckedRadioButtonId();
+		//This code block checks which radio button is selected in the radio group
+		RadioGroup = (RadioGroup) findViewById(R.id.radioGroup1);
+		int selectedId = RadioGroup.getCheckedRadioButtonId();
 		boolean passFail = false;
-//		if (selectedId == 0)
-//		{
-//			passFail = true;
-//		}
+		if (selectedId == 0)
+		{
+			passFail = true;
+		}
 		
+		//Get references to edit text fields
 		EditText crHours = (EditText) findViewById(R.id.crHours);
 		EditText className = (EditText) findViewById(R.id.className);
 		
+		//Create a class object with the information from the editText fields
 		Class cls = new Class(Integer.parseInt(crHours.getText().toString()), passFail, className.getText().toString());
 		
+		//Edit the "Classes" shared preferences, holds a "size" key with the number of classes
+		//And a list of classes where the key is a number
 		SharedPreferences classesPref = getSharedPreferences("Classes", Context.MODE_PRIVATE);
 		Editor editorCP = classesPref.edit();
-		editorCP.putInt("size", classesPref.getInt("size", 0) + 1);
-		editorCP.putString(Integer.toString(classesPref.getInt("size", 0)), cls.getName());
+		editorCP.putInt("size", classesPref.getInt("size", 0) + 1); //increases size by 1
+		editorCP.putString(Integer.toString(classesPref.getInt("size", 0)), cls.getName()); //adds a new key with the class name
 		editorCP.commit();
 		
+		//Creates a new SharedPreference with the name being the class name
+		//Used to hold the classes attributes
 		SharedPreferences thisClassPref = getSharedPreferences(cls.getName(), Context.MODE_PRIVATE);
 		Editor editorTCP = thisClassPref.edit();
 		editorTCP.putString("name", cls.getName());
@@ -69,6 +76,7 @@ public class AddClass extends ActionBarActivity {
 		editorTCP.putInt("crHrs", cls.getNumCrHrs());
 		editorTCP.commit();
 		
+		//Return to main activity menu
 		Intent intent = new Intent(this, MainActivity.class);
         startActivity(intent);
 
