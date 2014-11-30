@@ -5,10 +5,22 @@ import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuItem;
 
+// -------------------------------------------------------------------------
+/**
+ *  Description of class.
+ *
+ *  @author Zakk Lefkowitz
+ *  @author Jason Barrett
+ *  @author Tanner Hudson (tannerh4)
+ *  @version 2014.11.30
+ */
 public class AddAssignmentWeight
     extends ActionBarActivity
 {
-
+    /**
+     * Description of onCreate method.
+     * @param savedInstanceState The saved state of the instance
+     */
     @Override
     protected void onCreate(Bundle savedInstanceState)
     {
@@ -16,7 +28,10 @@ public class AddAssignmentWeight
         setContentView(R.layout.activity_add_assignment_weight);
     }
 
-
+    /**
+     * Description of onCreateOptionsMenu method.
+     * @param menu The menu
+     */
     @Override
     public boolean onCreateOptionsMenu(Menu menu)
     {
@@ -25,7 +40,10 @@ public class AddAssignmentWeight
         return true;
     }
 
-
+    /**
+     * Description of onOptionsItemSelected method.
+     * @param item The individual item in the menu
+     */
     @Override
     public boolean onOptionsItemSelected(MenuItem item)
     {
