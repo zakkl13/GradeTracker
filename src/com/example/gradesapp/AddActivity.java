@@ -7,33 +7,63 @@ import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuItem;
 
+// -------------------------------------------------------------------------
+/**
+ *  Description of class
+ *
+ *  @author Zakk Lefkowitz
+ *  @author Jason Barrett
+ *  @author Tanner Hudson (tannerh4)
+ *  @version 2014.11.30
+ */
 public class AddActivity
     extends ActionBarActivity
 {
-
+    /**
+     * Description of onCreate method.
+     * @param savedInstanceState A saved state of the instance
+     */
     @Override
     protected void onCreate(Bundle savedInstanceState)
     {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_add);
     }
+    // ----------------------------------------------------------
+    /**
+     * Description of button2 method.
+     * @param view The view
+     */
     public void button2(View view)
     {
         Intent intent = new Intent(this, GradeCalculatorActivity.class);
         startActivity(intent);
     }
+    // ----------------------------------------------------------
+    /**
+     * Description of addAnother method.
+     * @param view The view
+     */
     public void addAnother(View view)
     {
         Intent intent = new Intent(this, AddActivity.class);
         startActivity(intent);
     }
+    // ----------------------------------------------------------
+    /**
+     * Description of addCat method.
+     * @param view The view
+     */
     public void addCat(View view)
     {
         Intent intent = new Intent(this, AddAssignmentWeight.class);
         startActivity(intent);
     }
 
-
+    /**
+     * Description of the onCreateOptionsMenu method.
+     * @param menu The menu of the app
+     */
     @Override
     public boolean onCreateOptionsMenu(Menu menu)
     {
@@ -42,7 +72,10 @@ public class AddActivity
         return true;
     }
 
-
+    /**
+     * Description of the onOptionsItemSelected method.
+     * @param item The individual item in the menu
+     */
     @Override
     public boolean onOptionsItemSelected(MenuItem item)
     {
