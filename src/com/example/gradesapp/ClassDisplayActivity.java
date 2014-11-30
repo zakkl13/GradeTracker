@@ -1,5 +1,6 @@
 package com.example.gradesapp;
 
+import android.view.View;
 import java.util.Observable;
 import java.util.Observer;
 
@@ -14,7 +15,7 @@ import android.widget.Spinner;
 import android.widget.TextView;
 
 /**
- * 
+ *
  * @author Zakk
  * @version 2014.11.29
  */
@@ -30,23 +31,23 @@ public class ClassDisplayActivity extends ActionBarActivity implements Observer 
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.activity_class_display);
-		
-		String curClass = null;		
+
+		String curClass = null;
 		Intent inte = getIntent();
 		Bundle b = inte.getExtras();
 		if (b != null)
 		{
 			curClass = (String) b.get("class");
 		}
-		
+
 		SharedPreferences sPref = this.getSharedPreferences(curClass, Context.MODE_PRIVATE);
-		
+
 		clsDisp = new ClassDisplay(sPref);
 		clsDisp.addObserver(this);
-		
-		updateDisplay();		
+
+		updateDisplay();
 	}
-	
+
 	/**
 	 * Updates the display with the current class
 	 */
@@ -54,14 +55,23 @@ public class ClassDisplayActivity extends ActionBarActivity implements Observer 
 	{
 		TextView name = (TextView) findViewById(R.id.clsName);
 		name.setText(clsDisp.rtrnClass().getName());
-		
+
 		TextView grade = (TextView) findViewById(R.id.curGrade);
 		//TODO parse float to String below
 		//grade.setText(clsDisp.getClass().getGrade());
-		
+
 		TextView hours = (TextView) findViewById(R.id.hours);
 		hours.setText("Credit Hours: " + clsDisp.rtrnClass().getNumCrHrs());
 	}
+    /**
+     * Opens the addClass Activity
+     * @param view the button
+     */
+    public void addAssignment(View view)
+    {
+        Intent intent = new Intent(this, AddActivity.class);
+        startActivity(intent);
+    }
 
 	@Override
 	public boolean onCreateOptionsMenu(Menu menu) {
@@ -85,6 +95,6 @@ public class ClassDisplayActivity extends ActionBarActivity implements Observer 
 	@Override
 	public void update(Observable arg0, Object arg1) {
 		// TODO Auto-generated method stub
-		
+
 	}
 }

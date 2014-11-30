@@ -8,44 +8,17 @@
     android:paddingTop="@dimen/activity_vertical_margin"
     tools:context="com.example.gradesapp.AddClassActivity" >
 
-    <TextView
-        android:id="@+id/curGrade"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_alignLeft="@+id/clsName"
-        android:layout_below="@+id/clsName"
-        android:layout_marginTop="28dp"
-        android:text="Credit Hours:" />
-
-    <TextView
-        android:id="@+id/clsName"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_alignParentTop="true"
-        android:layout_marginTop="42dp"
-        android:layout_toLeftOf="@+id/categoryName"
-        android:text="Class Name:" />
-
     <EditText
         android:id="@+id/categoryName"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_alignBottom="@+id/clsName"
         android:layout_alignParentRight="true"
-        android:ems="10" >
+        android:ems="10"
+        android:hint="i.e. Test" >
 
         <requestFocus />
     </EditText>
-
-    <EditText
-        android:id="@+id/percent"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_alignBottom="@+id/curGrade"
-        android:layout_alignParentRight="true"
-        android:layout_below="@+id/categoryName"
-        android:ems="10"
-        android:inputType="number" />
 
     <RadioGroup
         android:id="@+id/radioGroup1"
@@ -61,29 +34,38 @@
         android:id="@+id/catAdd"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_below="@+id/aF"
+        android:layout_below="@+id/curGrade"
         android:layout_centerHorizontal="true"
         android:layout_marginTop="42dp"
         android:onClick="clsAdd"
-        android:text="Add Class" />
+        android:text="Add Category" />
 
-    <RadioButton
-        android:id="@+id/passFail"
+    <EditText
+        android:id="@+id/percent"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_below="@+id/curGrade"
-        android:layout_marginTop="34dp"
-        android:layout_toLeftOf="@+id/aF"
-        android:text="Pass/Fail" />
+        android:layout_above="@+id/catAdd"
+        android:layout_alignLeft="@+id/categoryName"
+        android:ems="10"
+        android:hint="Percentage"
+        android:inputType="number" />
 
-    <RadioButton
-        android:id="@+id/aF"
+    <TextView
+        android:id="@+id/curGrade"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_alignBaseline="@+id/passFail"
-        android:layout_alignBottom="@+id/passFail"
-        android:layout_alignRight="@+id/radioGroup1"
-        android:checked="true"
-        android:text="A-F" />
+        android:layout_alignParentLeft="true"
+        android:layout_below="@+id/clsName"
+        android:layout_marginTop="30dp"
+        android:text="Percentage" />
+
+    <TextView
+        android:id="@+id/clsName"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignLeft="@+id/curGrade"
+        android:layout_alignParentTop="true"
+        android:layout_marginTop="58dp"
+        android:text="Catergory" />
 
 </RelativeLayout>

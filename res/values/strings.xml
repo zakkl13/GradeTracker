@@ -13,5 +13,6 @@
     <string name="title_activity_view">ViewActivity</string>
     <string name="title_activity_add_class">AddClass</string>
     <string name="title_activity_class_display">ClassDisplay</string>
+    <string name="title_activity_add_assignment_weight">AddAssignmentWeight</string>
 
 </resources>

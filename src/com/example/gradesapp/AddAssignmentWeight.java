@@ -1,13 +1,11 @@
 package com.example.gradesapp;
 
-import android.view.View;
-import android.content.Intent;
 import android.support.v7.app.ActionBarActivity;
 import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuItem;
 
-public class AddActivity
+public class AddAssignmentWeight
     extends ActionBarActivity
 {
 
@@ -15,22 +13,7 @@ public class AddActivity
     protected void onCreate(Bundle savedInstanceState)
     {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_add);
-    }
-    public void button2(View view)
-    {
-        Intent intent = new Intent(this, GradeCalculatorActivity.class);
-        startActivity(intent);
-    }
-    public void addAnother(View view)
-    {
-        Intent intent = new Intent(this, AddActivity.class);
-        startActivity(intent);
-    }
-    public void addCat(View view)
-    {
-        Intent intent = new Intent(this, AddAssignmentWeight.class);
-        startActivity(intent);
+        setContentView(R.layout.activity_add_assignment_weight);
     }
 
 
@@ -38,7 +21,7 @@ public class AddActivity
     public boolean onCreateOptionsMenu(Menu menu)
     {
         // Inflate the menu; this adds items to the action bar if it is present.
-        getMenuInflater().inflate(R.menu.add, menu);
+        getMenuInflater().inflate(R.menu.add_assignment_weight, menu);
         return true;
     }
 

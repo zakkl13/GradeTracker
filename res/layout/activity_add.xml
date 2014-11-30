@@ -8,12 +8,6 @@
     android:paddingTop="@dimen/activity_vertical_margin"
     tools:context="com.example.gradesapp.AddActivity" >
 
-    <TextView
-        android:id="@+id/clsName"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="Add some new grades" />
-
     <Button
         android:id="@+id/addClass"
         android:layout_width="wrap_content"
@@ -21,6 +15,7 @@
         android:layout_alignParentBottom="true"
         android:layout_alignParentLeft="true"
         android:layout_marginBottom="96dp"
+        android:onClick="addAnother"
         android:text="Add Another" />
 
     <Button
@@ -31,18 +26,53 @@
         android:layout_alignBottom="@+id/addClass"
         android:layout_alignParentRight="true"
         android:layout_marginRight="40dp"
+        android:onClick="button2"
         android:text="Calc" />
 
-    <EditText
-        android:id="@+id/className"
+    <Spinner
+        android:id="@+id/categories"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_toRightOf="@+id/addClass"
+        android:layout_alignLeft="@+id/clsName"
+        android:layout_alignParentTop="true"
+        android:layout_marginTop="36dp" />
+
+    <TextView
+        android:id="@+id/textView1"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignLeft="@+id/categories"
+        android:layout_alignParentTop="true"
+        android:layout_marginTop="17dp"
+        android:text="Choose your category"
+        android:textAppearance="?android:attr/textAppearanceMedium" />
+
+    <EditText
+        android:id="@+id/categoryName"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignLeft="@+id/addClass"
+        android:layout_centerVertical="true"
         android:ems="10"
         android:hint="Grade"
-        android:inputType="numberDecimal" >
+        android:inputType="numberDecimal" />
 
-        <requestFocus />
-    </EditText>
+    <TextView
+        android:id="@+id/clsName"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_above="@+id/categoryName"
+        android:layout_alignLeft="@+id/categoryName"
+        android:layout_marginBottom="22dp"
+        android:text="Add some new grades" />
+
+    <Button
+        android:id="@+id/addCat"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignBottom="@+id/categories"
+        android:layout_alignLeft="@+id/button2"
+        android:onClick="addCat"
+        android:text="Add Category" />
 
 </RelativeLayout>

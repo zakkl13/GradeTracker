@@ -58,6 +58,10 @@
             android:name=".ClassDisplayActivity"
             android:label="@string/title_activity_class_display" >
         </activity>
+        <activity
+            android:name=".AddAssignmentWeight"
+            android:label="@string/title_activity_add_assignment_weight" >
+        </activity>
     </application>
 
 </manifest>
