@@ -3,13 +3,13 @@ package com.example.gradesapp;
 import java.util.ArrayList;
 
 public class Class {
-	
-	int numCrHrs;
-	boolean passFail;
-	String name;
-	ArrayList<Assignment> assignments;
-	float grade;
-	
+
+	private int numCrHrs;
+	private boolean passFail;
+	private String name;
+	private ArrayList<Assignment> assignments;
+	private float grade;
+
 	public Class(int numCrHrs, boolean passFail, String name)
 	{
 		this.numCrHrs = numCrHrs;
@@ -17,13 +17,13 @@ public class Class {
 		this.name = name;
 		assignments = new ArrayList<Assignment>();
 	}
-	
+
 	public void addAssignment(Assignment assgn)
 	{
-		
+
 	}
-	
-	
+
+
 	//Getters and Setters
 	public int getNumCrHrs() {
 		return numCrHrs;
@@ -56,12 +56,12 @@ public class Class {
 	public void setAssignments(ArrayList<Assignment> assignments) {
 		this.assignments = assignments;
 	}
-	
+
 	public void setGrade(float grade)
 	{
 		this.grade = grade;
 	}
-	
+
 	public float getGrade()
 	{
 		return grade;
