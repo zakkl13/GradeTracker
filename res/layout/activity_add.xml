@@ -47,25 +47,6 @@
         android:text="Choose your category"
         android:textAppearance="?android:attr/textAppearanceMedium" />
 
-    <EditText
-        android:id="@+id/categoryName"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_alignLeft="@+id/addClass"
-        android:layout_centerVertical="true"
-        android:ems="10"
-        android:hint="Grade"
-        android:inputType="numberDecimal" />
-
-    <TextView
-        android:id="@+id/clsName"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_above="@+id/categoryName"
-        android:layout_alignLeft="@+id/categoryName"
-        android:layout_marginBottom="22dp"
-        android:text="Add some new grades" />
-
     <Button
         android:id="@+id/addCat"
         android:layout_width="wrap_content"
@@ -74,5 +55,39 @@
         android:layout_alignLeft="@+id/button2"
         android:onClick="addCat"
         android:text="Add Category" />
+
+    <TextView
+        android:id="@+id/clsName"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignLeft="@+id/addClass"
+        android:layout_below="@+id/categories"
+        android:layout_marginTop="58dp"
+        android:text="Add some new grades" />
+
+    <EditText
+        android:id="@+id/categoryName"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignLeft="@+id/button2"
+        android:layout_alignRight="@+id/categories"
+        android:layout_centerVertical="true"
+        android:ems="10"
+        android:hint="ex: 15/20"
+        android:inputType="numberDecimal" >
+
+        <requestFocus />
+    </EditText>
+
+    <EditText
+        android:id="@+id/gradeName"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignBaseline="@+id/categoryName"
+        android:layout_alignBottom="@+id/categoryName"
+        android:layout_alignLeft="@+id/clsName"
+        android:layout_alignRight="@+id/clsName"
+        android:ems="10"
+        android:hint="Name" />
 
 </RelativeLayout>
