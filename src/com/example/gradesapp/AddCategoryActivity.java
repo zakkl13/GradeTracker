@@ -49,8 +49,9 @@ public class AddCategoryActivity
         EditText catName = (EditText) findViewById(R.id.categoryName);
 
         //Create a class object with the information from the editText fields
-        Category cat = new Category(Integer.parseInt(percent.getText().toString()), catName.getText().toString());
-        
+        Category cat = new Category(Integer.parseInt(percent.getText().
+            toString()), catName.getText().toString());
+
         thisClass.addCategory(cat);
 
         //Return to main activity menu
@@ -67,7 +68,7 @@ public class AddCategoryActivity
     @Override
     public boolean onCreateOptionsMenu(Menu menu)
     {
-        // Inflate the menu; this adds items to the action bar if it is present.
+        // Inflate the menu; this adds items to the action bar if it is present
         getMenuInflater().inflate(R.menu.add_assignment_weight, menu);
         return true;
     }

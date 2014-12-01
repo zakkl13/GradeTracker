@@ -44,23 +44,29 @@ public class AddActivity
         {
             curClass = (String) b.get("name");
         }
-        SharedPreferences classCategoriesPref = this.getSharedPreferences("Categories" + curClass, Context.MODE_PRIVATE);
+        SharedPreferences classCategoriesPref = this.getSharedPreferences(
+            "Categories" + curClass, Context.MODE_PRIVATE);
         cat = new Categories();
         cat.addObserver(this);
 
         //Get a reference to the number of categories
         int numClasses = classCategoriesPref.getInt("size", 0);
 
-        //runs through the sharedpreferences and adds each class to the model's array
+        //runs through the sharedpreferences and adds each class to the model's
+        //array
         for (int i = 0; i < numClasses; i++)
         {
-            cat.addCategory(this.getSharedPreferences(classCategoriesPref.getString(Integer.toString(i), null), Context.MODE_PRIVATE));
+            cat.addCategory(this.getSharedPreferences(classCategoriesPref.
+                getString(Integer.toString(i), null), Context.MODE_PRIVATE));
         }
 
-        //Sets the spinner to display the string array of the names of the classes
+        //Sets the spinner to display the string array of the names of the
+        //classes
         Spinner spinner = (Spinner) findViewById(R.id.categories);
-        ArrayAdapter<String> adapter = new ArrayAdapter<String>(this, android.R.layout.simple_spinner_item, cat.getNameArray());
-        adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+        ArrayAdapter<String> adapter = new ArrayAdapter<String>(this, android.
+            R.layout.simple_spinner_item, cat.getNameArray());
+        adapter.setDropDownViewResource(android.R.layout.
+            simple_spinner_dropdown_item);
         spinner.setAdapter(adapter);
     }
     // ----------------------------------------------------------
@@ -102,7 +108,7 @@ public class AddActivity
     @Override
     public boolean onCreateOptionsMenu(Menu menu)
     {
-        // Inflate the menu; this adds items to the action bar if it is present.
+        // Inflate the menu; this adds items to the action bar if it is present
         getMenuInflater().inflate(R.menu.add, menu);
         return true;
     }

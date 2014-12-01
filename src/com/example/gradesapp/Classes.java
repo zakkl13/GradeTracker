@@ -30,7 +30,8 @@ public class Classes extends Observable implements Parcelable {
 	}
 
 	/**
-	 * Adds a class to the array from its sharedPreference (created in the add class activity)
+	 * Adds a class to the array from its sharedPreference (created in the
+	 * add class activity)
 	 * @param sharedPref
 	 */
 	public void addClass(Class cls)
@@ -117,7 +118,8 @@ public class Classes extends Observable implements Parcelable {
     }
 
     @SuppressWarnings("unused")
-    public static final Parcelable.Creator<Classes> CREATOR = new Parcelable.Creator<Classes>() {
+    public static final Parcelable.Creator<Classes> CREATOR =
+    new Parcelable.Creator<Classes>() {
         @Override
         public Classes createFromParcel(Parcel in) {
             return new Classes(in);

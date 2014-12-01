@@ -86,7 +86,8 @@ public class Category implements Parcelable {
     }
 
     @SuppressWarnings("unused")
-    public static final Parcelable.Creator<Category> CREATOR = new Parcelable.Creator<Category>() {
+    public static final Parcelable.Creator<Category> CREATOR =
+    new Parcelable.Creator<Category>() {
         @Override
         public Category createFromParcel(Parcel in) {
             return new Category(in);
