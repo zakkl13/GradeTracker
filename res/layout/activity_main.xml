@@ -44,9 +44,9 @@
         android:id="@+id/addCat"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_alignLeft="@+id/addClass"
-        android:layout_below="@+id/addClass"
-        android:layout_marginTop="106dp"
+        android:layout_below="@+id/button1"
+        android:layout_marginLeft="25dp"
+        android:layout_toRightOf="@+id/curGrade"
         android:onClick="goToClass"
         android:text="Go" />
 
@@ -54,8 +54,9 @@
         android:id="@+id/button1"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_alignLeft="@+id/addCat"
-        android:layout_centerVertical="true"
+        android:layout_alignLeft="@+id/addClass"
+        android:layout_below="@+id/addClass"
+        android:layout_marginTop="45dp"
         android:onClick="deleteClass"
         android:text="Delete Class" />
 

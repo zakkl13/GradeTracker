@@ -81,7 +81,7 @@ public class AddGradesActivity
     public void addCat(View view)
     {
         Intent intent = new Intent(this, AddCategoryActivity.class);
-        intent.putExtra("name", thisClass);
+        intent.putExtra("class", thisClass);
         startActivity(intent);
     }
     
