@@ -27,31 +27,14 @@ public class Assignment implements Parcelable {
 	 * @param totPts      The total points the assignment is worth
 	 * @param ptsRecieved The points received on the assignment
 	 */
-	public Assignment(int weight, String name, int totPts, int ptsRecieved)
+	public Assignment( String name, int totPts, int ptsRecieved)
 	{
-		this.weight = weight;
 		this.name = name;
 		this.totPts = totPts;
 		this.ptsRecieved = ptsRecieved;
 	}
 
-	// ----------------------------------------------------------
-	/**
-	 * Gets the weights of the assignment.
-	 * @return Returns the value of the weight
-	 */
-	public int getWeight() {
-		return weight;
-	}
 
-	// ----------------------------------------------------------
-	/**
-	 * Sets the weight of the assignment.
-	 * @param weight The assignment's weight
-	 */
-	public void setWeight(int weight) {
-		this.weight = weight;
-	}
 
 	// ----------------------------------------------------------
 	/**

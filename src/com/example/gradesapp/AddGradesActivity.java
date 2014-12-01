@@ -31,7 +31,7 @@ public class AddGradesActivity
 {
     private Class thisClass;
     private ArrayList<Category> categories;
-    
+
     /**
      * Description of onCreate method.
      * @param savedInstanceState A saved state of the instance
@@ -41,26 +41,27 @@ public class AddGradesActivity
     {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_add);
-        
+
         Intent inte = getIntent();
         Bundle b = inte.getExtras();
 		if (b != null)
 		{
 			thisClass = (Class) b.getParcelable("class");
 		}
-		
+
 		categories = thisClass.getCats();
         updateSpinner();
-		
+
     }
     // ----------------------------------------------------------
     /**
-     * Description of button2 method.
+     * Description of button2 method. CALC BUTTON
      * @param view The view
      */
     public void button2(View view)
     {
-        Intent intent = new Intent(this, GradeCalculatorActivity.class);
+
+        Intent intent = new Intent(this, ClassDisplayActivity.class);
         startActivity(intent);
     }
     // ----------------------------------------------------------
@@ -84,7 +85,7 @@ public class AddGradesActivity
         intent.putExtra("class", thisClass);
         startActivity(intent);
     }
-    
+
     public void updateSpinner()
     {
     	String[] cats = new String[categories.size()];
@@ -92,7 +93,7 @@ public class AddGradesActivity
 		{
 			cats[i] = categories.get(i).getName();
 		}
-		
+
 		//Sets the spinner to display the string array of the names of the classes
         Spinner spinner = (Spinner) findViewById(R.id.categories);
         ArrayAdapter<String> adapter = new ArrayAdapter<String>(this, android.R.layout.simple_spinner_item, cats);
