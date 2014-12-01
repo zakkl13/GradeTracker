@@ -37,7 +37,7 @@
         android:layout_below="@+id/curGrade"
         android:layout_centerHorizontal="true"
         android:layout_marginTop="42dp"
-        android:onClick="clsAdd"
+        android:onClick="catAdd"
         android:text="Add Category" />
 
     <EditText

@@ -12,7 +12,6 @@ import android.view.Menu;
 import android.view.MenuItem;
 
 // -------------------------------------------------------------------------
-// -------------------------------------------------------------------------
 /**
  *  Description of class.
  *
@@ -33,7 +32,7 @@ public class AddCategoryActivity
     protected void onCreate(Bundle savedInstanceState)
     {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_add_assignment_weight);
+        setContentView(R.layout.activity_add_category);
         Intent inte = getIntent();
         Bundle b = inte.getExtras();
         if (b != null)
@@ -54,7 +53,7 @@ public class AddCategoryActivity
 
         //Edit the "Classes" shared preferences, holds a "size" key with the number of classes
         //And a list of classes where the key is a number
-        SharedPreferences curClassCategories = getSharedPreferences("Category" + curClass, Context.MODE_PRIVATE);
+        SharedPreferences curClassCategories = getSharedPreferences("Categories" + curClass, Context.MODE_PRIVATE);
         Editor editorCP = curClassCategories.edit();
         editorCP.putInt("size", curClassCategories.getInt("size", 0) + 1); //increases size by 1
         editorCP.putString(Integer.toString(curClassCategories.getInt("size", 0)), cat.getName()); //adds a new key with the class name

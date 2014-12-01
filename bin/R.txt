@@ -341,7 +341,7 @@ int layout abc_search_dropdown_item_icons_2line 0x7f030015
 int layout abc_search_view 0x7f030016
 int layout abc_simple_decor 0x7f030017
 int layout activity_add 0x7f030018
-int layout activity_add_assignment_weight 0x7f030019
+int layout activity_add_category 0x7f030019
 int layout activity_add_class 0x7f03001a
 int layout activity_class_display 0x7f03001b
 int layout activity_grade_calculator 0x7f03001c
