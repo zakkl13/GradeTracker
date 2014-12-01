@@ -47,10 +47,10 @@ public class AddGradesActivity
 		if (b != null)
 		{
 			thisClass = (Class) b.getParcelable("class");
-			categories = thisClass.getCats();
-	        updateSpinner();
 		}
 		
+		categories = thisClass.getCats();
+        updateSpinner();
 		
     }
     // ----------------------------------------------------------

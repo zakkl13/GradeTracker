@@ -131,8 +131,7 @@ public class Class implements Parcelable {
 	{
 		return grade;
 	}
-
-
+	
     protected Class(Parcel in) {
         numCrHrs = in.readInt();
         passFail = in.readByte() != 0x00;
@@ -166,8 +165,7 @@ public class Class implements Parcelable {
     }
 
     @SuppressWarnings("unused")
-    public static final Parcelable.Creator<Class> CREATOR =
-    new Parcelable.Creator<Class>() {
+    public static final Parcelable.Creator<Class> CREATOR = new Parcelable.Creator<Class>() {
         @Override
         public Class createFromParcel(Parcel in) {
             return new Class(in);

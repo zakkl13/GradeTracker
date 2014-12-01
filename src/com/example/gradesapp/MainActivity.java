@@ -46,7 +46,12 @@ public class MainActivity
 	    	clss = new Classes();
 	    }
 
-        //Sets the spinner to display the string array of the names of the
+        updateSpinner();
+
+    }
+
+	private void updateSpinner() {
+		//Sets the spinner to display the string array of the names of the
 	    //classes
         Spinner spinner = (Spinner) findViewById(R.id.classSpinner);
 	    ArrayAdapter<String> adapter = new ArrayAdapter<String>(this, android.
@@ -54,8 +59,7 @@ public class MainActivity
 	    adapter.setDropDownViewResource(android.R.layout.
 	        simple_spinner_dropdown_item);
 	    spinner.setAdapter(adapter);
-
-    }
+	}
 
     /**
      * Opens the addClass Activity
@@ -92,8 +96,7 @@ public class MainActivity
 
     	clss.deleteClass();
 
-    	Intent intent = new Intent(this, MainActivity.class);
-        startActivity(intent);
+    	updateSpinner();
     }
 
     @Override

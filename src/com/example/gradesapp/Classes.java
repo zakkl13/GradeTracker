@@ -43,7 +43,7 @@ public class Classes extends Observable implements Parcelable {
 
 	public void deleteClass()
 	{
-		clsArray.remove(curClass);
+		clsArray.remove(getCurClass());
 
 		notifyObservers();
 
