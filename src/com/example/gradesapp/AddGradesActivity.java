@@ -1,5 +1,6 @@
 package com.example.gradesapp;
 
+import java.util.ArrayList;
 import java.util.Observable;
 import java.util.Observer;
 
@@ -25,10 +26,12 @@ import android.view.MenuItem;
  *  @author Tanner Hudson (tannerh4)
  *  @version 2014.11.30
  */
-public class AddActivity
+public class AddGradesActivity
     extends ActionBarActivity implements Observer
 {
-    private Class curClass;
+    private Class thisClass;
+    private ArrayList<Category> categories;
+    
     /**
      * Description of onCreate method.
      * @param savedInstanceState A saved state of the instance
@@ -38,30 +41,17 @@ public class AddActivity
     {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_add);
+        
         Intent inte = getIntent();
         Bundle b = inte.getExtras();
-        if (b != null)
-        {
-            curClass = (String) b.get("name");
-        }
-        SharedPreferences classCategoriesPref = this.getSharedPreferences("Categories" + curClass, Context.MODE_PRIVATE);
-        cat = new Categories();
-        cat.addObserver(this);
-
-        //Get a reference to the number of categories
-        int numClasses = classCategoriesPref.getInt("size", 0);
-
-        //runs through the sharedpreferences and adds each class to the model's array
-        for (int i = 0; i < numClasses; i++)
-        {
-            cat.addCategory(this.getSharedPreferences(classCategoriesPref.getString(Integer.toString(i), null), Context.MODE_PRIVATE));
-        }
-
-        //Sets the spinner to display the string array of the names of the classes
-        Spinner spinner = (Spinner) findViewById(R.id.categories);
-        ArrayAdapter<String> adapter = new ArrayAdapter<String>(this, android.R.layout.simple_spinner_item, cat.getNameArray());
-        adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
-        spinner.setAdapter(adapter);
+		if (b != null)
+		{
+			thisClass = (Class) b.getParcelable("class");
+			categories = thisClass.getCats();
+	        updateSpinner();
+		}
+		
+		
     }
     // ----------------------------------------------------------
     /**
@@ -80,7 +70,7 @@ public class AddActivity
      */
     public void addAnother(View view)
     {
-        Intent intent = new Intent(this, AddActivity.class);
+        Intent intent = new Intent(this, AddGradesActivity.class);
         startActivity(intent);
     }
     // ----------------------------------------------------------
@@ -91,8 +81,23 @@ public class AddActivity
     public void addCat(View view)
     {
         Intent intent = new Intent(this, AddCategoryActivity.class);
-        intent.putExtra("name", curClass);
+        intent.putExtra("name", thisClass);
         startActivity(intent);
+    }
+    
+    public void updateSpinner()
+    {
+    	String[] cats = new String[categories.size()];
+		for (int i = 0; i < categories.size(); i++)
+		{
+			cats[i] = categories.get(i).getName();
+		}
+		
+		//Sets the spinner to display the string array of the names of the classes
+        Spinner spinner = (Spinner) findViewById(R.id.categories);
+        ArrayAdapter<String> adapter = new ArrayAdapter<String>(this, android.R.layout.simple_spinner_item, cats);
+        adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+        spinner.setAdapter(adapter);
     }
 
     /**

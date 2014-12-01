@@ -54,7 +54,7 @@ public class AddCategoryActivity
         thisClass.addCategory(cat);
 
         //Return to main activity menu
-        Intent intent = new Intent(this, AddActivity.class);
+        Intent intent = new Intent(this, AddGradesActivity.class);
         intent.putExtra("class", thisClass);
         startActivity(intent);
 

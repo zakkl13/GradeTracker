@@ -43,7 +43,7 @@
             android:label="@string/title_activity_grade_calculator" >
         </activity>
         <activity
-            android:name=".AddActivity"
+            android:name=".AddGradesActivity"
             android:label="@string/title_activity_add" >
         </activity>
         <activity
