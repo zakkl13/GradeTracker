@@ -23,7 +23,7 @@ public class Categories extends Observable {
      */
     public Categories()
     {
-        catArray = new ArrayList<Catergory>();
+        catArray = new ArrayList<Category>();
     }
 
     /**
