@@ -9,14 +9,14 @@
     tools:context="com.example.gradesapp.ClassDisplayActivity" >
 
     <Button
-        android:id="@+id/addAssignment"
+        android:id="@+id/addGrades"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_alignParentBottom="true"
         android:layout_centerHorizontal="true"
         android:layout_marginBottom="88dp"
-        android:onClick="addAssignment"        
-        android:text="Add Assigment" />
+        android:onClick="addAssignment"
+        android:text="Add Grades" />
 
     <TextView
         android:id="@+id/textView1"

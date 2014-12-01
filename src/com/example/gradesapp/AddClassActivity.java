@@ -1,5 +1,6 @@
 package com.example.gradesapp;
 
+import br.com.kots.mob.complex.preferences.ComplexPreferences;
 import android.support.v7.app.ActionBarActivity;
 import android.content.Context;
 import android.content.Intent;
@@ -25,6 +26,7 @@ import android.widget.RadioGroup;
  */
 public class AddClassActivity extends ActionBarActivity {
 	private RadioGroup RadioGroup;
+	Classes clss;
 
 	/**
 	 * Description of onCreate method.
@@ -34,6 +36,12 @@ public class AddClassActivity extends ActionBarActivity {
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.activity_add_class);
+		Intent inte = getIntent();
+		Bundle b = inte.getExtras();
+		if (b != null)
+		{
+			clss = (Classes) b.getParcelable("Classes");
+		}
 	}
 
 	/**
@@ -84,23 +92,12 @@ public class AddClassActivity extends ActionBarActivity {
 
 		//Create a class object with the information from the editText fields
 		Class cls = new Class(Integer.parseInt(crHours.getText().toString()), passFail, className.getText().toString());
-
-		//Edit the "Classes" shared preferences, holds a "size" key with the number of classes
-		//And a list of classes where the key is a number
-		SharedPreferences classesPref = getSharedPreferences("Classes", Context.MODE_PRIVATE);
-		Editor editorCP = classesPref.edit();
-		editorCP.putInt("size", classesPref.getInt("size", 0) + 1); //increases size by 1
-		editorCP.putString(Integer.toString(classesPref.getInt("size", 0)), cls.getName()); //adds a new key with the class name
-		editorCP.commit();
-
-		//Creates a new SharedPreference with the name being the class name
-		//Used to hold the classes attributes
-		SharedPreferences thisClassPref = getSharedPreferences(cls.getName(), Context.MODE_PRIVATE);
-		Editor editorTCP = thisClassPref.edit();
-		editorTCP.putString("name", cls.getName());
-		editorTCP.putBoolean("passFail", passFail);
-		editorTCP.putInt("crHrs", cls.getNumCrHrs());
-		editorTCP.commit();
+		
+		clss.addClass(cls);
+		
+	    ComplexPreferences complexPreferences = ComplexPreferences.getComplexPreferences(this, "Classes", MODE_PRIVATE);
+	    complexPreferences.putObject("Model", clss);
+	    complexPreferences.commit();
 
 		//Return to main activity menu
 		Intent intent = new Intent(this, MainActivity.class);
@@ -108,3 +105,4 @@ public class AddClassActivity extends ActionBarActivity {
 
 	}
 }
+

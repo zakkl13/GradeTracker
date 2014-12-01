@@ -1,5 +1,8 @@
 package com.example.gradesapp;
 
+import android.os.Parcel;
+import android.os.Parcelable;
+
 // -------------------------------------------------------------------------
 /**
  *  Creates a new Assignment.
@@ -9,7 +12,7 @@ package com.example.gradesapp;
  *  @author Tanner Hudson
  *  @version 2014.11.30
  */
-public class Assignment {
+public class Assignment implements Parcelable {
 
 	private int weight;
 	private String name;
@@ -103,7 +106,37 @@ public class Assignment {
 	public void setPtsRecieved(int ptsRecieved) {
 		this.ptsRecieved = ptsRecieved;
 	}
+	
+    protected Assignment(Parcel in) {
+        weight = in.readInt();
+        name = in.readString();
+        totPts = in.readInt();
+        ptsRecieved = in.readInt();
+    }
 
+    @Override
+    public int describeContents() {
+        return 0;
+    }
 
+    @Override
+    public void writeToParcel(Parcel dest, int flags) {
+        dest.writeInt(weight);
+        dest.writeString(name);
+        dest.writeInt(totPts);
+        dest.writeInt(ptsRecieved);
+    }
 
+    @SuppressWarnings("unused")
+    public static final Parcelable.Creator<Assignment> CREATOR = new Parcelable.Creator<Assignment>() {
+        @Override
+        public Assignment createFromParcel(Parcel in) {
+            return new Assignment(in);
+        }
+
+        @Override
+        public Assignment[] newArray(int size) {
+            return new Assignment[size];
+        }
+    };
 }

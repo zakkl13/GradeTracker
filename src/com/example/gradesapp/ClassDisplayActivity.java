@@ -20,7 +20,6 @@ import android.widget.TextView;
  * @version 2014.11.29
  */
 public class ClassDisplayActivity extends ActionBarActivity implements Observer {
-	private ClassDisplay clsDisp;
 	private Class thisClass;
 	private String cName = null;
 
@@ -33,19 +32,13 @@ public class ClassDisplayActivity extends ActionBarActivity implements Observer 
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.activity_class_display);
 
-		String curClass = null;
 		Intent inte = getIntent();
 		Bundle b = inte.getExtras();
 		if (b != null)
 		{
-			curClass = (String) b.get("class");
+			thisClass = (Class) b.getParcelable("class");
 		}
-
-		SharedPreferences sPref = this.getSharedPreferences(curClass, Context.MODE_PRIVATE);
-
-		clsDisp = new ClassDisplay(sPref);
-		clsDisp.addObserver(this);
-
+		
 		updateDisplay();
 	}
 
@@ -55,7 +48,7 @@ public class ClassDisplayActivity extends ActionBarActivity implements Observer 
 	public void updateDisplay()
 	{
 		TextView name = (TextView) findViewById(R.id.clsName);
-		name.setText(clsDisp.rtrnClass().getName());
+		name.setText(thisClass.getName());
 		cName = (String)name.getText();
 
 		TextView grade = (TextView) findViewById(R.id.curGrade);
@@ -63,16 +56,16 @@ public class ClassDisplayActivity extends ActionBarActivity implements Observer 
 		//grade.setText(clsDisp.getClass().getGrade());
 
 		TextView hours = (TextView) findViewById(R.id.hours);
-		hours.setText("Credit Hours: " + clsDisp.rtrnClass().getNumCrHrs());
+		hours.setText("Credit Hours: " + thisClass.getNumCrHrs());
 	}
     /**
      * Opens the addClass Activity
      * @param view the button
      */
-    public void addAssignment(View view)
+    public void addGrades(View view)
     {
         Intent intent = new Intent(this, AddActivity.class);
-        intent.putExtra("name", cName);
+        intent.putExtra("class", thisClass);
         startActivity(intent);
     }
 

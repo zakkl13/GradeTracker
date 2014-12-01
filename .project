@@ -3,6 +3,7 @@
 	<name>GradesApp</name>
 	<comment></comment>
 	<projects>
+		<project>android-complex-preferences</project>
 	</projects>
 	<buildSpec>
 		<buildCommand>

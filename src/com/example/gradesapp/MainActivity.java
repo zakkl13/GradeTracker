@@ -4,6 +4,8 @@ package com.example.gradesapp;
 import java.util.Observable;
 import java.util.Observer;
 
+import br.com.kots.mob.complex.preferences.ComplexPreferences;
+
 import android.view.View;
 import android.widget.ArrayAdapter;
 import android.widget.EditText;
@@ -22,7 +24,6 @@ public class MainActivity
 {
     public final static String EXTRA_MESSAGE = "com.example.myfirstapp.MESSAGE";
     private Classes clss;
-    private SharedPreferences classesPref;
 
     @Override
     /**
@@ -33,19 +34,15 @@ public class MainActivity
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
-        //Retrieve the list of classes
-		classesPref = this.getSharedPreferences("Classes", Context.MODE_PRIVATE);
-        clss = new Classes();
-        clss.addObserver(this);
-
-        //Get a reference to the number of classes
-        int numClasses = classesPref.getInt("size", 0);
-
-        //runs through the sharedpreferences and adds each class to the model's array
-        for (int i = 0; i < numClasses; i++)
-        {
-        	clss.addClass(this.getSharedPreferences(classesPref.getString(Integer.toString(i), null), Context.MODE_PRIVATE));
-        }
+        clss = null;
+        
+	    ComplexPreferences complexPreferences = ComplexPreferences.getComplexPreferences(this, "Classes", MODE_PRIVATE);
+	    clss = complexPreferences.getObject("Model", Classes.class);
+	    
+	    if (clss == null)
+	    {
+	    	clss = new Classes();
+	    }
 
         //Sets the spinner to display the string array of the names of the classes
         Spinner spinner = (Spinner) findViewById(R.id.classSpinner);
@@ -62,19 +59,22 @@ public class MainActivity
     public void addClass(View view)
     {
     	Intent intent = new Intent(this, AddClassActivity.class);
+    	intent.putExtra("Classes", clss);
         startActivity(intent);
     }
 
     /**
      * Gets the selected class and passes it via Intent Extras to the Class Display View
      * @param view the button
-     */
+     */							
     public void goToClass(View view)
     {
     	Spinner spinner = (Spinner) findViewById(R.id.classSpinner);
     	String curClass = (String) spinner.getSelectedItem();
+    	clss.setCurClass(curClass);
+    	
     	Intent intent = new Intent(this, ClassDisplayActivity.class);
-    	intent.putExtra("class", curClass);
+    	intent.putExtra("class", clss.getCurClass());
         startActivity(intent);
     }
 
@@ -82,10 +82,9 @@ public class MainActivity
     {
     	Spinner spinner = (Spinner) findViewById(R.id.classSpinner);
     	String curClass = (String) spinner.getSelectedItem();
+    	clss.setCurClass(curClass);
 
-		SharedPreferences deleteClassPref = this.getSharedPreferences(curClass, Context.MODE_PRIVATE);
-
-    	clss.deleteClass(classesPref, deleteClassPref);
+    	clss.deleteClass();
 
     	Intent intent = new Intent(this, MainActivity.class);
         startActivity(intent);

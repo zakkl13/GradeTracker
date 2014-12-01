@@ -23,7 +23,7 @@ import android.view.MenuItem;
 public class AddCategoryActivity
     extends ActionBarActivity
 {
-    private String curClass;
+    private Class thisClass;
     /**
      * Description of onCreate method.
      * @param savedInstanceState The saved state of the instance
@@ -34,11 +34,11 @@ public class AddCategoryActivity
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_add_category);
         Intent inte = getIntent();
-        Bundle b = inte.getExtras();
-        if (b != null)
-        {
-            curClass = (String) b.get("name");
-        }
+		Bundle b = inte.getExtras();
+		if (b != null)
+		{
+			thisClass = (Class) b.getParcelable("class");
+		}
     }
     public void catAdd(View v)
     {
@@ -50,26 +50,12 @@ public class AddCategoryActivity
 
         //Create a class object with the information from the editText fields
         Category cat = new Category(Integer.parseInt(percent.getText().toString()), catName.getText().toString());
-
-        //Edit the "Classes" shared preferences, holds a "size" key with the number of classes
-        //And a list of classes where the key is a number
-        SharedPreferences curClassCategories = getSharedPreferences("Categories" + curClass, Context.MODE_PRIVATE);
-        Editor editorCP = curClassCategories.edit();
-        editorCP.putInt("size", curClassCategories.getInt("size", 0) + 1); //increases size by 1
-        editorCP.putString(Integer.toString(curClassCategories.getInt("size", 0)), cat.getName()); //adds a new key with the class name
-        editorCP.commit();
-
-        //Creates a new SharedPreference with the name being the class name
-        //Used to hold the classes attributes
-        SharedPreferences thisCatPref = getSharedPreferences(cat.getName(), Context.MODE_PRIVATE);
-        Editor editorTCP = thisCatPref.edit();
-        editorTCP.putInt("percent", cat.getWeight());
-        editorTCP.putString("name", cat.getName());
-        editorTCP.commit();
+        
+        thisClass.addCategory(cat);
 
         //Return to main activity menu
         Intent intent = new Intent(this, AddActivity.class);
-        intent.putExtra("name", curClass);
+        intent.putExtra("class", thisClass);
         startActivity(intent);
 
     }

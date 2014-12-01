@@ -28,8 +28,7 @@ import android.view.MenuItem;
 public class AddActivity
     extends ActionBarActivity implements Observer
 {
-    private String curClass;
-    private Categories cat;
+    private Class curClass;
     /**
      * Description of onCreate method.
      * @param savedInstanceState A saved state of the instance

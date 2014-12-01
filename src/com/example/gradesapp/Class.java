@@ -2,6 +2,9 @@ package com.example.gradesapp;
 
 import java.util.ArrayList;
 
+import android.os.Parcel;
+import android.os.Parcelable;
+
 // -------------------------------------------------------------------------
 /**
  *  Creates a new Class.
@@ -11,12 +14,12 @@ import java.util.ArrayList;
  *  @author Tanner Hudson (tannerh4)
  *  @version 2014.11.14
  */
-public class Class {
+public class Class implements Parcelable {
 
 	private int numCrHrs;
 	private boolean passFail;
 	private String name;
-	private ArrayList<Assignment> assignments;
+	private ArrayList<Category> categories;
 	private float grade;
 
 	// ----------------------------------------------------------
@@ -31,7 +34,7 @@ public class Class {
 		this.numCrHrs = numCrHrs;
 		this.passFail = passFail;
 		this.name = name;
-		assignments = new ArrayList<Assignment>();
+		this.categories = new ArrayList<Category>();
 	}
 
 	// ----------------------------------------------------------
@@ -39,9 +42,9 @@ public class Class {
 	 * Setup for adding assignments.
 	 * @param assgn An assignment object
 	 */
-	public void addAssignment(Assignment assgn)
+	public void addCategory(Category cat)
 	{
-	    //Intentionally blank
+	    categories.add(cat);
 	}
 
 
@@ -105,17 +108,8 @@ public class Class {
 	 * Gets a list of all the assignments that have been input.
 	 * @return Returns a list of assignments
 	 */
-	public ArrayList<Assignment> getAssignments() {
-		return assignments;
-	}
-
-	// ----------------------------------------------------------
-	/**
-	 * Sets the list of assignments.
-	 * @param assignments The list of assignments
-	 */
-	public void setAssignments(ArrayList<Assignment> assignments) {
-		this.assignments = assignments;
+	public ArrayList<Category> getCats() {
+		return categories;
 	}
 
 	// ----------------------------------------------------------
@@ -138,4 +132,49 @@ public class Class {
 		return grade;
 	}
 
+
+    protected Class(Parcel in) {
+        numCrHrs = in.readInt();
+        passFail = in.readByte() != 0x00;
+        name = in.readString();
+        if (in.readByte() == 0x01) {
+            categories = new ArrayList<Category>();
+            in.readList(categories, Category.class.getClassLoader());
+        } else {
+            categories = null;
+        }
+        grade = in.readFloat();
+    }
+
+    @Override
+    public int describeContents() {
+        return 0;
+    }
+
+    @Override
+    public void writeToParcel(Parcel dest, int flags) {
+        dest.writeInt(numCrHrs);
+        dest.writeByte((byte) (passFail ? 0x01 : 0x00));
+        dest.writeString(name);
+        if (categories == null) {
+            dest.writeByte((byte) (0x00));
+        } else {
+            dest.writeByte((byte) (0x01));
+            dest.writeList(categories);
+        }
+        dest.writeFloat(grade);
+    }
+
+    @SuppressWarnings("unused")
+    public static final Parcelable.Creator<Class> CREATOR = new Parcelable.Creator<Class>() {
+        @Override
+        public Class createFromParcel(Parcel in) {
+            return new Class(in);
+        }
+
+        @Override
+        public Class[] newArray(int size) {
+            return new Class[size];
+        }
+    };
 }
