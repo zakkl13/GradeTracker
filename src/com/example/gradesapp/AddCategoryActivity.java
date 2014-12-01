@@ -21,7 +21,7 @@ import android.view.MenuItem;
  *  @author Tanner Hudson (tannerh4)
  *  @version 2014.11.30
  */
-public class AddAssignmentWeight
+public class AddCategoryActivity
     extends ActionBarActivity
 {
     private String curClass;
@@ -54,16 +54,16 @@ public class AddAssignmentWeight
 
         //Edit the "Classes" shared preferences, holds a "size" key with the number of classes
         //And a list of classes where the key is a number
-        SharedPreferences classesPref = getSharedPreferences("Category" + curClass, Context.MODE_PRIVATE);
-        Editor editorCP = classesPref.edit();
-        editorCP.putInt("size", classesPref.getInt("size", 0) + 1); //increases size by 1
-        editorCP.putString(Integer.toString(classesPref.getInt("size", 0)), cat.getName()); //adds a new key with the class name
+        SharedPreferences curClassCategories = getSharedPreferences("Category" + curClass, Context.MODE_PRIVATE);
+        Editor editorCP = curClassCategories.edit();
+        editorCP.putInt("size", curClassCategories.getInt("size", 0) + 1); //increases size by 1
+        editorCP.putString(Integer.toString(curClassCategories.getInt("size", 0)), cat.getName()); //adds a new key with the class name
         editorCP.commit();
 
         //Creates a new SharedPreference with the name being the class name
         //Used to hold the classes attributes
-        SharedPreferences thisClassPref = getSharedPreferences(cat.getName(), Context.MODE_PRIVATE);
-        Editor editorTCP = thisClassPref.edit();
+        SharedPreferences thisCatPref = getSharedPreferences(cat.getName(), Context.MODE_PRIVATE);
+        Editor editorTCP = thisCatPref.edit();
         editorTCP.putInt("percent", cat.getWeight());
         editorTCP.putString("name", cat.getName());
         editorTCP.commit();

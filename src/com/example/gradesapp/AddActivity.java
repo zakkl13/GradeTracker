@@ -45,17 +45,17 @@ public class AddActivity
         {
             curClass = (String) b.get("name");
         }
-        SharedPreferences classesPref = this.getSharedPreferences("Categories" + curClass, Context.MODE_PRIVATE);
+        SharedPreferences classCategoriesPref = this.getSharedPreferences("Categories" + curClass, Context.MODE_PRIVATE);
         cat = new Categories();
         cat.addObserver(this);
 
-        //Get a reference to the number of classes
-        int numClasses = classesPref.getInt("size", 0);
+        //Get a reference to the number of categories
+        int numClasses = classCategoriesPref.getInt("size", 0);
 
         //runs through the sharedpreferences and adds each class to the model's array
         for (int i = 0; i < numClasses; i++)
         {
-            cat.addCategory(this.getSharedPreferences(classesPref.getString(Integer.toString(i), null), Context.MODE_PRIVATE));
+            cat.addCategory(this.getSharedPreferences(classCategoriesPref.getString(Integer.toString(i), null), Context.MODE_PRIVATE));
         }
 
         //Sets the spinner to display the string array of the names of the classes
@@ -91,7 +91,7 @@ public class AddActivity
      */
     public void addCat(View view)
     {
-        Intent intent = new Intent(this, AddAssignmentWeight.class);
+        Intent intent = new Intent(this, AddCategoryActivity.class);
         intent.putExtra("name", curClass);
         startActivity(intent);
     }
