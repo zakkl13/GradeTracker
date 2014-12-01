@@ -34,7 +34,6 @@ public class Categories extends Observable {
     {
         Category cat = new Category(sharedPref.getInt("weight", 0), sharedPref.getString("name", null));
         catArray.add(cat);
-
         notifyObservers();
     }
 
