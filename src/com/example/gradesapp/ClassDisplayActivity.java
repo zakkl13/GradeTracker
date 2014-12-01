@@ -19,7 +19,8 @@ import android.widget.TextView;
  * @author Zakk
  * @version 2014.11.29
  */
-public class ClassDisplayActivity extends ActionBarActivity implements Observer {
+public class ClassDisplayActivity extends ActionBarActivity
+implements Observer {
 	private Class thisClass;
 	private String cName = null;
 
@@ -38,7 +39,7 @@ public class ClassDisplayActivity extends ActionBarActivity implements Observer 
 		{
 			thisClass = (Class) b.getParcelable("class");
 		}
-		
+
 		updateDisplay();
 	}
 
@@ -71,7 +72,7 @@ public class ClassDisplayActivity extends ActionBarActivity implements Observer 
 
 	@Override
 	public boolean onCreateOptionsMenu(Menu menu) {
-		// Inflate the menu; this adds items to the action bar if it is present.
+		// Inflate the menu; this adds items to the action bar if it is present
 		getMenuInflater().inflate(R.menu.class_display, menu);
 		return true;
 	}

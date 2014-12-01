@@ -50,7 +50,7 @@ public class AddClassActivity extends ActionBarActivity {
 	 */
 	@Override
 	public boolean onCreateOptionsMenu(Menu menu) {
-		// Inflate the menu; this adds items to the action bar if it is present.
+		// Inflate the menu; this adds items to the action bar if it is present
 		getMenuInflater().inflate(R.menu.add_class, menu);
 		return true;
 	}
@@ -77,7 +77,8 @@ public class AddClassActivity extends ActionBarActivity {
 	 */
 	public void clsAdd(View v)
 	{
-		//This code block checks which radio button is selected in the radio group
+		//This code block checks which radio button is selected in the radio
+	    //group
 		RadioGroup = (RadioGroup) findViewById(R.id.radioGroup1);
 		int selectedId = RadioGroup.getCheckedRadioButtonId();
 		boolean passFail = false;
@@ -91,11 +92,13 @@ public class AddClassActivity extends ActionBarActivity {
 		EditText className = (EditText) findViewById(R.id.categoryName);
 
 		//Create a class object with the information from the editText fields
-		Class cls = new Class(Integer.parseInt(crHours.getText().toString()), passFail, className.getText().toString());
-		
+		Class cls = new Class(Integer.parseInt(crHours.getText().toString()),
+		    passFail, className.getText().toString());
+
 		clss.addClass(cls);
-		
-	    ComplexPreferences complexPreferences = ComplexPreferences.getComplexPreferences(this, "Classes", MODE_PRIVATE);
+
+	    ComplexPreferences complexPreferences = ComplexPreferences.
+	        getComplexPreferences(this, "Classes", MODE_PRIVATE);
 	    complexPreferences.putObject("Model", clss);
 	    complexPreferences.commit();
 
