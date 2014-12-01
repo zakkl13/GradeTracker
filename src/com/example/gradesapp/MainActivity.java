@@ -22,6 +22,7 @@ public class MainActivity
 {
     public final static String EXTRA_MESSAGE = "com.example.myfirstapp.MESSAGE";
     private Classes clss;
+    private SharedPreferences classesPref;
 
     @Override
     /**
@@ -33,7 +34,7 @@ public class MainActivity
         setContentView(R.layout.activity_main);  
         
         //Retrieve the list of classes
-		SharedPreferences classesPref = this.getSharedPreferences("Classes", Context.MODE_PRIVATE);
+		classesPref = this.getSharedPreferences("Classes", Context.MODE_PRIVATE);
         clss = new Classes();
         clss.addObserver(this);
         
@@ -75,6 +76,19 @@ public class MainActivity
     	
     	Intent intent = new Intent(this, ClassDisplayActivity.class);
     	intent.putExtra("class", curClass);
+        startActivity(intent);
+    }
+    
+    public void deleteClass(View view)
+    {
+    	Spinner spinner = (Spinner) findViewById(R.id.classSpinner);
+    	String curClass = (String) spinner.getSelectedItem(); 
+    	
+		SharedPreferences deleteClassPref = this.getSharedPreferences(curClass, Context.MODE_PRIVATE);
+    	
+    	clss.deleteClass(classesPref, deleteClassPref);    	
+    	
+    	Intent intent = new Intent(this, MainActivity.class);
         startActivity(intent);
     }
 

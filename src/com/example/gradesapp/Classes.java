@@ -38,6 +38,27 @@ public class Classes extends Observable {
 		notifyObservers();
 	}
 	
+	public void deleteClass(SharedPreferences classesPref, SharedPreferences deleteClassPref)
+	{
+		String name = deleteClassPref.getString("name", null);
+		Editor classEditor = classesPref.edit();
+		classEditor.remove(name);
+		classEditor.putInt("size", classesPref.getInt("size", 0) - 1);
+		
+		deleteClassPref.edit().clear().commit();
+		
+		for (int i = 0; i < clsArray.size(); i++)
+		{
+			if (clsArray.get(i).getName() == name)
+			{
+				clsArray.remove(i);
+			}
+		}
+		
+		notifyObservers();
+		
+	}
+	
 	/**
 	 * Returns a string array of the names of each class for use in the spinner
 	 * @return a string array of class names

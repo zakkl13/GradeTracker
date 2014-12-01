@@ -44,10 +44,19 @@
         android:id="@+id/addCat"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_alignRight="@+id/classSpinner"
-        android:layout_alignTop="@+id/classSpinner"
-        android:layout_marginRight="33dp"
+        android:layout_alignLeft="@+id/addClass"
+        android:layout_below="@+id/addClass"
+        android:layout_marginTop="106dp"
         android:onClick="goToClass"
         android:text="Go" />
+
+    <Button
+        android:id="@+id/button1"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignLeft="@+id/addCat"
+        android:layout_centerVertical="true"
+        android:onClick="deleteClass"
+        android:text="Delete Class" />
 
 </RelativeLayout>
