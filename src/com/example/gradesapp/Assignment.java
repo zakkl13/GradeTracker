@@ -2,7 +2,7 @@ package com.example.gradesapp;
 
 // -------------------------------------------------------------------------
 /**
- *  Description of the Assignment class.
+ *  Creates a new Assignment.
  *
  *  @author Zakk Lefkowitz
  *  @author Jason Barrett
