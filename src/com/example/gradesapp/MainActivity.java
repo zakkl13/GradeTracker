@@ -31,16 +31,16 @@ public class MainActivity
     protected void onCreate(Bundle savedInstanceState)
     {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_main);  
-        
+        setContentView(R.layout.activity_main);
+
         //Retrieve the list of classes
 		classesPref = this.getSharedPreferences("Classes", Context.MODE_PRIVATE);
         clss = new Classes();
         clss.addObserver(this);
-        
+
         //Get a reference to the number of classes
         int numClasses = classesPref.getInt("size", 0);
-        
+
         //runs through the sharedpreferences and adds each class to the model's array
         for (int i = 0; i < numClasses; i++)
         {
@@ -52,9 +52,9 @@ public class MainActivity
 	    ArrayAdapter<String> adapter = new ArrayAdapter<String>(this, android.R.layout.simple_spinner_item, clss.getNameArray());
 	    adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
 	    spinner.setAdapter(adapter);
-        
+
     }
-    
+
     /**
      * Opens the addClass Activity
      * @param view the button
@@ -64,30 +64,29 @@ public class MainActivity
     	Intent intent = new Intent(this, AddClassActivity.class);
         startActivity(intent);
     }
-    
+
     /**
-     * Gets the selected class and passes it via Intent Extras to the Class Display View 
+     * Gets the selected class and passes it via Intent Extras to the Class Display View
      * @param view the button
      */
     public void goToClass(View view)
     {
     	Spinner spinner = (Spinner) findViewById(R.id.classSpinner);
-    	String curClass = (String) spinner.getSelectedItem();    	
-    	
+    	String curClass = (String) spinner.getSelectedItem();
     	Intent intent = new Intent(this, ClassDisplayActivity.class);
     	intent.putExtra("class", curClass);
         startActivity(intent);
     }
-    
+
     public void deleteClass(View view)
     {
     	Spinner spinner = (Spinner) findViewById(R.id.classSpinner);
-    	String curClass = (String) spinner.getSelectedItem(); 
-    	
+    	String curClass = (String) spinner.getSelectedItem();
+
 		SharedPreferences deleteClassPref = this.getSharedPreferences(curClass, Context.MODE_PRIVATE);
-    	
-    	clss.deleteClass(classesPref, deleteClassPref);    	
-    	
+
+    	clss.deleteClass(classesPref, deleteClassPref);
+
     	Intent intent = new Intent(this, MainActivity.class);
         startActivity(intent);
     }
@@ -117,6 +116,6 @@ public class MainActivity
 	@Override
 	public void update(Observable arg0, Object arg1) {
 		// TODO Auto-generated method stub
-		
+
 	}
 }

@@ -30,7 +30,7 @@ public class Categories extends Observable {
      * Adds a class to the array from its sharedPreference (created in the add class activity)
      * @param sharedPref
      */
-    public void addClass(SharedPreferences sharedPref)
+    public void addCategory(SharedPreferences sharedPref)
     {
         Category cat = new Category(sharedPref.getInt("weight", 0), sharedPref.getString("name", null));
         catArray.add(cat);
@@ -56,7 +56,7 @@ public class Categories extends Observable {
      * Sets the current selected class
      * @param className
      */
-    public void setCurClass(String catName)
+    public void setCurCategory(String catName)
     {
         curCat = catName;
     }
@@ -65,7 +65,7 @@ public class Categories extends Observable {
      * returns the current class object the corresponds to the name
      * @return a class object
      */
-    public Category getCurClass()
+    public Category getCurCategory()
     {
         for (int i = 0; i < catArray.size(); i++)
         {

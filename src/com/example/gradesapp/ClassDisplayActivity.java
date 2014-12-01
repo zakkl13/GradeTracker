@@ -20,8 +20,9 @@ import android.widget.TextView;
  * @version 2014.11.29
  */
 public class ClassDisplayActivity extends ActionBarActivity implements Observer {
-	ClassDisplay clsDisp;
-	Class thisClass;
+	private ClassDisplay clsDisp;
+	private Class thisClass;
+	private String cName = null;
 
 	/**
 	 * Gets the current class from getExtras() through the intent
@@ -55,6 +56,7 @@ public class ClassDisplayActivity extends ActionBarActivity implements Observer 
 	{
 		TextView name = (TextView) findViewById(R.id.clsName);
 		name.setText(clsDisp.rtrnClass().getName());
+		cName = (String)name.getText();
 
 		TextView grade = (TextView) findViewById(R.id.curGrade);
 		//TODO parse float to String below
@@ -70,6 +72,7 @@ public class ClassDisplayActivity extends ActionBarActivity implements Observer 
     public void addAssignment(View view)
     {
         Intent intent = new Intent(this, AddActivity.class);
+        intent.putExtra("name", cName);
         startActivity(intent);
     }
 

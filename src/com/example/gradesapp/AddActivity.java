@@ -1,9 +1,18 @@
 package com.example.gradesapp;
 
+import java.util.Observable;
+import java.util.Observer;
+
 import android.view.View;
+import android.widget.ArrayAdapter;
+import android.widget.EditText;
+import android.widget.Spinner;
+import android.content.Context;
 import android.content.Intent;
-import android.support.v7.app.ActionBarActivity;
+import android.content.SharedPreferences;
+import android.content.SharedPreferences.Editor;
 import android.os.Bundle;
+import android.support.v7.app.ActionBarActivity;
 import android.view.Menu;
 import android.view.MenuItem;
 
@@ -17,8 +26,10 @@ import android.view.MenuItem;
  *  @version 2014.11.30
  */
 public class AddActivity
-    extends ActionBarActivity
+    extends ActionBarActivity implements Observer
 {
+    private String curClass;
+    private Categories cat;
     /**
      * Description of onCreate method.
      * @param savedInstanceState A saved state of the instance
@@ -28,6 +39,30 @@ public class AddActivity
     {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_add);
+        Intent inte = getIntent();
+        Bundle b = inte.getExtras();
+        if (b != null)
+        {
+            curClass = (String) b.get("name");
+        }
+        SharedPreferences classesPref = this.getSharedPreferences("Categories" + curClass, Context.MODE_PRIVATE);
+        cat = new Categories();
+        cat.addObserver(this);
+
+        //Get a reference to the number of classes
+        int numClasses = classesPref.getInt("size", 0);
+
+        //runs through the sharedpreferences and adds each class to the model's array
+        for (int i = 0; i < numClasses; i++)
+        {
+            cat.addCategory(this.getSharedPreferences(classesPref.getString(Integer.toString(i), null), Context.MODE_PRIVATE));
+        }
+
+        //Sets the spinner to display the string array of the names of the classes
+        Spinner spinner = (Spinner) findViewById(R.id.categories);
+        ArrayAdapter<String> adapter = new ArrayAdapter<String>(this, android.R.layout.simple_spinner_item, cat.getNameArray());
+        adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+        spinner.setAdapter(adapter);
     }
     // ----------------------------------------------------------
     /**
@@ -57,6 +92,7 @@ public class AddActivity
     public void addCat(View view)
     {
         Intent intent = new Intent(this, AddAssignmentWeight.class);
+        intent.putExtra("name", curClass);
         startActivity(intent);
     }
 
@@ -88,5 +124,11 @@ public class AddActivity
             return true;
         }
         return super.onOptionsItemSelected(item);
+    }
+    @Override
+    public void update(Observable arg0, Object arg1)
+    {
+        // TODO Auto-generated method stub
+
     }
 }

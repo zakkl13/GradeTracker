@@ -1,5 +1,6 @@
 package com.example.gradesapp;
 
+import android.content.SharedPreferences.Editor;
 import java.util.ArrayList;
 import java.util.Observable;
 
@@ -9,15 +10,15 @@ import android.content.SharedPreferences;
 import android.widget.Spinner;
 
 /**
- * 
+ *
  * @author Zakk
  *
  */
 public class Classes extends Observable {
-	
+
 	private ArrayList<Class> clsArray;
 	private String curClass;
-	
+
 	/**
 	 * Creates the classes Object
 	 */
@@ -25,7 +26,7 @@ public class Classes extends Observable {
 	{
 		clsArray = new ArrayList<Class>();
 	}
-	
+
 	/**
 	 * Adds a class to the array from its sharedPreference (created in the add class activity)
 	 * @param sharedPref
@@ -34,19 +35,19 @@ public class Classes extends Observable {
 	{
 		Class cls = new Class(sharedPref.getInt("crHrs", 0), sharedPref.getBoolean("passFail", false), sharedPref.getString("name", null));
 		clsArray.add(cls);
-		
+
 		notifyObservers();
 	}
-	
+
 	public void deleteClass(SharedPreferences classesPref, SharedPreferences deleteClassPref)
 	{
 		String name = deleteClassPref.getString("name", null);
 		Editor classEditor = classesPref.edit();
 		classEditor.remove(name);
 		classEditor.putInt("size", classesPref.getInt("size", 0) - 1);
-		
+
 		deleteClassPref.edit().clear().commit();
-		
+
 		for (int i = 0; i < clsArray.size(); i++)
 		{
 			if (clsArray.get(i).getName() == name)
@@ -54,11 +55,11 @@ public class Classes extends Observable {
 				clsArray.remove(i);
 			}
 		}
-		
+
 		notifyObservers();
-		
+
 	}
-	
+
 	/**
 	 * Returns a string array of the names of each class for use in the spinner
 	 * @return a string array of class names
@@ -70,10 +71,10 @@ public class Classes extends Observable {
 		{
 			classes[i] = clsArray.get(i).getName();
 		}
-		
+
 		return classes;
 	}
-	
+
 	/**
 	 * Sets the current selected class
 	 * @param className
@@ -82,7 +83,7 @@ public class Classes extends Observable {
 	{
 		curClass = className;
 	}
-	
+
 	/**
 	 * returns the current class object the corresponds to the name
 	 * @return a class object
@@ -96,8 +97,8 @@ public class Classes extends Observable {
 				return clsArray.get(i);
 			}
 		}
-		
+
 		return null;
 	}
-	
+
 }

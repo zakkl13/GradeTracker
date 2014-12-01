@@ -1,5 +1,11 @@
 package com.example.gradesapp;
 
+import android.content.Intent;
+import android.content.Context;
+import android.content.SharedPreferences.Editor;
+import android.content.SharedPreferences;
+import android.view.View;
+import android.widget.EditText;
 import android.support.v7.app.ActionBarActivity;
 import android.os.Bundle;
 import android.view.Menu;
@@ -18,6 +24,7 @@ import android.view.MenuItem;
 public class AddAssignmentWeight
     extends ActionBarActivity
 {
+    private String curClass;
     /**
      * Description of onCreate method.
      * @param savedInstanceState The saved state of the instance
@@ -27,6 +34,45 @@ public class AddAssignmentWeight
     {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_add_assignment_weight);
+        Intent inte = getIntent();
+        Bundle b = inte.getExtras();
+        if (b != null)
+        {
+            curClass = (String) b.get("name");
+        }
+    }
+    public void catAdd(View v)
+    {
+        //crHours
+        //className
+        //Get references to edit text fields
+        EditText percent = (EditText) findViewById(R.id.percent);
+        EditText catName = (EditText) findViewById(R.id.categoryName);
+
+        //Create a class object with the information from the editText fields
+        Category cat = new Category(Integer.parseInt(percent.getText().toString()), catName.getText().toString());
+
+        //Edit the "Classes" shared preferences, holds a "size" key with the number of classes
+        //And a list of classes where the key is a number
+        SharedPreferences classesPref = getSharedPreferences("Category" + curClass, Context.MODE_PRIVATE);
+        Editor editorCP = classesPref.edit();
+        editorCP.putInt("size", classesPref.getInt("size", 0) + 1); //increases size by 1
+        editorCP.putString(Integer.toString(classesPref.getInt("size", 0)), cat.getName()); //adds a new key with the class name
+        editorCP.commit();
+
+        //Creates a new SharedPreference with the name being the class name
+        //Used to hold the classes attributes
+        SharedPreferences thisClassPref = getSharedPreferences(cat.getName(), Context.MODE_PRIVATE);
+        Editor editorTCP = thisClassPref.edit();
+        editorTCP.putInt("percent", cat.getWeight());
+        editorTCP.putString("name", cat.getName());
+        editorTCP.commit();
+
+        //Return to main activity menu
+        Intent intent = new Intent(this, AddActivity.class);
+        intent.putExtra("name", curClass);
+        startActivity(intent);
+
     }
 
     /**
