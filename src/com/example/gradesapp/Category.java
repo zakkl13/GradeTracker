@@ -1,5 +1,6 @@
 package com.example.gradesapp;
 
+import java.util.ArrayList;
 import android.os.Parcel;
 import android.os.Parcelable;
 
@@ -16,6 +17,7 @@ public class Category implements Parcelable {
 
  private int weight;
  private String name;
+ private ArrayList<Assignment> assmt;
 
 
  // ---------------------------------------------------------
@@ -29,6 +31,7 @@ public class Category implements Parcelable {
  {
      this.weight = weight;
      this.name = name;
+     assmt = new ArrayList<Assignment>();
 
  }
 
@@ -98,4 +101,18 @@ public class Category implements Parcelable {
             return new Category[size];
         }
     };
+
+
+    /**
+     * gets the assignment arrayList
+     */
+    public ArrayList<Assignment> getAssmts() {
+        return assmt;
+    }
+    /**
+     * add assignment
+     */
+    public void addAssmt(Assignment grade) {
+        assmt.add(grade);
+    }
 }

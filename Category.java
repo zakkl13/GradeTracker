@@ -1,5 +1,7 @@
 package com.example.gradesapp;
 
+import java.util.ArrayList;
+
 //-------------------------------------------------------------------------
 /**
 *  Description of the Category class.
@@ -11,9 +13,9 @@ package com.example.gradesapp;
 */
 public class Category {
 
- private int weight;
+ private iArrayList<E>;
  private String name;
-
+ private ArrayList<Assignment> assmt; 
 
  // ---------------------------------------------------------
  /**
@@ -26,6 +28,7 @@ public class Category {
  {
      this.weight = weight;
      this.name = name;
+     assmt = new ArrayList<Assignment>();
 
  }
 
@@ -63,6 +66,18 @@ public class Category {
   */
  public void setName(String name) {
      this.name = name;
+ }
+ /**
+  * gets the assignment arrayList
+  */
+ public ArrayList<Assignment> getAssmts() {
+     return assmt;
+ }
+ /**
+  * add assignment
+  */
+ public void addAssmt(Assignment grade) {
+     assmt.add(grade);
  }
 
 }

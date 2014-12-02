@@ -34,6 +34,7 @@ public class AddGradesActivity
     private Class thisClass;
     private Classes clss;
     private ArrayList<Category> categories;
+    private Category currentCat;
     private Assignment assmt;
     private String gradeName;
     private int ptsRcvd;
@@ -56,7 +57,7 @@ public class AddGradesActivity
 			clss = (Classes) b.getParcelable("Classes");
 		}
 		thisClass = clss.getCurClass();
-		
+
 
 		categories = thisClass.getCats();
         updateSpinner();
@@ -69,6 +70,19 @@ public class AddGradesActivity
      */
     public void button2(View view)
     {
+        Spinner spinner = (Spinner) findViewById(R.id.categories);
+        String curCategory = (String) spinner.getSelectedItem();
+        for (Category c : categories)
+        {
+            if ( c.getName().equals(curCategory))
+            {
+                currentCat = c;
+            }
+            else
+            {
+               //may need this if there are no c's
+            }
+        }
         String grade; //hold grade ex: 15/20
 
         EditText nameG = (EditText) findViewById(R.id.gradeName);
@@ -80,7 +94,7 @@ public class AddGradesActivity
         ptsTot = Integer.parseInt(grade.substring(grade.indexOf("/")
             , grade.length()));
         assmt = new Assignment(gradeName, ptsTot, ptsRcvd);
-
+        currentCat.addAssmt(assmt);
         Intent intent = new Intent(this, ClassDisplayActivity.class);
         startActivity(intent);
     }
@@ -105,12 +119,12 @@ public class AddGradesActivity
         intent.putExtra("Classes", clss);
         startActivity(intent);
     }
-    
+
     public void delete(View view)
     {
     	categories.remove(thisClass);
     	updateSpinner();
-    	
+
     	ComplexPreferences complexPreferences = ComplexPreferences.
     	        getComplexPreferences(this, "Classes", MODE_PRIVATE);
     	    complexPreferences.putObject("Model", clss);
