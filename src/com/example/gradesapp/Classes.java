@@ -2,6 +2,7 @@ package com.example.gradesapp;
 
 import android.content.SharedPreferences.Editor;
 import java.util.ArrayList;
+import java.util.NoSuchElementException;
 import java.util.Observable;
 
 import android.content.Context;
@@ -43,10 +44,22 @@ public class Classes extends Observable implements Parcelable {
 
 	public void deleteClass()
 	{
-		clsArray.remove(getCurClass());
+		if (curClass != null)
+		{
+			clsArray.remove(getCurClass());
+		}
+		else
+		{
+			throw new NoSuchElementException("There is no class!");
+		}
 
 		notifyObservers();
 
+	}
+	
+	public ArrayList<Class> getClsArray()
+	{
+		return clsArray;
 	}
 
 	/**
