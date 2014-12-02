@@ -1,6 +1,6 @@
 package com.example.gradesapp;
 /**
- *  Description of class.
+ *  This class is used in order to add grades for individual classes.
  *
  *  @author Zakk Lefkowitz (zakkl13)
  *  @author Jason Barrett (jason95)
@@ -11,6 +11,11 @@ public class AddGrades {
 
 	private Class cls;
 
+	// ----------------------------------------------------------
+	/**
+	 * Create a new AddGrades object.
+	 * @param cls The class the grades are being added to
+	 */
 	public AddGrades(Class cls)
 	{
 		this.cls = cls;
