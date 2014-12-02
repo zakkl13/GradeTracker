@@ -25,7 +25,6 @@ import android.view.MenuItem;
 public class AddCategoryActivity
     extends ActionBarActivity
 {
-    private Class thisClass;
     private Classes clss;
     /**
      * Description of onCreate method.
@@ -43,9 +42,8 @@ public class AddCategoryActivity
 			clss = (Classes) b.getParcelable("Classes");
 		}
 
-		thisClass = clss.getCurClass();
-
     }
+    
     public void catAdd(View v)
     {
         //crHours
@@ -53,17 +51,18 @@ public class AddCategoryActivity
         //Get references to edit text fields
         EditText percent = (EditText) findViewById(R.id.percent);
         EditText catName = (EditText) findViewById(R.id.ptsRcv);
-        Log.d("catName", catName.getText().toString());
+
         //Create a class object with the information from the editText fields
         Category cat = new Category(Integer.parseInt(percent.getText().
             toString()), catName.getText().toString());
 
-        thisClass.addCategory(cat);
+        clss.getCurClass().addCategory(cat);
+        clss.saveModel(getApplicationContext());
 
-        ComplexPreferences complexPreferences = ComplexPreferences.
-    	        getComplexPreferences(this, "Classes", MODE_PRIVATE);
-    	    complexPreferences.putObject(thisClass.getName(), thisClass);
-    	    complexPreferences.commit();
+//        ComplexPreferences complexPreferences = ComplexPreferences.
+//    	        getComplexPreferences(this, "Classes", MODE_PRIVATE);
+//    	    complexPreferences.putObject("Model", clss);
+//    	    complexPreferences.commit();
 
         //Return to main activity menu
         Intent intent = new Intent(this, AddGradesActivity.class);

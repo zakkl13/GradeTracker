@@ -2,8 +2,12 @@ package com.example.gradesapp;
 
 import java.util.ArrayList;
 
+import br.com.kots.mob.complex.preferences.ComplexPreferences;
+
+import android.content.Context;
 import android.os.Parcel;
 import android.os.Parcelable;
+import android.util.Log;
 
 //-------------------------------------------------------------------------
 /**
@@ -20,7 +24,7 @@ public class Class implements Parcelable {
 	private boolean passFail;
 	private String name;
 	private ArrayList<Category> categories;
-	private float grade;
+	private double grade;
 
 	// ----------------------------------------------------------
 	/**
@@ -35,6 +39,24 @@ public class Class implements Parcelable {
 		this.passFail = passFail;
 		this.name = name;
 		this.categories = new ArrayList<Category>();
+		grade = 0.00;
+	}
+	
+	public Class(Class cls, Context appContext)
+	{
+		ComplexPreferences cp = ComplexPreferences.getComplexPreferences(appContext, "Classes", Context.MODE_PRIVATE);
+
+		this.numCrHrs = cls.getNumCrHrs();
+		this.passFail = cls.isPassFail();
+		this.name = cls.getName();
+		this.grade = cls.getGrade();
+		this.categories = new ArrayList<Category>();
+		for (Category cat: cls.getCats())
+		{
+			categories.add(new Category(cp.getObject(name + cat.getName(), Category.class), appContext));
+			Log.d("setCat", cat.getName());
+		}
+		
 	}
 
 	// ----------------------------------------------------------
@@ -49,13 +71,33 @@ public class Class implements Parcelable {
 	
 	public void removeCategory(String catName)
 	{
+		categories.remove(getCategory(catName));
+		
+	}
+	
+	public Category getCategory(String catName)
+	{
 		for (int i = 0; i < categories.size(); i++)
 		{
 			if (categories.get(i).getName() == catName)
 			{
-				categories.remove(i);
+				return categories.get(i);
 			}
 		}
+		
+		return null;
+	}
+	
+	public void saveClass(Context appContext)
+	{
+		ComplexPreferences cp = ComplexPreferences.getComplexPreferences(appContext, "Classes", Context.MODE_PRIVATE);
+		for (Category cat: categories)
+		{
+			cat.saveCategory(appContext);
+		    cp.putObject(name + cat.getName(), cat);
+		    Log.d("saveCat", cat.getName());
+		}
+		cp.commit();
 	}
 
 
@@ -128,7 +170,7 @@ public class Class implements Parcelable {
 	 * Sets the value of the grade in the class.
 	 * @param grade The grade in the class
 	 */
-	public void setGrade(float grade)
+	public void setGrade(double grade)
 	{
 		this.grade = grade;
 	}
@@ -138,53 +180,64 @@ public class Class implements Parcelable {
 	 * Gets the value of the grade in the class.
 	 * @return Returns the grade in the class
 	 */
-	public float getGrade()
+	public double getGrade()
 	{
-		return grade;
+    	double totalGrade = 0.0;
+    	
+    	for (Category c : categories)
+        {
+            c.setGrade();
+            Log.d("grade", c.getGrade() + "");
+            totalGrade += c.getGrade() * c.getWeight();
+            Log.d("totalGrade", totalGrade + "");
+
+        }
+    	
+    	return totalGrade;
 	}
 	
- protected Class(Parcel in) {
-     numCrHrs = in.readInt();
-     passFail = in.readByte() != 0x00;
-     name = in.readString();
-     if (in.readByte() == 0x01) {
-         categories = new ArrayList<Category>();
-         in.readList(categories, Category.class.getClassLoader());
-     } else {
-         categories = null;
-     }
-     grade = in.readFloat();
- }
+    protected Class(Parcel in) {
+        numCrHrs = in.readInt();
+        passFail = in.readByte() != 0x00;
+        name = in.readString();
+        if (in.readByte() == 0x01) {
+            categories = new ArrayList<Category>();
+            in.readList(categories, Category.class.getClassLoader());
+        } else {
+            categories = null;
+        }
+        grade = in.readDouble();
+    }
 
- @Override
- public int describeContents() {
-     return 0;
- }
+    @Override
+    public int describeContents() {
+        return 0;
+    }
 
- @Override
- public void writeToParcel(Parcel dest, int flags) {
-     dest.writeInt(numCrHrs);
-     dest.writeByte((byte) (passFail ? 0x01 : 0x00));
-     dest.writeString(name);
-     if (categories == null) {
-         dest.writeByte((byte) (0x00));
-     } else {
-         dest.writeByte((byte) (0x01));
-         dest.writeList(categories);
-     }
-     dest.writeFloat(grade);
- }
+    @Override
+    public void writeToParcel(Parcel dest, int flags) {
+        dest.writeInt(numCrHrs);
+        dest.writeByte((byte) (passFail ? 0x01 : 0x00));
+        dest.writeString(name);
+        if (categories == null) {
+            dest.writeByte((byte) (0x00));
+        } else {
+            dest.writeByte((byte) (0x01));
+            dest.writeList(categories);
+        }
+        dest.writeDouble(grade);
+    }
 
- @SuppressWarnings("unused")
- public static final Parcelable.Creator<Class> CREATOR = new Parcelable.Creator<Class>() {
-     @Override
-     public Class createFromParcel(Parcel in) {
-         return new Class(in);
-     }
+    @SuppressWarnings("unused")
+    public static final Parcelable.Creator<Class> CREATOR = new Parcelable.Creator<Class>() {
+        @Override
+        public Class createFromParcel(Parcel in) {
+            return new Class(in);
+        }
 
-     @Override
-     public Class[] newArray(int size) {
-         return new Class[size];
-     }
- };
+        @Override
+        public Class[] newArray(int size) {
+            return new Class[size];
+        }
+    };
 }

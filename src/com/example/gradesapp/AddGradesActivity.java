@@ -9,6 +9,8 @@ import java.util.Observer;
 import br.com.kots.mob.complex.preferences.ComplexPreferences;
 
 import android.view.View;
+import android.widget.AdapterView;
+import android.widget.AdapterView.OnItemSelectedListener;
 import android.widget.ArrayAdapter;
 import android.widget.EditText;
 import android.widget.Spinner;
@@ -31,7 +33,7 @@ import android.view.MenuItem;
  *  @version 2014.11.30
  */
 public class AddGradesActivity
-    extends ActionBarActivity implements Observer
+    extends ActionBarActivity implements Observer, OnItemSelectedListener
 {
     private Class thisClass;
     private AddGrades adGr;
@@ -43,6 +45,7 @@ public class AddGradesActivity
     private String gradeName;
     private int ptsRcv;
     private int ptsTot;
+    private Category curCat;
 
     /**
      * Description of onCreate method.
@@ -62,18 +65,20 @@ public class AddGradesActivity
 		}
 		thisClass = clss.getCurClass();
 		
-		ComplexPreferences cp = ComplexPreferences.getComplexPreferences(this,
-				"Classes", MODE_PRIVATE);
-		Class temp = cp.getObject(thisClass.getName(), Class.class);
-		if (temp != null)
-		{
-			thisClass = temp;
-		}
-
+//		ComplexPreferences cp = ComplexPreferences.getComplexPreferences(this,
+//				"Classes", MODE_PRIVATE);
+//		Class temp = cp.getObject(thisClass.getName(), Class.class);
+//		if (temp != null)
+//		{
+//			thisClass = temp;
+//		}
 
 		categories = thisClass.getCats();
         updateSpinner();
-
+        //updateTotalGrade();
+        
+        Spinner spinner = (Spinner) findViewById(R.id.categories);
+        spinner.setOnItemSelectedListener(this);
 
 
     }
@@ -84,7 +89,6 @@ public class AddGradesActivity
      */
     public void button2(View view)
     {
-        double totalGrade = 0.0;
         String grade; //hold grade ex: 15/20
         //get the current category chosen
         Spinner spinner = (Spinner) findViewById(R.id.categories);
@@ -107,9 +111,19 @@ public class AddGradesActivity
         ptsTot = Integer.parseInt(totPts.getText().toString());
         assmt = new Assignment(gradeName, ptsTot, ptsRcv);
         currentCat.addAssmt(assmt);
-
-
-        for (Category c : categories)
+        
+        currentCat.setGrade();
+        TextView finalGrade = (TextView) findViewById(R.id.grade);
+        finalGrade.setText(String.valueOf(currentCat.getGrade()));
+        
+        clss.saveModel(getApplicationContext());
+    }
+    
+    public void updateTotalGrade()
+    {
+    	double totalGrade = 0.0;
+    	
+    	for (Category c : categories)
         {
             c.setGrade();
             Log.d("grade", c.getGrade() + "");
@@ -119,9 +133,8 @@ public class AddGradesActivity
         }
         TextView finalGrade = (TextView) findViewById(R.id.grade);
         finalGrade.setText(totalGrade + "");
-        //Intent intent = new Intent(this, ClassDisplayActivity.class);
-        //startActivity(intent);
     }
+    
     // ----------------------------------------------------------
     /**
      * Description of addAnother method.
@@ -153,6 +166,8 @@ public class AddGradesActivity
         ptsTot = Integer.parseInt(totPts.getText().toString());
         assmt = new Assignment(gradeName, ptsTot, ptsRcv);
         currentCat.addAssmt(assmt);
+        clss.saveModel(getApplicationContext());
+        
         nameG.setText("");
         ptsRcvd.setText("");//reset them
         totPts.setText("");
@@ -186,19 +201,19 @@ public class AddGradesActivity
     	String catName = (String) spinner.getSelectedItem();
 
     	thisClass.removeCategory(catName);
+    	clss.saveModel(getApplicationContext());
     	updateSpinner();
 
-    	ComplexPreferences complexPreferences = ComplexPreferences.
-    	        getComplexPreferences(this, "Classes", MODE_PRIVATE);
-    	    complexPreferences.putObject("Model", clss);
-    	    complexPreferences.commit();
     }
     
     public void clear(View view)
     {
-    	Spinner spinner = (Spinner) findViewById(R.id.categories);
-        String curCategory = (String) spinner.getSelectedItem();
-    	thisClass.getCurCat(curCategory);
+    	for (Category c : categories)
+        {
+    		c.clearAssmt();
+        }
+    	
+    	updateTotalGrade();
     	
     }
 
@@ -252,4 +267,18 @@ public class AddGradesActivity
         // TODO Auto-generated method stub
 
     }
+	@Override
+	public void onItemSelected(AdapterView<?> adapt, View v, int pos,
+			long arg3) {
+		TextView finalGrade = (TextView) findViewById(R.id.grade);
+        finalGrade.setText(String.valueOf(categories.get(pos).getGrade()));
+        
+        
+		
+	}
+	@Override
+	public void onNothingSelected(AdapterView<?> arg0) {
+		// TODO Auto-generated method stub
+		
+	}
 }

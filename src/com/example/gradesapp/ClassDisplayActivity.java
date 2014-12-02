@@ -39,7 +39,7 @@ implements Observer {
 		{
 			clss = (Classes) b.getParcelable("Classes");
 			thisClass = clss.getCurClass();
-
+			
 			updateDisplay();
 		}
 		
@@ -55,8 +55,7 @@ implements Observer {
 		name.setText(thisClass.getName());
 
 		TextView grade = (TextView) findViewById(R.id.curGrade);
-		//TODO parse float to String below
-		//grade.setText(clsDisp.getClass().getGrade());
+		grade.setText(String.valueOf(thisClass.getGrade()));
 
 		TextView hours = (TextView) findViewById(R.id.hours);
 		hours.setText("Credit Hours: " + thisClass.getNumCrHrs());

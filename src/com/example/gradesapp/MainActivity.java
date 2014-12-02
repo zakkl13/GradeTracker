@@ -34,17 +34,32 @@ public class MainActivity
     {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+		Intent inte = getIntent();
+		Bundle b = inte.getExtras();
+		if (b != null)
+		{
+			clss = (Classes) b.getParcelable("Classes");
+		}
+		else
+		{
+			clss = null;
 
-        clss = null;
+		    ComplexPreferences complexPreferences = ComplexPreferences.
+		        getComplexPreferences(this, "Classes", MODE_PRIVATE);
+		    clss = complexPreferences.getObject("Model", Classes.class);
 
-	    ComplexPreferences complexPreferences = ComplexPreferences.
-	        getComplexPreferences(this, "Classes", MODE_PRIVATE);
-	    clss = complexPreferences.getObject("Model", Classes.class);
+		    if (clss == null)
+		    {
+		    	clss = new Classes();
+		    }
+		    else
+		    {
+		    	clss.updateModel(getApplicationContext());
+		    }
+		}
+		
 
-	    if (clss == null)
-	    {
-	    	clss = new Classes();
-	    }
+        
 
         updateSpinner();
 
@@ -126,6 +141,12 @@ public class MainActivity
         }
         return super.onOptionsItemSelected(item);
     }
+    
+    public Context getActivity()
+    {
+    	return this;
+    }
+    
 	@Override
 	public void update(Observable arg0, Object arg1) {
 		// TODO Auto-generated method stub

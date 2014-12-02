@@ -2,8 +2,11 @@ package com.example.gradesapp;
 
 import android.util.Log;
 import java.util.ArrayList;
+
+import android.content.Context;
 import android.os.Parcel;
 import android.os.Parcelable;
+import br.com.kots.mob.complex.preferences.ComplexPreferences;
 
 //-------------------------------------------------------------------------
 /**
@@ -34,7 +37,33 @@ public Category(int weight, String name)
    this.weight = weight;
    this.name = name;
    assmt = new ArrayList<Assignment>();
+   grade = 0.00;
 
+}
+
+public Category(Category cat, Context appContext)
+{
+	ComplexPreferences cp = ComplexPreferences.getComplexPreferences(appContext, "Classes", Context.MODE_PRIVATE);
+
+	this.weight = cat.getWeight();
+	this.name = cat.getName();
+	this.grade = cat.getGrade();
+	assmt = new ArrayList<Assignment>();
+	for (Assignment asgn: cat.getAssmts())
+	{
+		assmt.add(cp.getObject(name + asgn.getName(), Assignment.class));
+	}
+}
+
+public void saveCategory(Context appContext)
+{
+	ComplexPreferences cp = ComplexPreferences.getComplexPreferences(appContext, "Classes", Context.MODE_PRIVATE);
+
+	for (Assignment asgn: assmt)
+	{
+		cp.putObject(name + asgn.getName(), asgn);
+	}
+	cp.commit();
 }
 
 // ----------------------------------------------------------
@@ -98,7 +127,14 @@ public void setGrade() {
        Log.d("given", count + "");
 
    }
-   grade =  ((double)totPtsRcvd / (double)totPtsGiven);
+   if (totPtsRcvd == 0 || totPtsGiven == 0)
+   {
+	   grade = 0.00;
+   }
+   else
+   {
+	   grade =  ((double)totPtsRcvd / (double)totPtsGiven);
+   }
    Log.d("orig", grade + "");
 }
 
@@ -117,53 +153,54 @@ public void setGrade() {
   
   public void clearAssmt() {
 	  assmt.clear();
+	  grade = 0.00;
   }
+  
+    protected Category(Parcel in) {
+        name = in.readString();
+        if (in.readByte() == 0x01) {
+            assmt = new ArrayList<Assignment>();
+            in.readList(assmt, Assignment.class.getClassLoader());
+        } else {
+            assmt = null;
+        }
+        weight = in.readInt();
+        grade = in.readByte() == 0x00 ? null : in.readDouble();
+    }
 
-  protected Category(Parcel in) {
-      name = in.readString();
-      if (in.readByte() == 0x01) {
-          assmt = new ArrayList<Assignment>();
-          in.readList(assmt, Assignment.class.getClassLoader());
-      } else {
-          assmt = null;
-      }
-      weight = in.readInt();
-      grade = in.readByte() == 0x00 ? null : in.readDouble();
-  }
+    @Override
+    public int describeContents() {
+        return 0;
+    }
 
-  @Override
-  public int describeContents() {
-      return 0;
-  }
+    @Override
+    public void writeToParcel(Parcel dest, int flags) {
+        dest.writeString(name);
+        if (assmt == null) {
+            dest.writeByte((byte) (0x00));
+        } else {
+            dest.writeByte((byte) (0x01));
+            dest.writeList(assmt);
+        }
+        dest.writeInt(weight);
+        if (grade == null) {
+            dest.writeByte((byte) (0x00));
+        } else {
+            dest.writeByte((byte) (0x01));
+            dest.writeDouble(grade);
+        }
+    }
 
-  @Override
-  public void writeToParcel(Parcel dest, int flags) {
-      dest.writeString(name);
-      if (assmt == null) {
-          dest.writeByte((byte) (0x00));
-      } else {
-          dest.writeByte((byte) (0x01));
-          dest.writeList(assmt);
-      }
-      dest.writeInt(weight);
-      if (grade == null) {
-          dest.writeByte((byte) (0x00));
-      } else {
-          dest.writeByte((byte) (0x01));
-          dest.writeDouble(grade);
-      }
-  }
+    @SuppressWarnings("unused")
+    public static final Parcelable.Creator<Category> CREATOR = new Parcelable.Creator<Category>() {
+        @Override
+        public Category createFromParcel(Parcel in) {
+            return new Category(in);
+        }
 
-  @SuppressWarnings("unused")
-  public static final Parcelable.Creator<Category> CREATOR = new Parcelable.Creator<Category>() {
-      @Override
-      public Category createFromParcel(Parcel in) {
-          return new Category(in);
-      }
-
-      @Override
-      public Category[] newArray(int size) {
-          return new Category[size];
-      }
-  };
+        @Override
+        public Category[] newArray(int size) {
+            return new Category[size];
+        }
+    };
 }

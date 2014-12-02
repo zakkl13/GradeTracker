@@ -1,5 +1,6 @@
 package com.example.gradesapp;
 
+import android.content.Context;
 import android.os.Parcel;
 import android.os.Parcelable;
 
@@ -32,8 +33,6 @@ public class Assignment implements Parcelable {
 		this.totPts = totPts;
 		this.ptsRecieved = ptsRecieved;
 	}
-
-
 
 	// ----------------------------------------------------------
 	/**

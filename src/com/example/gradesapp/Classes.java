@@ -9,7 +9,9 @@ import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Parcel;
 import android.os.Parcelable;
+import android.util.Log;
 import android.widget.Spinner;
+import br.com.kots.mob.complex.preferences.ComplexPreferences;
 
 /**
  *
@@ -19,7 +21,7 @@ import android.widget.Spinner;
 public class Classes extends Observable implements Parcelable {
 
 	private ArrayList<Class> clsArray;
-	private Class curClass;
+	private String curClassName;
 
 	/**
 	 * Creates the classes Object
@@ -27,6 +29,27 @@ public class Classes extends Observable implements Parcelable {
 	public Classes()
 	{
 		clsArray = new ArrayList<Class>();
+	}
+
+	public void updateModel(Context appContext) {
+		ComplexPreferences cp = ComplexPreferences.getComplexPreferences(appContext, "Classes", Context.MODE_PRIVATE);
+		for (Class c: clsArray)
+		{
+			c = new Class(cp.getObject(c.getName(), Class.class), appContext);
+			Log.d("setClass", c.getName());
+		}
+	}
+	
+	public void saveModel(Context appContext)
+	{
+		ComplexPreferences cp = ComplexPreferences.getComplexPreferences(appContext, "Classes", Context.MODE_PRIVATE);
+		for (Class c: clsArray)
+		{
+			c.saveClass(appContext);
+			cp.putObject(c.getName(), c);
+		}
+		cp.putObject("Model", this);
+		cp.commit();
 	}
 
 	/**
@@ -70,13 +93,7 @@ public class Classes extends Observable implements Parcelable {
 	 */
 	public void setCurClass(String className)
 	{
-		for (int i = 0; i < clsArray.size(); i++)
-		{
-			if (clsArray.get(i).getName() == className)
-			{
-				curClass = clsArray.get(i);
-			}
-		}
+		curClassName = className;
 	}
 
 	/**
@@ -85,10 +102,20 @@ public class Classes extends Observable implements Parcelable {
 	 */
 	public Class getCurClass()
 	{
+		for (int i = 0; i < clsArray.size(); i++)
+		{
+			Log.d("looking", curClassName);
+			Log.d("is", clsArray.get(i).getName());
+			if (clsArray.get(i).getName().equals(curClassName))
+			{
+				return clsArray.get(i);
+			}
+		}
 		
-		return curClass;
+		return null;
 	}
 	
+
     protected Classes(Parcel in) {
         if (in.readByte() == 0x01) {
             clsArray = new ArrayList<Class>();
@@ -96,7 +123,7 @@ public class Classes extends Observable implements Parcelable {
         } else {
             clsArray = null;
         }
-        curClass = (Class) in.readValue(Class.class.getClassLoader());
+        curClassName = in.readString();
     }
 
     @Override
@@ -112,7 +139,7 @@ public class Classes extends Observable implements Parcelable {
             dest.writeByte((byte) (0x01));
             dest.writeList(clsArray);
         }
-        dest.writeValue(curClass);
+        dest.writeString(curClassName);
     }
 
     @SuppressWarnings("unused")

@@ -29,24 +29,6 @@
         android:layout_toLeftOf="@+id/addCat" />
 
     <Button
-        android:id="@+id/addCat"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_alignBottom="@+id/categories"
-        android:layout_alignLeft="@+id/button2"
-        android:onClick="addCat"
-        android:text="Add Category" />
-
-    <Button
-        android:id="@+id/button1"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_alignLeft="@+id/addCat"
-        android:layout_below="@+id/categories"
-        android:onClick="delete"
-        android:text="Delete Category" />
-
-    <Button
         android:id="@+id/addClass"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
@@ -115,14 +97,44 @@
         android:layout_alignBottom="@+id/name"
         android:layout_alignRight="@+id/button2"
         android:text="Grade"
+        android:maxLength="4"
         android:textAppearance="?android:attr/textAppearanceLarge" />
+
+    <Button
+        android:id="@+id/addCat"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignRight="@+id/button1"
+        android:layout_alignTop="@+id/categories"
+        android:layout_marginTop="24dp"
+        android:onClick="addCat"
+        android:text="Add Category" />
+
+    <Button
+        android:id="@+id/button4"
+        style="?android:attr/buttonStyleSmall"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_above="@+id/addCat"
+        android:layout_alignRight="@+id/addCat"
+        android:onClick="home"
+        android:text="Home" />
+
+    <Button
+        android:id="@+id/button1"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignLeft="@+id/grade"
+        android:layout_below="@+id/addCat"
+        android:onClick="delete"
+        android:text="Delete Category" />
 
     <Button
         android:id="@+id/button3"
         style="?android:attr/buttonStyleSmall"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_alignRight="@+id/button2"
+        android:layout_alignLeft="@+id/addCat"
         android:layout_below="@+id/totPts"
         android:onClick="clear"
         android:text="Clear Assignments" />

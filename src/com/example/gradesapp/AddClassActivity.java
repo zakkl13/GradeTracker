@@ -96,11 +96,12 @@ public class AddClassActivity extends ActionBarActivity {
 		    passFail, className.getText().toString());
 
 		clss.addClass(cls);
+		clss.saveModel(getApplicationContext());
 
-	    ComplexPreferences complexPreferences = ComplexPreferences.
-	        getComplexPreferences(this, "Classes", MODE_PRIVATE);
-	    complexPreferences.putObject("Model", clss);
-	    complexPreferences.commit();
+//	    ComplexPreferences complexPreferences = ComplexPreferences.
+//	        getComplexPreferences(this, "Classes", MODE_PRIVATE);
+//	    complexPreferences.putObject("Model", clss);
+//	    complexPreferences.commit();
 
 		//Return to main activity menu
 		Intent intent = new Intent(this, MainActivity.class);
