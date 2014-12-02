@@ -75,4 +75,12 @@
         android:onClick="addCat"
         android:text="Add Category" />
 
+    <Button
+        android:id="@+id/delCat"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignLeft="@+id/addCat"
+        android:layout_below="@+id/categories"
+        android:text="Delete Category" />
+
 </RelativeLayout>

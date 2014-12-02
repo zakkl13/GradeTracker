@@ -1080,7 +1080,7 @@ containing a value of this type.
         public static final int ic_launcher=0x7f020057;
     }
     public static final class id {
-        public static final int aF=0x7f060047;
+        public static final int aF=0x7f060048;
         public static final int action_bar=0x7f06001c;
         public static final int action_bar_activity_content=0x7f060015;
         public static final int action_bar_container=0x7f06001b;
@@ -1092,24 +1092,25 @@ containing a value of this type.
         public static final int action_menu_divider=0x7f060016;
         public static final int action_menu_presenter=0x7f060017;
         public static final int action_mode_close_button=0x7f060024;
-        public static final int action_settings=0x7f06004f;
+        public static final int action_settings=0x7f060050;
         public static final int activity_chooser_view_content=0x7f060025;
         public static final int addCat=0x7f060042;
         public static final int addClass=0x7f06003c;
-        public static final int addGrades=0x7f060049;
+        public static final int addGrades=0x7f06004a;
         public static final int always=0x7f06000b;
         public static final int beginning=0x7f060011;
-        public static final int button1=0x7f06004e;
+        public static final int button1=0x7f06004f;
         public static final int button2=0x7f06003d;
-        public static final int catAdd=0x7f060045;
+        public static final int catAdd=0x7f060046;
         public static final int categories=0x7f06003e;
         public static final int categoryName=0x7f060041;
         public static final int checkbox=0x7f06002d;
-        public static final int classSpinner=0x7f06004d;
+        public static final int classSpinner=0x7f06004e;
         public static final int clsName=0x7f06003f;
         public static final int collapseActionView=0x7f06000d;
-        public static final int curGrade=0x7f060046;
+        public static final int curGrade=0x7f060047;
         public static final int default_activity_button=0x7f060028;
+        public static final int delCat=0x7f060043;
         public static final int dialog=0x7f06000e;
         public static final int disableHome=0x7f060008;
         public static final int dropdown=0x7f06000f;
@@ -1119,7 +1120,7 @@ containing a value of this type.
         public static final int expanded_menu=0x7f06002c;
         public static final int home=0x7f060014;
         public static final int homeAsUp=0x7f060005;
-        public static final int hours=0x7f06004a;
+        public static final int hours=0x7f06004b;
         public static final int icon=0x7f06002a;
         public static final int ifRoom=0x7f06000a;
         public static final int image=0x7f060027;
@@ -1129,12 +1130,12 @@ containing a value of this type.
         public static final int never=0x7f060009;
         public static final int none=0x7f060010;
         public static final int normal=0x7f060000;
-        public static final int passFail=0x7f060048;
-        public static final int percent=0x7f060044;
+        public static final int passFail=0x7f060049;
+        public static final int percent=0x7f060045;
         public static final int progress_circular=0x7f060018;
         public static final int progress_horizontal=0x7f060019;
         public static final int radio=0x7f06002f;
-        public static final int radioGroup1=0x7f060043;
+        public static final int radioGroup1=0x7f060044;
         public static final int search_badge=0x7f060032;
         public static final int search_bar=0x7f060031;
         public static final int search_button=0x7f060033;
@@ -1153,8 +1154,8 @@ containing a value of this type.
         public static final int submit_area=0x7f060039;
         public static final int tabMode=0x7f060002;
         public static final int textView1=0x7f060040;
-        public static final int textView3=0x7f06004b;
-        public static final int textView4=0x7f06004c;
+        public static final int textView3=0x7f06004c;
+        public static final int textView4=0x7f06004d;
         public static final int title=0x7f06002b;
         public static final int top_action_bar=0x7f060020;
         public static final int up=0x7f060021;
