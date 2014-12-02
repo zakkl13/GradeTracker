@@ -115,17 +115,10 @@ public Double getGrade() {
 public void setGrade() {
    int totPtsRcvd = 0;
    int totPtsGiven = 0;
-   int count = 0;
    for (Assignment a : assmt)
    {
-       count++;
-
        totPtsRcvd += a.getPtsRecieved();
        totPtsGiven += a.getTotPts();
-       Log.d("rcvd", totPtsRcvd + "");
-       Log.d("given", totPtsGiven + "");
-       Log.d("given", count + "");
-
    }
    if (totPtsRcvd == 0 || totPtsGiven == 0)
    {
@@ -135,7 +128,6 @@ public void setGrade() {
    {
 	   grade =  ((double)totPtsRcvd / (double)totPtsGiven);
    }
-   Log.d("orig", grade + "");
 }
 
   /**

@@ -111,10 +111,7 @@ public class MainActivity
 
     	clss.deleteClass();
     	
-    	ComplexPreferences complexPreferences = ComplexPreferences.
-    	        getComplexPreferences(this, "Classes", MODE_PRIVATE);
-    	    complexPreferences.putObject("Model", clss);
-    	    complexPreferences.commit();
+    	clss.saveModel(getApplicationContext());
 
     	updateSpinner();
     }

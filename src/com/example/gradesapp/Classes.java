@@ -79,7 +79,7 @@ public class Classes extends Observable implements Parcelable {
 	public String[] getNameArray()
 	{
 		String[] classes = new String[clsArray.size()];
-		for (int i = 0; i < clsArray.size(); i++)
+		for (int i = (clsArray.size() - 1); i >= 0; i--)
 		{
 			classes[i] = clsArray.get(i).getName();
 		}

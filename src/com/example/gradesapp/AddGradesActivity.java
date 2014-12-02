@@ -14,6 +14,7 @@ import android.widget.AdapterView.OnItemSelectedListener;
 import android.widget.ArrayAdapter;
 import android.widget.EditText;
 import android.widget.Spinner;
+import android.widget.Toast;
 import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
@@ -43,8 +44,8 @@ public class AddGradesActivity
     private Category currentCat;
     private Assignment assmt;
     private String gradeName;
-    private int ptsRcv;
-    private int ptsTot;
+    private Integer ptsRcv;
+    private Integer ptsTot;
     private Category curCat;
 
     /**
@@ -89,50 +90,59 @@ public class AddGradesActivity
      */
     public void button2(View view)
     {
-        String grade; //hold grade ex: 15/20
         //get the current category chosen
         Spinner spinner = (Spinner) findViewById(R.id.categories);
         String curCategory = (String) spinner.getSelectedItem();
-        for (Category c : categories)
-        {
-            if ( c.getName().equals(curCategory)) // if the category chosen is already in categories
-            {
-                currentCat = c; // make it the current one
-            }
-
-        }
+        currentCat = thisClass.getCategory(curCategory);
+        
         EditText nameG = (EditText) findViewById(R.id.gradeName); //get values
         EditText ptsRcvd = (EditText) findViewById(R.id.name);
         EditText totPts = (EditText) findViewById(R.id.totPts);
 
-
         gradeName = nameG.getText().toString(); //make Assignment obj
-        ptsRcv = Integer.parseInt(ptsRcvd.getText().toString());
-        ptsTot = Integer.parseInt(totPts.getText().toString());
-        assmt = new Assignment(gradeName, ptsTot, ptsRcv);
-        currentCat.addAssmt(assmt);
-        
-        currentCat.setGrade();
-        TextView finalGrade = (TextView) findViewById(R.id.grade);
-        finalGrade.setText(String.valueOf(currentCat.getGrade()));
-        
-        clss.saveModel(getApplicationContext());
-    }
-    
-    public void updateTotalGrade()
-    {
-    	double totalGrade = 0.0;
-    	
-    	for (Category c : categories)
+        String ptsRcv = ptsRcvd.getText().toString();
+        String ptsTot = totPts.getText().toString();
+        if (gradeName == null)
         {
-            c.setGrade();
-            Log.d("grade", c.getGrade() + "");
-            totalGrade += c.getGrade() * c.getWeight();
-            Log.d("totalGrade", totalGrade + "");
-
+        	gradeName = "NONAME";
         }
-        TextView finalGrade = (TextView) findViewById(R.id.grade);
-        finalGrade.setText(totalGrade + "");
+        
+        if (!isInteger(ptsRcv))
+        {
+        	Toast.makeText(this, "Please enter a value for Points Recieved", Toast.LENGTH_SHORT).show();
+        }
+        else if (!isInteger(ptsTot))
+        {
+        	Toast.makeText(this, "Please enter a value for Total Points", Toast.LENGTH_SHORT).show();
+        }
+        else
+        {
+            assmt = new Assignment(gradeName, Integer.parseInt(ptsTot), Integer.parseInt(ptsRcv));
+            currentCat.addAssmt(assmt);
+            clss.saveModel(getApplicationContext());
+            
+            currentCat.setGrade();
+            TextView finalGrade = (TextView) findViewById(R.id.grade);
+            finalGrade.setText(String.valueOf(currentCat.getGrade()));
+            
+            clss.saveModel(getApplicationContext());
+            
+            Intent intent = new Intent(this, ClassDisplayActivity.class);
+            intent.putExtra("Classes", clss);
+            startActivity(intent);
+        }
+        
+
+    }
+
+    private boolean isInteger(String s) {
+        try { 
+            Integer.parseInt(s); 
+        } catch(NumberFormatException e) { 
+            return false; 
+        }
+        // only got here if we didn't return false
+        return true;
     }
     
     // ----------------------------------------------------------
@@ -147,14 +157,7 @@ public class AddGradesActivity
         //get the current category chosen
         Spinner spinner = (Spinner) findViewById(R.id.categories);
         String curCategory = (String) spinner.getSelectedItem();
-        for (Category c : categories)
-        {
-            if ( c.getName().equals(curCategory)) // if the category chosen is already in categories
-            {
-                currentCat = c; // make it the current one
-            }
-
-        }
+        currentCat = thisClass.getCategory(curCategory);
 
         EditText nameG = (EditText) findViewById(R.id.gradeName); //get values
         EditText ptsRcvd = (EditText) findViewById(R.id.name);
@@ -162,15 +165,36 @@ public class AddGradesActivity
 
 
         gradeName = nameG.getText().toString(); //make Assignment obj
-        ptsRcv = Integer.parseInt(ptsRcvd.getText().toString());
-        ptsTot = Integer.parseInt(totPts.getText().toString());
-        assmt = new Assignment(gradeName, ptsTot, ptsRcv);
-        currentCat.addAssmt(assmt);
-        clss.saveModel(getApplicationContext());
+        String ptsRcv = ptsRcvd.getText().toString();
+        String ptsTot = totPts.getText().toString();
+        if (gradeName == null)
+        {
+        	gradeName = "NONAME";
+        }
         
-        nameG.setText("");
-        ptsRcvd.setText("");//reset them
-        totPts.setText("");
+        if (!isInteger(ptsRcv))
+        {
+        	Toast.makeText(this, "Please enter a value for Points Recieved", Toast.LENGTH_SHORT).show();
+        }
+        else if (!isInteger(ptsTot))
+        {
+        	Toast.makeText(this, "Please enter a value for Total Points", Toast.LENGTH_SHORT).show();
+        }
+        else
+        {
+            assmt = new Assignment(gradeName, Integer.parseInt(ptsTot), Integer.parseInt(ptsRcv));
+            currentCat.addAssmt(assmt);
+            clss.saveModel(getApplicationContext());
+            
+            currentCat.setGrade();
+            TextView finalGrade = (TextView) findViewById(R.id.grade);
+            finalGrade.setText(String.valueOf(currentCat.getGrade()));
+            
+            nameG.setText("");
+            ptsRcvd.setText("");//reset them
+            totPts.setText("");
+        }
+
     }
     // ----------------------------------------------------------
     /**
@@ -213,21 +237,13 @@ public class AddGradesActivity
     		c.clearAssmt();
         }
     	
-    	updateTotalGrade();
-    	
     }
 
     public void updateSpinner()
     {
-    	String[] cats = new String[categories.size()];
-		for (int i = 0; i < categories.size(); i++)
-		{
-			cats[i] = categories.get(i).getName();
-		}
-
 		//Sets the spinner to display the string array of the names of the classes
         Spinner spinner = (Spinner) findViewById(R.id.categories);
-        ArrayAdapter<String> adapter = new ArrayAdapter<String>(this, android.R.layout.simple_spinner_item, cats);
+        ArrayAdapter<String> adapter = new ArrayAdapter<String>(this, android.R.layout.simple_spinner_item, thisClass.getCatNameArray());
         adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
         spinner.setAdapter(adapter);
     }

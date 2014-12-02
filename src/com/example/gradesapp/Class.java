@@ -79,13 +79,24 @@ public class Class implements Parcelable {
 	{
 		for (int i = 0; i < categories.size(); i++)
 		{
-			if (categories.get(i).getName() == catName)
+			if (categories.get(i).getName().equals(catName))
 			{
 				return categories.get(i);
 			}
 		}
 		
 		return null;
+	}
+	
+	public String[] getCatNameArray()
+	{
+		String[] cats = new String[categories.size()];
+		for (int i = (categories.size() - 1); i >= 0; i--)
+		{
+			cats[i] = categories.get(i).getName();
+		}
+
+		return cats;
 	}
 	
 	public void saveClass(Context appContext)
