@@ -122,7 +122,10 @@ public class AddGradesActivity
 
     public void delete(View view)
     {
-    	categories.remove(thisClass);
+    	Spinner spinner = (Spinner) findViewById(R.id.classSpinner);
+    	String catName = (String) spinner.getSelectedItem();
+    	
+    	thisClass.removeCategory(catName);
     	updateSpinner();
 
     	ComplexPreferences complexPreferences = ComplexPreferences.
