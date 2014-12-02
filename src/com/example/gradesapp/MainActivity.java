@@ -6,12 +6,8 @@ import br.com.kots.mob.complex.preferences.ComplexPreferences;
 
 import android.view.View;
 import android.widget.ArrayAdapter;
-import android.widget.EditText;
 import android.widget.Spinner;
-import android.content.Context;
 import android.content.Intent;
-import android.content.SharedPreferences;
-import android.content.SharedPreferences.Editor;
 import android.os.Bundle;
 import android.support.v7.app.ActionBarActivity;
 import android.view.Menu;
@@ -42,12 +38,13 @@ public class MainActivity
         setContentView(R.layout.activity_main);
 		Intent inte = getIntent();
 		Bundle b = inte.getExtras();
+		//checks if another activity passed the model back through
 		if (b != null)
 		{
 			clss = (Classes) b.getParcelable("Classes");
 		}
-		else
-		{
+		else //if not then check if there is any saved date
+		{	 //if so grab it and set the model, if not create a new model
 			clss = null;
 
 		    ComplexPreferences complexPreferences = ComplexPreferences.
@@ -63,10 +60,7 @@ public class MainActivity
 		    	clss.updateModel(getApplicationContext());
 		    }
 		}
-
-
-
-
+	
         updateSpinner();
 
     }
@@ -109,6 +103,10 @@ public class MainActivity
         startActivity(intent);
     }
 
+    /**
+     * deletes the current class on the spinner
+     * @param view
+     */
     public void deleteClass(View view)
     {
     	Spinner spinner = (Spinner) findViewById(R.id.classSpinner);
@@ -145,10 +143,6 @@ public class MainActivity
         return super.onOptionsItemSelected(item);
     }
 
-    public Context getActivity()
-    {
-    	return this;
-    }
 
 	@Override
 	public void update(Observable arg0, Object arg1) {

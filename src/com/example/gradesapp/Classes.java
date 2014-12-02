@@ -1,16 +1,11 @@
 package com.example.gradesapp;
 
-import android.content.SharedPreferences.Editor;
 import java.util.ArrayList;
 import java.util.Observable;
 
 import android.content.Context;
-import android.content.Intent;
-import android.content.SharedPreferences;
 import android.os.Parcel;
 import android.os.Parcelable;
-import android.util.Log;
-import android.widget.Spinner;
 import br.com.kots.mob.complex.preferences.ComplexPreferences;
 
 /**
@@ -34,25 +29,36 @@ public class Classes extends Observable implements Parcelable {
 		clsArray = new ArrayList<Class>();
 	}
 
+	/**
+	 * Updates the model from saved complex preferences
+	 * @param appContext
+	 */
 	public void updateModel(Context appContext) {
 		ComplexPreferences cp = ComplexPreferences.getComplexPreferences(
 		    appContext, "Classes", Context.MODE_PRIVATE);
 		for (Class c: clsArray)
 		{
+			//calls the second class constructor which sets the chain in motion
 			c = new Class(cp.getObject(c.getName(), Class.class), appContext);
-			Log.d("setClass", c.getName());
 		}
 	}
 
+	/**
+	 * Saves the model, sets up the chain for saving the complex preferences
+	 * at each level
+	 * @param appContext
+	 */
 	public void saveModel(Context appContext)
 	{
 		ComplexPreferences cp = ComplexPreferences.getComplexPreferences(
 		    appContext, "Classes", Context.MODE_PRIVATE);
+		//save each class (and everything inside it) then put it into the complex preferences
 		for (Class c: clsArray)
 		{
 			c.saveClass(appContext);
 			cp.putObject(c.getName(), c);
 		}
+		//saves the model
 		cp.putObject("Model", this);
 		cp.commit();
 	}
@@ -109,8 +115,6 @@ public class Classes extends Observable implements Parcelable {
 	{
 		for (int i = 0; i < clsArray.size(); i++)
 		{
-			Log.d("looking", curClassName);
-			Log.d("is", clsArray.get(i).getName());
 			if (clsArray.get(i).getName().equals(curClassName))
 			{
 				return clsArray.get(i);
@@ -147,7 +151,6 @@ public class Classes extends Observable implements Parcelable {
         dest.writeString(curClassName);
     }
 
-    @SuppressWarnings("unused")
     public static final Parcelable.Creator<Classes> CREATOR = new
     Parcelable.Creator<Classes>() {
         @Override

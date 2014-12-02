@@ -1,6 +1,5 @@
 package com.example.gradesapp;
 
-import android.content.Context;
 import android.os.Parcel;
 import android.os.Parcelable;
 
@@ -107,7 +106,6 @@ public class Assignment implements Parcelable {
      dest.writeInt(ptsRecieved);
  }
 
- @SuppressWarnings("unused")
  public static final Parcelable.Creator<Assignment> CREATOR = new
  Parcelable.Creator<Assignment>() {
      @Override

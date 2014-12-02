@@ -1,12 +1,9 @@
 package com.example.gradesapp;
 
-import android.util.Log;
 import android.widget.TextView;
 import java.util.ArrayList;
 import java.util.Observable;
 import java.util.Observer;
-
-import br.com.kots.mob.complex.preferences.ComplexPreferences;
 
 import android.view.View;
 import android.widget.AdapterView;
@@ -15,10 +12,7 @@ import android.widget.ArrayAdapter;
 import android.widget.EditText;
 import android.widget.Spinner;
 import android.widget.Toast;
-import android.content.Context;
 import android.content.Intent;
-import android.content.SharedPreferences;
-import android.content.SharedPreferences.Editor;
 import android.os.Bundle;
 import android.support.v7.app.ActionBarActivity;
 import android.view.Menu;
@@ -37,16 +31,11 @@ public class AddGradesActivity
     extends ActionBarActivity implements Observer, OnItemSelectedListener
 {
     private Class thisClass;
-    private AddGrades adGr;
-    private String lastCategory;
     private Classes clss;
     private ArrayList<Category> categories;
     private Category currentCat;
     private Assignment assmt;
     private String gradeName;
-    private Integer ptsRcv;
-    private Integer ptsTot;
-    private Category curCat;
 
     /**
      * Description of onCreate method.
@@ -66,17 +55,8 @@ public class AddGradesActivity
 		}
 		thisClass = clss.getCurClass();
 
-//		ComplexPreferences cp = ComplexPreferences.getComplexPreferences(this,
-//				"Classes", MODE_PRIVATE);
-//		Class temp = cp.getObject(thisClass.getName(), Class.class);
-//		if (temp != null)
-//		{
-//			thisClass = temp;
-//		}
-
 		categories = thisClass.getCats();
         updateSpinner();
-        //updateTotalGrade();
 
         Spinner spinner = (Spinner) findViewById(R.id.categories);
         spinner.setOnItemSelectedListener(this);
@@ -137,7 +117,7 @@ public class AddGradesActivity
 
 
     }
-
+    
     private boolean isInteger(String s) {
         try {
             Integer.parseInt(s);
@@ -155,8 +135,6 @@ public class AddGradesActivity
      */
     public void addAnother(View view)
     {
-
-        String grade; //hold grade ex: 15/20
         //get the current category chosen
         Spinner spinner = (Spinner) findViewById(R.id.categories);
         String curCategory = (String) spinner.getSelectedItem();
@@ -290,7 +268,7 @@ public class AddGradesActivity
     @Override
     public void update(Observable arg0, Object arg1)
     {
-        // TODO Auto-generated method stub
+        //Do Nothing
 
     }
 	@Override
@@ -304,7 +282,7 @@ public class AddGradesActivity
 	}
 	@Override
 	public void onNothingSelected(AdapterView<?> arg0) {
-		// TODO Auto-generated method stub
+		
 
 	}
 }

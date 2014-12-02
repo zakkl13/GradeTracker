@@ -1,6 +1,5 @@
 package com.example.gradesapp;
 
-import android.util.Log;
 import java.util.ArrayList;
 
 import android.content.Context;
@@ -185,7 +184,6 @@ public void setGrade() {
         }
     }
 
-    @SuppressWarnings("unused")
     public static final Parcelable.Creator<Category> CREATOR = new
     Parcelable.Creator<Category>() {
         @Override
