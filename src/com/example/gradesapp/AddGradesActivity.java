@@ -65,7 +65,7 @@ public class AddGradesActivity
 			clss = (Classes) b.getParcelable("Classes");
 		}
 		thisClass = clss.getCurClass();
-		
+
 //		ComplexPreferences cp = ComplexPreferences.getComplexPreferences(this,
 //				"Classes", MODE_PRIVATE);
 //		Class temp = cp.getObject(thisClass.getName(), Class.class);
@@ -77,7 +77,7 @@ public class AddGradesActivity
 		categories = thisClass.getCats();
         updateSpinner();
         //updateTotalGrade();
-        
+
         Spinner spinner = (Spinner) findViewById(R.id.categories);
         spinner.setOnItemSelectedListener(this);
 
@@ -94,7 +94,7 @@ public class AddGradesActivity
         Spinner spinner = (Spinner) findViewById(R.id.categories);
         String curCategory = (String) spinner.getSelectedItem();
         currentCat = thisClass.getCategory(curCategory);
-        
+
         EditText nameG = (EditText) findViewById(R.id.gradeName); //get values
         EditText ptsRcvd = (EditText) findViewById(R.id.name);
         EditText totPts = (EditText) findViewById(R.id.totPts);
@@ -106,45 +106,48 @@ public class AddGradesActivity
         {
         	gradeName = "NONAME";
         }
-        
+
         if (!isInteger(ptsRcv))
         {
-        	Toast.makeText(this, "Please enter a value for Points Recieved", Toast.LENGTH_SHORT).show();
+        	Toast.makeText(this, "Please enter a value for Points Recieved",
+        	    Toast.LENGTH_SHORT).show();
         }
         else if (!isInteger(ptsTot))
         {
-        	Toast.makeText(this, "Please enter a value for Total Points", Toast.LENGTH_SHORT).show();
+        	Toast.makeText(this, "Please enter a value for Total Points",
+        	    Toast.LENGTH_SHORT).show();
         }
         else
         {
-            assmt = new Assignment(gradeName, Integer.parseInt(ptsTot), Integer.parseInt(ptsRcv));
+            assmt = new Assignment(gradeName, Integer.parseInt(ptsTot),
+                Integer.parseInt(ptsRcv));
             currentCat.addAssmt(assmt);
             clss.saveModel(getApplicationContext());
-            
+
             currentCat.setGrade();
             TextView finalGrade = (TextView) findViewById(R.id.grade);
             finalGrade.setText(String.valueOf(currentCat.getGrade()));
-            
+
             clss.saveModel(getApplicationContext());
-            
+
             Intent intent = new Intent(this, ClassDisplayActivity.class);
             intent.putExtra("Classes", clss);
             startActivity(intent);
         }
-        
+
 
     }
 
     private boolean isInteger(String s) {
-        try { 
-            Integer.parseInt(s); 
-        } catch(NumberFormatException e) { 
-            return false; 
+        try {
+            Integer.parseInt(s);
+        } catch(NumberFormatException e) {
+            return false;
         }
         // only got here if we didn't return false
         return true;
     }
-    
+
     // ----------------------------------------------------------
     /**
      * Description of addAnother method.
@@ -171,32 +174,35 @@ public class AddGradesActivity
         {
         	gradeName = "NONAME";
         }
-        
+
         if (!isInteger(ptsRcv))
         {
-        	Toast.makeText(this, "Please enter a value for Points Recieved", Toast.LENGTH_SHORT).show();
+        	Toast.makeText(this, "Please enter a value for Points Recieved",
+        	    Toast.LENGTH_SHORT).show();
         }
         else if (!isInteger(ptsTot))
         {
-        	Toast.makeText(this, "Please enter a value for Total Points", Toast.LENGTH_SHORT).show();
+        	Toast.makeText(this, "Please enter a value for Total Points",
+        	    Toast.LENGTH_SHORT).show();
         }
         else
         {
-            assmt = new Assignment(gradeName, Integer.parseInt(ptsTot), Integer.parseInt(ptsRcv));
+            assmt = new Assignment(gradeName, Integer.parseInt(ptsTot),
+                Integer.parseInt(ptsRcv));
             currentCat.addAssmt(assmt);
             clss.saveModel(getApplicationContext());
-            
+
             currentCat.setGrade();
             TextView finalGrade = (TextView) findViewById(R.id.grade);
             finalGrade.setText(String.valueOf(currentCat.getGrade()));
-            
+
             nameG.setText("");
             ptsRcvd.setText("");//reset them
             totPts.setText("");
         }
 
     }
-    
+
     // ----------------------------------------------------------
     /**
      * takes you home
@@ -230,22 +236,25 @@ public class AddGradesActivity
     	updateSpinner();
 
     }
-    
+
     public void clear(View view)
     {
     	for (Category c : categories)
         {
     		c.clearAssmt();
         }
-    	
+
     }
 
     public void updateSpinner()
     {
-		//Sets the spinner to display the string array of the names of the classes
+		//Sets the spinner to display the string array of the names of the
+        //classes
         Spinner spinner = (Spinner) findViewById(R.id.categories);
-        ArrayAdapter<String> adapter = new ArrayAdapter<String>(this, android.R.layout.simple_spinner_item, thisClass.getCatNameArray());
-        adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+        ArrayAdapter<String> adapter = new ArrayAdapter<String>(this,
+            android.R.layout.simple_spinner_item, thisClass.getCatNameArray());
+        adapter.setDropDownViewResource(
+            android.R.layout.simple_spinner_dropdown_item);
         spinner.setAdapter(adapter);
     }
 
@@ -256,7 +265,7 @@ public class AddGradesActivity
     @Override
     public boolean onCreateOptionsMenu(Menu menu)
     {
-        // Inflate the menu; this adds items to the action bar if it is present.
+        // Inflate the menu; this adds items to the action bar if it is present
         getMenuInflater().inflate(R.menu.add, menu);
         return true;
     }
@@ -289,13 +298,13 @@ public class AddGradesActivity
 			long arg3) {
 		TextView finalGrade = (TextView) findViewById(R.id.grade);
         finalGrade.setText(String.valueOf(categories.get(pos).getGrade()));
-        
-        
-		
+
+
+
 	}
 	@Override
 	public void onNothingSelected(AdapterView<?> arg0) {
 		// TODO Auto-generated method stub
-		
+
 	}
 }

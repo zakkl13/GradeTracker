@@ -41,10 +41,11 @@ public class Class implements Parcelable {
 		this.categories = new ArrayList<Category>();
 		grade = 0.00;
 	}
-	
+
 	public Class(Class cls, Context appContext)
 	{
-		ComplexPreferences cp = ComplexPreferences.getComplexPreferences(appContext, "Classes", Context.MODE_PRIVATE);
+		ComplexPreferences cp = ComplexPreferences.getComplexPreferences(
+		    appContext, "Classes", Context.MODE_PRIVATE);
 
 		this.numCrHrs = cls.getNumCrHrs();
 		this.passFail = cls.isPassFail();
@@ -53,10 +54,11 @@ public class Class implements Parcelable {
 		this.categories = new ArrayList<Category>();
 		for (Category cat: cls.getCats())
 		{
-			categories.add(new Category(cp.getObject(name + cat.getName(), Category.class), appContext));
+			categories.add(new Category(cp.getObject(name + cat.getName(),
+			    Category.class), appContext));
 			Log.d("setCat", cat.getName());
 		}
-		
+
 	}
 
 	// ----------------------------------------------------------
@@ -68,13 +70,13 @@ public class Class implements Parcelable {
 	{
 	    categories.add(cat);
 	}
-	
+
 	public void removeCategory(String catName)
 	{
 		categories.remove(getCategory(catName));
-		
+
 	}
-	
+
 	public Category getCategory(String catName)
 	{
 		for (int i = 0; i < categories.size(); i++)
@@ -84,10 +86,10 @@ public class Class implements Parcelable {
 				return categories.get(i);
 			}
 		}
-		
+
 		return null;
 	}
-	
+
 	public String[] getCatNameArray()
 	{
 		String[] cats = new String[categories.size()];
@@ -98,10 +100,11 @@ public class Class implements Parcelable {
 
 		return cats;
 	}
-	
+
 	public void saveClass(Context appContext)
 	{
-		ComplexPreferences cp = ComplexPreferences.getComplexPreferences(appContext, "Classes", Context.MODE_PRIVATE);
+		ComplexPreferences cp = ComplexPreferences.getComplexPreferences(
+		    appContext, "Classes", Context.MODE_PRIVATE);
 		for (Category cat: categories)
 		{
 			cat.saveCategory(appContext);
@@ -194,7 +197,7 @@ public class Class implements Parcelable {
 	public double getGrade()
 	{
     	double totalGrade = 0.0;
-    	
+
     	for (Category c : categories)
         {
             c.setGrade();
@@ -203,10 +206,10 @@ public class Class implements Parcelable {
             Log.d("totalGrade", totalGrade + "");
 
         }
-    	
+
     	return totalGrade;
 	}
-	
+
     protected Class(Parcel in) {
         numCrHrs = in.readInt();
         passFail = in.readByte() != 0x00;
@@ -240,7 +243,8 @@ public class Class implements Parcelable {
     }
 
     @SuppressWarnings("unused")
-    public static final Parcelable.Creator<Class> CREATOR = new Parcelable.Creator<Class>() {
+    public static final Parcelable.Creator<Class> CREATOR = new
+    Parcelable.Creator<Class>() {
         @Override
         public Class createFromParcel(Parcel in) {
             return new Class(in);

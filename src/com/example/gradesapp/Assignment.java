@@ -108,7 +108,8 @@ public class Assignment implements Parcelable {
  }
 
  @SuppressWarnings("unused")
- public static final Parcelable.Creator<Assignment> CREATOR = new Parcelable.Creator<Assignment>() {
+ public static final Parcelable.Creator<Assignment> CREATOR = new
+ Parcelable.Creator<Assignment>() {
      @Override
      public Assignment createFromParcel(Parcel in) {
          return new Assignment(in);

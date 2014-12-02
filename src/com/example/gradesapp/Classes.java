@@ -32,17 +32,19 @@ public class Classes extends Observable implements Parcelable {
 	}
 
 	public void updateModel(Context appContext) {
-		ComplexPreferences cp = ComplexPreferences.getComplexPreferences(appContext, "Classes", Context.MODE_PRIVATE);
+		ComplexPreferences cp = ComplexPreferences.getComplexPreferences(
+		    appContext, "Classes", Context.MODE_PRIVATE);
 		for (Class c: clsArray)
 		{
 			c = new Class(cp.getObject(c.getName(), Class.class), appContext);
 			Log.d("setClass", c.getName());
 		}
 	}
-	
+
 	public void saveModel(Context appContext)
 	{
-		ComplexPreferences cp = ComplexPreferences.getComplexPreferences(appContext, "Classes", Context.MODE_PRIVATE);
+		ComplexPreferences cp = ComplexPreferences.getComplexPreferences(
+		    appContext, "Classes", Context.MODE_PRIVATE);
 		for (Class c: clsArray)
 		{
 			c.saveClass(appContext);
@@ -111,10 +113,10 @@ public class Classes extends Observable implements Parcelable {
 				return clsArray.get(i);
 			}
 		}
-		
+
 		return null;
 	}
-	
+
 
     protected Classes(Parcel in) {
         if (in.readByte() == 0x01) {
@@ -143,7 +145,8 @@ public class Classes extends Observable implements Parcelable {
     }
 
     @SuppressWarnings("unused")
-    public static final Parcelable.Creator<Classes> CREATOR = new Parcelable.Creator<Classes>() {
+    public static final Parcelable.Creator<Classes> CREATOR = new
+    Parcelable.Creator<Classes>() {
         @Override
         public Classes createFromParcel(Parcel in) {
             return new Classes(in);

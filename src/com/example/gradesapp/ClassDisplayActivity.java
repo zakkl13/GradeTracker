@@ -41,10 +41,10 @@ implements Observer {
 		{
 			clss = (Classes) b.getParcelable("Classes");
 			thisClass = clss.getCurClass();
-			
+
 			updateDisplay();
 		}
-		
+
 		setList();
 	}
 
@@ -62,7 +62,7 @@ implements Observer {
 		TextView hours = (TextView) findViewById(R.id.hours);
 		hours.setText("Credit Hours: " + thisClass.getNumCrHrs());
 	}
-	
+
     /**
      * Opens the addClass Activity
      * @param view the button
@@ -73,7 +73,7 @@ implements Observer {
         intent.putExtra("Classes", clss);
         startActivity(intent);
     }
-    
+
     public void setList()
     {
     	int totNumAsgn = 0;
@@ -81,9 +81,9 @@ implements Observer {
     	{
     		totNumAsgn += cat.getAssmts().size();
     	}
-    	
+
     	int index = 0;
-    	
+
     	String[] list = new String[totNumAsgn];
     	for (int i = 0; i < thisClass.getCats().size(); i++)
     	{
@@ -91,17 +91,19 @@ implements Observer {
     		for (int j = index; j < curCat.getAssmts().size(); j++)
     		{
     			Assignment curAsgn = curCat.getAssmts().get(j);
-    			list[j] = curCat.getName() + " - " + curAsgn.getName() + ": " + String.valueOf(curAsgn.getPtsRecieved()) 
+    			list[j] = curCat.getName() + " - " + curAsgn.getName() + ": " +
+    			String.valueOf(curAsgn.getPtsRecieved())
     					+ " / " + String.valueOf(curAsgn.getTotPts());
     			index++;
     		}
     	}
-    	
+
     	ListView lsView = (ListView) findViewById(R.id.listView1);
-    	ArrayAdapter<String> adapt = new ArrayAdapter<String>(this, android.R.layout.simple_list_item_1, list);
+    	ArrayAdapter<String> adapt = new ArrayAdapter<String>(this,
+    	    android.R.layout.simple_list_item_1, list);
     	lsView.setAdapter(adapt);
     }
-    
+
     // ----------------------------------------------------------
     /**
      * takes you home

@@ -43,7 +43,8 @@ public Category(int weight, String name)
 
 public Category(Category cat, Context appContext)
 {
-	ComplexPreferences cp = ComplexPreferences.getComplexPreferences(appContext, "Classes", Context.MODE_PRIVATE);
+	ComplexPreferences cp = ComplexPreferences.getComplexPreferences(appContext,
+	    "Classes", Context.MODE_PRIVATE);
 
 	this.weight = cat.getWeight();
 	this.name = cat.getName();
@@ -57,7 +58,8 @@ public Category(Category cat, Context appContext)
 
 public void saveCategory(Context appContext)
 {
-	ComplexPreferences cp = ComplexPreferences.getComplexPreferences(appContext, "Classes", Context.MODE_PRIVATE);
+	ComplexPreferences cp = ComplexPreferences.getComplexPreferences(appContext,
+	    "Classes", Context.MODE_PRIVATE);
 
 	for (Assignment asgn: assmt)
 	{
@@ -142,12 +144,12 @@ public void setGrade() {
   public void addAssmt(Assignment grade) {
       assmt.add(grade);
   }
-  
+
   public void clearAssmt() {
 	  assmt.clear();
 	  grade = 0.00;
   }
-  
+
     protected Category(Parcel in) {
         name = in.readString();
         if (in.readByte() == 0x01) {
@@ -184,7 +186,8 @@ public void setGrade() {
     }
 
     @SuppressWarnings("unused")
-    public static final Parcelable.Creator<Category> CREATOR = new Parcelable.Creator<Category>() {
+    public static final Parcelable.Creator<Category> CREATOR = new
+    Parcelable.Creator<Category>() {
         @Override
         public Category createFromParcel(Parcel in) {
             return new Category(in);
