@@ -15,7 +15,7 @@ import android.view.MenuItem;
 
 // -------------------------------------------------------------------------
 /**
- *  Description of class.
+ *  This class is used in order to add activities to the categories menu.
  *
  *  @author Zakk Lefkowitz (zakkl13)
  *  @author Jason Barrett (jason95)
@@ -27,7 +27,9 @@ public class AddCategoryActivity
 {
     private Classes clss;
     /**
-     * Description of onCreate method.
+     * This method runs when an activity is created. It sets the content view
+     * and also gets the intent; this is all done using the saved instance
+     * state.
      * @param savedInstanceState The saved state of the instance
      */
     @Override
@@ -44,6 +46,10 @@ public class AddCategoryActivity
 
     }
 
+    /**
+     * This method is used in order to add new categories to the menu.
+     * @param v The view for the app
+     */
     public void catAdd(View v)
     {
         //crHours
@@ -72,7 +78,7 @@ public class AddCategoryActivity
     }
 
     /**
-     * Description of onCreateOptionsMenu method.
+     * This method handles the menu for when the options button is pressed.
      * @param menu The menu
      */
     @Override
@@ -84,7 +90,7 @@ public class AddCategoryActivity
     }
 
     /**
-     * Description of onOptionsItemSelected method.
+     * This method handles when items on the action bar are clicked.
      * @param item The individual item in the menu
      */
     @Override
