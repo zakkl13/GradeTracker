@@ -34,6 +34,10 @@ public class AddGradesActivity
     private Class thisClass;
     private Classes clss;
     private ArrayList<Category> categories;
+    private Assignment assmt;
+    private String gradeName;
+    private int ptsRcvd;
+    private int ptsTot;
 
     /**
      * Description of onCreate method.
@@ -65,6 +69,17 @@ public class AddGradesActivity
      */
     public void button2(View view)
     {
+        String grade; //hold grade ex: 15/20
+
+        EditText nameG = (EditText) findViewById(R.id.gradeName);
+        EditText gradeNumber = (EditText) findViewById(R.id.grade);
+
+        gradeName = nameG.getText().toString();
+        grade = gradeNumber.getText().toString();
+        ptsRcvd = Integer.parseInt(grade.substring(0, grade.indexOf("/")));
+        ptsTot = Integer.parseInt(grade.substring(grade.indexOf("/")
+            , grade.length()));
+        assmt = new Assignment(gradeName, ptsTot, ptsRcvd);
 
         Intent intent = new Intent(this, ClassDisplayActivity.class);
         startActivity(intent);

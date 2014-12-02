@@ -66,7 +66,7 @@
         android:text="Add some new grades" />
 
     <EditText
-        android:id="@+id/categoryName"
+        android:id="@+id/grade"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_alignLeft="@+id/button2"
@@ -83,8 +83,8 @@
         android:id="@+id/gradeName"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_alignBaseline="@+id/categoryName"
-        android:layout_alignBottom="@+id/categoryName"
+        android:layout_alignBaseline="@+id/grade"
+        android:layout_alignBottom="@+id/grade"
         android:layout_alignLeft="@+id/clsName"
         android:layout_alignRight="@+id/clsName"
         android:ems="10"

@@ -1103,7 +1103,6 @@ containing a value of this type.
         public static final int button2=0x7f06003d;
         public static final int catAdd=0x7f060047;
         public static final int categories=0x7f06003e;
-        public static final int categoryName=0x7f060042;
         public static final int checkbox=0x7f06002d;
         public static final int classSpinner=0x7f06004f;
         public static final int clsName=0x7f06003f;
@@ -1117,6 +1116,7 @@ containing a value of this type.
         public static final int end=0x7f060013;
         public static final int expand_activities_button=0x7f060026;
         public static final int expanded_menu=0x7f06002c;
+        public static final int grade=0x7f060042;
         public static final int gradeName=0x7f060043;
         public static final int home=0x7f060014;
         public static final int homeAsUp=0x7f060005;
