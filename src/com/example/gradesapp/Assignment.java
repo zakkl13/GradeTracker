@@ -5,7 +5,7 @@ import android.os.Parcelable;
 
 //-------------------------------------------------------------------------
 /**
- *  Description of class.
+ *  This class handles the creation of a new assignment object.
  *
  *  @author Zakk Lefkowitz (zakkl13)
  *  @author Jason Barrett (jason95)
@@ -21,7 +21,6 @@ public class Assignment implements Parcelable {
 	// ----------------------------------------------------------
 	/**
 	 * Create a new Assignment object.
-	 * @param weight      The weight of the assignment
 	 * @param name        The name of the assignment
 	 * @param totPts      The total points the assignment is worth
 	 * @param ptsRecieved The points received on the assignment
@@ -87,7 +86,10 @@ public class Assignment implements Parcelable {
 		this.ptsRecieved = ptsRecieved;
 	}
 
-
+/**
+ * This protected method protects the values in assignment.
+ * @param in The parcel
+ */
  protected Assignment(Parcel in) {
      name = in.readString();
      totPts = in.readInt();
@@ -106,7 +108,10 @@ public class Assignment implements Parcelable {
      dest.writeInt(ptsRecieved);
  }
 
- public static final Parcelable.Creator<Assignment> CREATOR = new
+ /**
+ * Not sure what this is, someone else edit?
+ */
+public static final Parcelable.Creator<Assignment> CREATOR = new
  Parcelable.Creator<Assignment>() {
      @Override
      public Assignment createFromParcel(Parcel in) {
