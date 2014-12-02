@@ -3,6 +3,7 @@ package com.example.gradesapp;
 import java.util.ArrayList;
 import android.os.Parcel;
 import android.os.Parcelable;
+import android.util.Log;
 
 //-------------------------------------------------------------------------
 /**
@@ -18,7 +19,7 @@ public class Category implements Parcelable {
 private String name;
 private ArrayList<Assignment> assmt;
 private int weight;
-private Double catGrade;
+private Double grade;
 
 
 // ---------------------------------------------------------
@@ -76,7 +77,7 @@ public void setName(String name) {
 * gets the grade
 */
 public Double getGrade() {
-   return catGrade;
+   return grade;
 }
 
 /**
@@ -85,12 +86,20 @@ public Double getGrade() {
 public void setGrade() {
    int totPtsRcvd = 0;
    int totPtsGiven = 0;
+   int count = 0;
    for (Assignment a : assmt)
    {
+       count++;
+
        totPtsRcvd += a.getPtsRecieved();
        totPtsGiven += a.getTotPts();
+       Log.d("rcvd", totPtsRcvd + "");
+       Log.d("given", totPtsGiven + "");
+       Log.d("given", count + "");
+
    }
-   catGrade = (double) (totPtsRcvd / totPtsGiven);
+   grade =  ((double)totPtsRcvd / (double)totPtsGiven);
+   Log.d("orig", grade + "");
 }
 
   /**
@@ -116,7 +125,7 @@ public void setGrade() {
           assmt = null;
       }
       weight = in.readInt();
-      catGrade = in.readByte() == 0x00 ? null : in.readDouble();
+      grade = in.readByte() == 0x00 ? null : in.readDouble();
   }
 
   @Override
@@ -134,11 +143,11 @@ public void setGrade() {
           dest.writeList(assmt);
       }
       dest.writeInt(weight);
-      if (catGrade == null) {
+      if (grade == null) {
           dest.writeByte((byte) (0x00));
       } else {
           dest.writeByte((byte) (0x01));
-          dest.writeDouble(catGrade);
+          dest.writeDouble(grade);
       }
   }
 
