@@ -11,6 +11,8 @@ import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.widget.ArrayAdapter;
+import android.widget.ListView;
 import android.widget.Spinner;
 import android.widget.TextView;
 
@@ -43,7 +45,7 @@ implements Observer {
 			updateDisplay();
 		}
 		
-		
+		setList();
 	}
 
 	/**
@@ -60,6 +62,7 @@ implements Observer {
 		TextView hours = (TextView) findViewById(R.id.hours);
 		hours.setText("Credit Hours: " + thisClass.getNumCrHrs());
 	}
+	
     /**
      * Opens the addClass Activity
      * @param view the button
@@ -68,6 +71,45 @@ implements Observer {
     {
         Intent intent = new Intent(this, AddGradesActivity.class);
         intent.putExtra("Classes", clss);
+        startActivity(intent);
+    }
+    
+    public void setList()
+    {
+    	int totNumAsgn = 0;
+    	for (Category cat: thisClass.getCats())
+    	{
+    		totNumAsgn += cat.getAssmts().size();
+    	}
+    	
+    	int index = 0;
+    	
+    	String[] list = new String[totNumAsgn];
+    	for (int i = 0; i < thisClass.getCats().size(); i++)
+    	{
+    		Category curCat = thisClass.getCats().get(i);
+    		for (int j = index; j < curCat.getAssmts().size(); j++)
+    		{
+    			Assignment curAsgn = curCat.getAssmts().get(j);
+    			list[j] = curCat.getName() + " - " + curAsgn.getName() + ": " + String.valueOf(curAsgn.getPtsRecieved()) 
+    					+ " / " + String.valueOf(curAsgn.getTotPts());
+    			index++;
+    		}
+    	}
+    	
+    	ListView lsView = (ListView) findViewById(R.id.listView1);
+    	ArrayAdapter<String> adapt = new ArrayAdapter<String>(this, android.R.layout.simple_list_item_1, list);
+    	lsView.setAdapter(adapt);
+    }
+    
+    // ----------------------------------------------------------
+    /**
+     * takes you home
+     * @param view The view
+     */
+    public void home(View view)
+    {
+        Intent intent = new Intent(this, MainActivity.class);
         startActivity(intent);
     }
 
