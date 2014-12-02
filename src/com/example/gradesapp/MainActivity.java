@@ -38,7 +38,7 @@ public class MainActivity
         clss = null;
 
 	    ComplexPreferences complexPreferences = ComplexPreferences.
-	        getComplexPreferences(this, "Classes", MODE_PRIVATE);
+	        getComplexPreferences(this, "Objects", MODE_PRIVATE);
 	    clss = complexPreferences.getObject("Model", Classes.class);
 
 	    if (clss == null)
@@ -95,6 +95,11 @@ public class MainActivity
     	clss.setCurClass(curClass);
 
     	clss.deleteClass();
+    	
+    	ComplexPreferences complexPreferences = ComplexPreferences.
+    	        getComplexPreferences(this, "Objects", MODE_PRIVATE);
+    	    complexPreferences.putObject("Model", clss);
+    	    complexPreferences.commit();
 
     	updateSpinner();
     }

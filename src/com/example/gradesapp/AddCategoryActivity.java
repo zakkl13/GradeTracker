@@ -1,5 +1,6 @@
 package com.example.gradesapp;
 
+import br.com.kots.mob.complex.preferences.ComplexPreferences;
 import android.content.Intent;
 import android.content.Context;
 import android.content.SharedPreferences.Editor;
@@ -53,6 +54,11 @@ public class AddCategoryActivity
             toString()), catName.getText().toString());
 
         thisClass.addCategory(cat);
+        
+        ComplexPreferences complexPreferences = ComplexPreferences.
+        getComplexPreferences(this, "Objects", MODE_PRIVATE);
+        complexPreferences.putObject(thisClass.getName(), thisClass);
+        complexPreferences.commit();
 
         //Return to main activity menu
         Intent intent = new Intent(this, AddGradesActivity.class);

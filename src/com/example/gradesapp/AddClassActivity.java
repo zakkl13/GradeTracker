@@ -98,7 +98,7 @@ public class AddClassActivity extends ActionBarActivity {
 		clss.addClass(cls);
 
 	    ComplexPreferences complexPreferences = ComplexPreferences.
-	        getComplexPreferences(this, "Classes", MODE_PRIVATE);
+	        getComplexPreferences(this, "Objects", MODE_PRIVATE);
 	    complexPreferences.putObject("Model", clss);
 	    complexPreferences.commit();
 

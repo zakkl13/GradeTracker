@@ -46,6 +46,28 @@ public class Class implements Parcelable {
 	{
 	    categories.add(cat);
 	}
+	
+	public void removeCategory(String catName)
+	{
+		for (int i = 0; i < categories.size(); i++)
+		{
+			if (categories.get(i).getName() == catName)
+			{
+				categories.remove(i);
+			}
+		}
+	}
+	
+	public String[] getCatNameArray()
+	{
+		String[] cats = new String[categories.size()];
+		for (int i = 0; i < categories.size(); i++)
+		{
+			cats[i] = categories.get(i).getName();
+		}
+		
+		return cats;
+	}
 
 
 	//Getters and Setters

@@ -4,6 +4,8 @@ import java.util.ArrayList;
 import java.util.Observable;
 import java.util.Observer;
 
+import br.com.kots.mob.complex.preferences.ComplexPreferences;
+
 import android.view.View;
 import android.widget.ArrayAdapter;
 import android.widget.EditText;
@@ -30,7 +32,6 @@ public class AddGradesActivity
     extends ActionBarActivity implements Observer
 {
     private Class thisClass;
-    private ArrayList<Category> categories;
     
     /**
      * Description of onCreate method.
@@ -49,7 +50,15 @@ public class AddGradesActivity
 			thisClass = (Class) b.getParcelable("class");
 		}
 		
-		categories = thisClass.getCats();
+		ComplexPreferences complexPreferences = ComplexPreferences.
+		        getComplexPreferences(this, "Objects", MODE_PRIVATE);
+		Class temp = complexPreferences.getObject(thisClass.getName(), Class.class);
+		
+		if (temp != null)
+		{
+			thisClass = temp;
+		}
+		
         updateSpinner();
 		
     }
@@ -85,17 +94,25 @@ public class AddGradesActivity
         startActivity(intent);
     }
     
+    public void delCat(View view)
+    {
+    	Spinner spinner = (Spinner) findViewById(R.id.categories);
+    	String curCat = (String) spinner.getSelectedItem();
+    	thisClass.removeCategory(curCat);
+    	
+    	ComplexPreferences complexPreferences = ComplexPreferences.
+    	getComplexPreferences(this, "Objects", MODE_PRIVATE);
+    	complexPreferences.putObject(thisClass.getName(), thisClass);
+    	complexPreferences.commit();
+    	
+    	updateSpinner();
+    }
+    
     public void updateSpinner()
     {
-    	String[] cats = new String[categories.size()];
-		for (int i = 0; i < categories.size(); i++)
-		{
-			cats[i] = categories.get(i).getName();
-		}
-		
 		//Sets the spinner to display the string array of the names of the classes
         Spinner spinner = (Spinner) findViewById(R.id.categories);
-        ArrayAdapter<String> adapter = new ArrayAdapter<String>(this, android.R.layout.simple_spinner_item, cats);
+        ArrayAdapter<String> adapter = new ArrayAdapter<String>(this, android.R.layout.simple_spinner_item, thisClass.getCatNameArray());
         adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
         spinner.setAdapter(adapter);
     }
