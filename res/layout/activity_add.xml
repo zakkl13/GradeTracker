@@ -90,4 +90,13 @@
         android:ems="10"
         android:hint="Name" />
 
+    <Button
+        android:id="@+id/button1"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignLeft="@+id/addCat"
+        android:layout_below="@+id/categories"
+        android:onClick="delete"
+        android:text="Delete Category" />
+
 </RelativeLayout>

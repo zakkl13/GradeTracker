@@ -84,7 +84,7 @@ public class MainActivity
     	clss.setCurClass(curClass);
 
     	Intent intent = new Intent(this, ClassDisplayActivity.class);
-    	intent.putExtra("class", clss.getCurClass());
+    	intent.putExtra("Classes", clss);
         startActivity(intent);
     }
 
@@ -95,6 +95,11 @@ public class MainActivity
     	clss.setCurClass(curClass);
 
     	clss.deleteClass();
+    	
+    	ComplexPreferences complexPreferences = ComplexPreferences.
+    	        getComplexPreferences(this, "Classes", MODE_PRIVATE);
+    	    complexPreferences.putObject("Model", clss);
+    	    complexPreferences.commit();
 
     	updateSpinner();
     }

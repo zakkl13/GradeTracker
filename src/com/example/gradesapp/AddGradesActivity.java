@@ -4,6 +4,8 @@ import java.util.ArrayList;
 import java.util.Observable;
 import java.util.Observer;
 
+import br.com.kots.mob.complex.preferences.ComplexPreferences;
+
 import android.view.View;
 import android.widget.ArrayAdapter;
 import android.widget.EditText;
@@ -30,6 +32,7 @@ public class AddGradesActivity
     extends ActionBarActivity implements Observer
 {
     private Class thisClass;
+    private Classes clss;
     private ArrayList<Category> categories;
 
     /**
@@ -46,8 +49,10 @@ public class AddGradesActivity
         Bundle b = inte.getExtras();
 		if (b != null)
 		{
-			thisClass = (Class) b.getParcelable("class");
+			clss = (Classes) b.getParcelable("Classes");
 		}
+		thisClass = clss.getCurClass();
+		
 
 		categories = thisClass.getCats();
         updateSpinner();
@@ -82,8 +87,19 @@ public class AddGradesActivity
     public void addCat(View view)
     {
         Intent intent = new Intent(this, AddCategoryActivity.class);
-        intent.putExtra("class", thisClass);
+        intent.putExtra("Classes", clss);
         startActivity(intent);
+    }
+    
+    public void delete(View view)
+    {
+    	categories.remove(thisClass);
+    	updateSpinner();
+    	
+    	ComplexPreferences complexPreferences = ComplexPreferences.
+    	        getComplexPreferences(this, "Classes", MODE_PRIVATE);
+    	    complexPreferences.putObject("Model", clss);
+    	    complexPreferences.commit();
     }
 
     public void updateSpinner()

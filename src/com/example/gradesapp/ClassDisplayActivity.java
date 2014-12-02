@@ -22,7 +22,7 @@ import android.widget.TextView;
 public class ClassDisplayActivity extends ActionBarActivity
 implements Observer {
 	private Class thisClass;
-	private String cName = null;
+	private Classes clss;
 
 	/**
 	 * Gets the current class from getExtras() through the intent
@@ -37,10 +37,13 @@ implements Observer {
 		Bundle b = inte.getExtras();
 		if (b != null)
 		{
-			thisClass = (Class) b.getParcelable("class");
-		}
+			clss = (Classes) b.getParcelable("Classes");
+			thisClass = clss.getCurClass();
 
-		updateDisplay();
+			updateDisplay();
+		}
+		
+		
 	}
 
 	/**
@@ -50,7 +53,6 @@ implements Observer {
 	{
 		TextView name = (TextView) findViewById(R.id.clsName);
 		name.setText(thisClass.getName());
-		cName = (String)name.getText();
 
 		TextView grade = (TextView) findViewById(R.id.curGrade);
 		//TODO parse float to String below
@@ -66,7 +68,7 @@ implements Observer {
     public void addGrades(View view)
     {
         Intent intent = new Intent(this, AddGradesActivity.class);
-        intent.putExtra("class", thisClass);
+        intent.putExtra("Classes", clss);
         startActivity(intent);
     }
 

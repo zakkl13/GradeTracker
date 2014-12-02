@@ -1,5 +1,6 @@
 package com.example.gradesapp;
 
+import br.com.kots.mob.complex.preferences.ComplexPreferences;
 import android.content.Intent;
 import android.content.Context;
 import android.content.SharedPreferences.Editor;
@@ -24,6 +25,7 @@ public class AddCategoryActivity
     extends ActionBarActivity
 {
     private Class thisClass;
+    private Classes clss;
     /**
      * Description of onCreate method.
      * @param savedInstanceState The saved state of the instance
@@ -37,8 +39,11 @@ public class AddCategoryActivity
 		Bundle b = inte.getExtras();
 		if (b != null)
 		{
-			thisClass = (Class) b.getParcelable("class");
+			clss = (Classes) b.getParcelable("Classes");
 		}
+		
+		thisClass = clss.getCurClass();
+		
     }
     public void catAdd(View v)
     {
@@ -53,10 +58,15 @@ public class AddCategoryActivity
             toString()), catName.getText().toString());
 
         thisClass.addCategory(cat);
+        
+        ComplexPreferences complexPreferences = ComplexPreferences.
+    	        getComplexPreferences(this, "Classes", MODE_PRIVATE);
+    	    complexPreferences.putObject("Model", clss);
+    	    complexPreferences.commit();
 
         //Return to main activity menu
         Intent intent = new Intent(this, AddGradesActivity.class);
-        intent.putExtra("class", thisClass);
+        intent.putExtra("Classes", clss);
         startActivity(intent);
 
     }
