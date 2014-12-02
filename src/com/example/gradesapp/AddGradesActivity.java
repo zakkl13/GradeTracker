@@ -60,6 +60,14 @@ public class AddGradesActivity
 			clss = (Classes) b.getParcelable("Classes");
 		}
 		thisClass = clss.getCurClass();
+		
+		ComplexPreferences cp = ComplexPreferences.getComplexPreferences(this,
+				"Classes", MODE_PRIVATE);
+		Class temp = cp.getObject(thisClass.getName(), Class.class);
+		if (temp != null)
+		{
+			thisClass = temp;
+		}
 
 
 		categories = thisClass.getCats();

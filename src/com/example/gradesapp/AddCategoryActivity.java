@@ -62,7 +62,7 @@ public class AddCategoryActivity
 
         ComplexPreferences complexPreferences = ComplexPreferences.
     	        getComplexPreferences(this, "Classes", MODE_PRIVATE);
-    	    complexPreferences.putObject("Model", clss);
+    	    complexPreferences.putObject(thisClass.getName(), thisClass);
     	    complexPreferences.commit();
 
         //Return to main activity menu
