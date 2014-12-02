@@ -1,5 +1,6 @@
 package com.example.gradesapp;
 
+import android.util.Log;
 import java.util.ArrayList;
 import android.os.Parcel;
 import android.os.Parcelable;
@@ -85,12 +86,20 @@ public Double getGrade() {
 public void setGrade() {
    int totPtsRcvd = 0;
    int totPtsGiven = 0;
+   int count = 0;
    for (Assignment a : assmt)
    {
+       count++;
+
        totPtsRcvd += a.getPtsRecieved();
        totPtsGiven += a.getTotPts();
+       Log.d("rcvd", totPtsRcvd + "");
+       Log.d("given", totPtsGiven + "");
+       Log.d("given", count + "");
+
    }
-   grade = (double) (totPtsRcvd / totPtsGiven);
+   grade =  ((double)totPtsRcvd / (double)totPtsGiven);
+   Log.d("orig", grade + "");
 }
 
   /**

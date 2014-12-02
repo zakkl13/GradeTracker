@@ -1,5 +1,6 @@
 package com.example.gradesapp;
 
+import android.util.Log;
 import br.com.kots.mob.complex.preferences.ComplexPreferences;
 import android.content.Intent;
 import android.content.Context;
@@ -41,9 +42,9 @@ public class AddCategoryActivity
 		{
 			clss = (Classes) b.getParcelable("Classes");
 		}
-		
+
 		thisClass = clss.getCurClass();
-		
+
     }
     public void catAdd(View v)
     {
@@ -52,13 +53,13 @@ public class AddCategoryActivity
         //Get references to edit text fields
         EditText percent = (EditText) findViewById(R.id.percent);
         EditText catName = (EditText) findViewById(R.id.ptsRcv);
-
+        Log.d("catName", catName.getText().toString());
         //Create a class object with the information from the editText fields
         Category cat = new Category(Integer.parseInt(percent.getText().
             toString()), catName.getText().toString());
 
         thisClass.addCategory(cat);
-        
+
         ComplexPreferences complexPreferences = ComplexPreferences.
     	        getComplexPreferences(this, "Classes", MODE_PRIVATE);
     	    complexPreferences.putObject("Model", clss);

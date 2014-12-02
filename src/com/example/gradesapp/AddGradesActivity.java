@@ -1,5 +1,7 @@
 package com.example.gradesapp;
 
+import android.util.Log;
+import android.widget.TextView;
 import java.util.ArrayList;
 import java.util.Observable;
 import java.util.Observer;
@@ -32,6 +34,7 @@ public class AddGradesActivity
     extends ActionBarActivity implements Observer
 {
     private Class thisClass;
+    private String lastCategory;
     private Classes clss;
     private ArrayList<Category> categories;
     private Category currentCat;
@@ -62,6 +65,8 @@ public class AddGradesActivity
 		categories = thisClass.getCats();
         updateSpinner();
 
+
+
     }
     // ----------------------------------------------------------
     /**
@@ -70,33 +75,43 @@ public class AddGradesActivity
      */
     public void button2(View view)
     {
+        double totalGrade = 0.0;
+        String grade; //hold grade ex: 15/20
+        //get the current category chosen
         Spinner spinner = (Spinner) findViewById(R.id.categories);
         String curCategory = (String) spinner.getSelectedItem();
         for (Category c : categories)
         {
-            if ( c.getName().equals(curCategory))
+            if ( c.getName().equals(curCategory)) // if the category chosen is already in categories
             {
-                currentCat = c;
+                currentCat = c; // make it the current one
             }
-            else
-            {
-               //may need this if there are no c's
-            }
-        }
-        String grade; //hold grade ex: 15/20
 
-        EditText nameG = (EditText) findViewById(R.id.gradeName);
-        EditText ptsRcvd = (EditText) findViewById(R.id.ptsRcv);
+        }
+        EditText nameG = (EditText) findViewById(R.id.gradeName); //get values
+        EditText ptsRcvd = (EditText) findViewById(R.id.name);
         EditText totPts = (EditText) findViewById(R.id.totPts);
 
 
-        gradeName = nameG.getText().toString();
+        gradeName = nameG.getText().toString(); //make Assignment obj
         ptsRcv = Integer.parseInt(ptsRcvd.getText().toString());
         ptsTot = Integer.parseInt(totPts.getText().toString());
         assmt = new Assignment(gradeName, ptsTot, ptsRcv);
         currentCat.addAssmt(assmt);
-        Intent intent = new Intent(this, ClassDisplayActivity.class);
-        startActivity(intent);
+
+
+        for (Category c : categories)
+        {
+            c.setGrade();
+            Log.d("grade", c.getGrade() + "");
+            totalGrade += c.getGrade() * c.getWeight();
+            Log.d("totalGrade", totalGrade + "");
+
+        }
+        TextView finalGrade = (TextView) findViewById(R.id.grade);
+        finalGrade.setText(totalGrade + "");
+        //Intent intent = new Intent(this, ClassDisplayActivity.class);
+        //startActivity(intent);
     }
     // ----------------------------------------------------------
     /**
@@ -105,10 +120,48 @@ public class AddGradesActivity
      */
     public void addAnother(View view)
     {
-        Intent intent = new Intent(this, AddGradesActivity.class);
+
+        String grade; //hold grade ex: 15/20
+        //get the current category chosen
+        Spinner spinner = (Spinner) findViewById(R.id.categories);
+        String curCategory = (String) spinner.getSelectedItem();
+        for (Category c : categories)
+        {
+            if ( c.getName().equals(curCategory)) // if the category chosen is already in categories
+            {
+                currentCat = c; // make it the current one
+            }
+
+        }
+
+
+
+        EditText nameG = (EditText) findViewById(R.id.gradeName); //get values
+        EditText ptsRcvd = (EditText) findViewById(R.id.name);
+        EditText totPts = (EditText) findViewById(R.id.totPts);
+
+
+        gradeName = nameG.getText().toString(); //make Assignment obj
+        ptsRcv = Integer.parseInt(ptsRcvd.getText().toString());
+        ptsTot = Integer.parseInt(totPts.getText().toString());
+        assmt = new Assignment(gradeName, ptsTot, ptsRcv);
+        currentCat.addAssmt(assmt);
+        nameG.setText("");
+        ptsRcvd.setText("");//reset them
+        totPts.setText("");
+    }
+    // ----------------------------------------------------------
+    /**
+     * takes you home
+     * @param view The view
+     */
+    public void home(View view)
+    {
+        Intent intent = new Intent(this, MainActivity.class);
         startActivity(intent);
     }
     // ----------------------------------------------------------
+
     /**
      * Description of addCat method.
      * @param view The view

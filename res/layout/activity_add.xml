@@ -25,17 +25,8 @@
         android:layout_height="wrap_content"
         android:layout_alignLeft="@+id/clsName"
         android:layout_alignParentTop="true"
-        android:layout_marginTop="36dp" />
-
-    <TextView
-        android:id="@+id/textView1"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_alignLeft="@+id/categories"
-        android:layout_alignParentTop="true"
-        android:layout_marginTop="17dp"
-        android:text="Choose your category"
-        android:textAppearance="?android:attr/textAppearanceMedium" />
+        android:layout_marginTop="36dp"
+        android:layout_toLeftOf="@+id/addCat" />
 
     <Button
         android:id="@+id/addCat"
@@ -45,15 +36,6 @@
         android:layout_alignLeft="@+id/button2"
         android:onClick="addCat"
         android:text="Add Category" />
-
-    <TextView
-        android:id="@+id/clsName"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_alignLeft="@+id/addClass"
-        android:layout_below="@+id/categories"
-        android:layout_marginTop="58dp"
-        android:text="Add some new grades" />
 
     <Button
         android:id="@+id/button1"
@@ -69,32 +51,48 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_alignParentBottom="true"
-        android:layout_alignParentLeft="true"
-        android:layout_marginBottom="40dp"
-        android:layout_marginLeft="17dp"
+        android:layout_marginRight="34dp"
+        android:layout_toLeftOf="@+id/button2"
         android:onClick="addAnother"
         android:text="Add Another" />
+
+    <TextView
+        android:id="@+id/textView1"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentTop="true"
+        android:layout_marginTop="14dp"
+        android:text="Choose your category"
+        android:textAppearance="?android:attr/textAppearanceMedium" />
+
+    <TextView
+        android:id="@+id/clsName"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignBaseline="@+id/button1"
+        android:layout_alignBottom="@+id/button1"
+        android:layout_alignLeft="@+id/gradeName"
+        android:text="Add some new grades" />
 
     <EditText
         android:id="@+id/gradeName"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_alignRight="@+id/clsName"
-        android:layout_centerVertical="true"
+        android:layout_alignLeft="@+id/textView1"
+        android:layout_alignRight="@+id/addClass"
+        android:layout_below="@+id/button1"
         android:ems="10"
-        android:hint="Name" >
-
-        <requestFocus />
-    </EditText>
+        android:hint="Name" />
 
     <EditText
-        android:id="@+id/ptsRcv"
+        android:id="@+id/name"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_above="@+id/button2"
         android:layout_alignLeft="@+id/gradeName"
         android:layout_alignRight="@+id/addClass"
-        android:layout_marginBottom="33dp"
+        android:layout_below="@+id/gradeName"
+        android:layout_marginTop="22dp"
         android:ems="10"
         android:hint="pts Recieved"
         android:inputType="numberDecimal" />
@@ -103,11 +101,20 @@
         android:id="@+id/totPts"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_alignBaseline="@+id/ptsRcv"
-        android:layout_alignBottom="@+id/ptsRcv"
-        android:layout_alignRight="@+id/button1"
-        android:layout_toRightOf="@+id/textView1"
+        android:layout_alignLeft="@+id/name"
+        android:layout_alignRight="@+id/addClass"
+        android:layout_below="@+id/name"
+        android:layout_marginTop="38dp"
         android:ems="10"
         android:hint="total Pts" />
+
+    <TextView
+        android:id="@+id/grade"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignBottom="@+id/name"
+        android:layout_alignRight="@+id/button2"
+        android:text="Grade"
+        android:textAppearance="?android:attr/textAppearanceLarge" />
 
 </RelativeLayout>
