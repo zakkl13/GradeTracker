@@ -20,7 +20,7 @@ import android.view.MenuItem;
 
 // -------------------------------------------------------------------------
 /**
- *  Description of class.
+ *  This class handles when grades are added.
  *
  *  @author Zakk Lefkowitz (zakkl13)
  *  @author Jason Barrett (jason95)
@@ -38,7 +38,9 @@ public class AddGradesActivity
     private String gradeName;
 
     /**
-     * Description of onCreate method.
+     * This method is run when a new grade is created; it sets the content
+     * view and gets the intent from the saved instance state.  It also gets
+     * the current class and categories, and updates the spinner.
      * @param savedInstanceState A saved state of the instance
      */
     @Override
@@ -65,7 +67,7 @@ public class AddGradesActivity
     }
     // ----------------------------------------------------------
     /**
-     * Description of button2 method. CALC BUTTON
+     * This method is called when the calculate button is pressed.
      * @param view The view
      */
     public void button2(View view)
@@ -117,7 +119,11 @@ public class AddGradesActivity
 
 
     }
-    
+
+    /**
+     * This method determines whether or not a string represents an integer.
+     * @return Returns true if the string is an integer, otherwise false
+     */
     private boolean isInteger(String s) {
         try {
             Integer.parseInt(s);
@@ -130,7 +136,7 @@ public class AddGradesActivity
 
     // ----------------------------------------------------------
     /**
-     * Description of addAnother method.
+     * This method is called when adding another grade.
      * @param view The view
      */
     public void addAnother(View view)
@@ -183,7 +189,7 @@ public class AddGradesActivity
 
     // ----------------------------------------------------------
     /**
-     * takes you home
+     * This method takes you to the home screen.
      * @param view The view
      */
     public void home(View view)
@@ -194,7 +200,7 @@ public class AddGradesActivity
     // ----------------------------------------------------------
 
     /**
-     * Description of addCat method.
+     * This method is called when adding categories to a class.
      * @param view The view
      */
     public void addCat(View view)
@@ -204,6 +210,10 @@ public class AddGradesActivity
         startActivity(intent);
     }
 
+    /**
+     * This method is called when deleting a category.
+     * @param view The view
+     */
     public void delete(View view)
     {
     	Spinner spinner = (Spinner) findViewById(R.id.classSpinner);
@@ -215,6 +225,10 @@ public class AddGradesActivity
 
     }
 
+    /**
+     * This method is called when clearing the assignments for a category.
+     * @param view The view
+     */
     public void clear(View view)
     {
     	for (Category c : categories)
@@ -224,6 +238,9 @@ public class AddGradesActivity
 
     }
 
+    /**
+     * This method is called when the spinner is updated.
+     */
     public void updateSpinner()
     {
 		//Sets the spinner to display the string array of the names of the
@@ -237,7 +254,7 @@ public class AddGradesActivity
     }
 
     /**
-     * Description of the onCreateOptionsMenu method.
+     * This method handles the options menu.
      * @param menu The menu of the app
      */
     @Override
@@ -249,7 +266,7 @@ public class AddGradesActivity
     }
 
     /**
-     * Description of the onOptionsItemSelected method.
+     * This method handles when items in the options menu are selected.
      * @param item The individual item in the menu
      */
     @Override
@@ -265,12 +282,20 @@ public class AddGradesActivity
         }
         return super.onOptionsItemSelected(item);
     }
+
+    /**
+     * This method is left intentionally blank.
+     */
     @Override
     public void update(Observable arg0, Object arg1)
     {
         //Do Nothing
 
     }
+
+    /**
+     * This method is called to set the text of the final grade text view.
+     */
 	@Override
 	public void onItemSelected(AdapterView<?> adapt, View v, int pos,
 			long arg3) {
@@ -280,9 +305,13 @@ public class AddGradesActivity
 
 
 	}
+
+	/**
+	 * This method is left intentionally blank.
+	 */
 	@Override
 	public void onNothingSelected(AdapterView<?> arg0) {
-		
+    //Do nothing
 
 	}
 }
