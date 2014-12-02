@@ -34,6 +34,7 @@ public class AddGradesActivity
     extends ActionBarActivity implements Observer
 {
     private Class thisClass;
+    private AddGrades adGr;
     private String lastCategory;
     private Classes clss;
     private ArrayList<Category> categories;
@@ -142,8 +143,6 @@ public class AddGradesActivity
 
         }
 
-
-
         EditText nameG = (EditText) findViewById(R.id.gradeName); //get values
         EditText ptsRcvd = (EditText) findViewById(R.id.name);
         EditText totPts = (EditText) findViewById(R.id.totPts);
@@ -193,6 +192,14 @@ public class AddGradesActivity
     	        getComplexPreferences(this, "Classes", MODE_PRIVATE);
     	    complexPreferences.putObject("Model", clss);
     	    complexPreferences.commit();
+    }
+    
+    public void clear(View view)
+    {
+    	Spinner spinner = (Spinner) findViewById(R.id.categories);
+        String curCategory = (String) spinner.getSelectedItem();
+    	thisClass.getCurCat(curCategory);
+    	
     }
 
     public void updateSpinner()

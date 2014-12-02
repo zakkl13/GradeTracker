@@ -114,6 +114,10 @@ public void setGrade() {
   public void addAssmt(Assignment grade) {
       assmt.add(grade);
   }
+  
+  public void clearAssmt() {
+	  assmt.clear();
+  }
 
   protected Category(Parcel in) {
       name = in.readString();
