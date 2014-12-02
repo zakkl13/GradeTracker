@@ -19,7 +19,7 @@ import android.widget.Spinner;
 public class Classes extends Observable implements Parcelable {
 
 	private ArrayList<Class> clsArray;
-	private String curClass;
+	private Class curClass;
 
 	/**
 	 * Creates the classes Object
@@ -70,7 +70,13 @@ public class Classes extends Observable implements Parcelable {
 	 */
 	public void setCurClass(String className)
 	{
-		curClass = className;
+		for (int i = 0; i < clsArray.size(); i++)
+		{
+			if (clsArray.get(i).getName() == className)
+			{
+				curClass = clsArray.get(i);
+			}
+		}
 	}
 
 	/**
@@ -79,18 +85,10 @@ public class Classes extends Observable implements Parcelable {
 	 */
 	public Class getCurClass()
 	{
-		for (int i = 0; i < clsArray.size(); i++)
-		{
-			if (clsArray.get(i).getName() == curClass)
-			{
-				return clsArray.get(i);
-			}
-		}
-
-		return null;
+		
+		return curClass;
 	}
-
-
+	
     protected Classes(Parcel in) {
         if (in.readByte() == 0x01) {
             clsArray = new ArrayList<Class>();
@@ -98,7 +96,7 @@ public class Classes extends Observable implements Parcelable {
         } else {
             clsArray = null;
         }
-        curClass = in.readString();
+        curClass = (Class) in.readValue(Class.class.getClassLoader());
     }
 
     @Override
@@ -114,12 +112,11 @@ public class Classes extends Observable implements Parcelable {
             dest.writeByte((byte) (0x01));
             dest.writeList(clsArray);
         }
-        dest.writeString(curClass);
+        dest.writeValue(curClass);
     }
 
     @SuppressWarnings("unused")
-    public static final Parcelable.Creator<Classes> CREATOR =
-    new Parcelable.Creator<Classes>() {
+    public static final Parcelable.Creator<Classes> CREATOR = new Parcelable.Creator<Classes>() {
         @Override
         public Classes createFromParcel(Parcel in) {
             return new Classes(in);

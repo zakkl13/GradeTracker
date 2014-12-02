@@ -5,15 +5,15 @@ import java.util.ArrayList;
 import android.os.Parcel;
 import android.os.Parcelable;
 
-// -------------------------------------------------------------------------
+//-------------------------------------------------------------------------
 /**
- *  Creates a new Class.
- *
- *  @author Zakk Lefkowitz
- *  @author Jason Barrett
- *  @author Tanner Hudson (tannerh4)
- *  @version 2014.11.14
- */
+*  Creates a new Class.
+*
+*  @author Zakk Lefkowitz
+*  @author Jason Barrett
+*  @author Tanner Hudson (tannerh4)
+*  @version 2014.11.14
+*/
 public class Class implements Parcelable {
 
 	private int numCrHrs;
@@ -45,6 +45,17 @@ public class Class implements Parcelable {
 	public void addCategory(Category cat)
 	{
 	    categories.add(cat);
+	}
+	
+	public void removeCategory(String catName)
+	{
+		for (int i = 0; i < categories.size(); i++)
+		{
+			if (categories.get(i).getName() == catName)
+			{
+				categories.remove(i);
+			}
+		}
 	}
 
 
@@ -132,48 +143,48 @@ public class Class implements Parcelable {
 		return grade;
 	}
 	
-    protected Class(Parcel in) {
-        numCrHrs = in.readInt();
-        passFail = in.readByte() != 0x00;
-        name = in.readString();
-        if (in.readByte() == 0x01) {
-            categories = new ArrayList<Category>();
-            in.readList(categories, Category.class.getClassLoader());
-        } else {
-            categories = null;
-        }
-        grade = in.readFloat();
-    }
+ protected Class(Parcel in) {
+     numCrHrs = in.readInt();
+     passFail = in.readByte() != 0x00;
+     name = in.readString();
+     if (in.readByte() == 0x01) {
+         categories = new ArrayList<Category>();
+         in.readList(categories, Category.class.getClassLoader());
+     } else {
+         categories = null;
+     }
+     grade = in.readFloat();
+ }
 
-    @Override
-    public int describeContents() {
-        return 0;
-    }
+ @Override
+ public int describeContents() {
+     return 0;
+ }
 
-    @Override
-    public void writeToParcel(Parcel dest, int flags) {
-        dest.writeInt(numCrHrs);
-        dest.writeByte((byte) (passFail ? 0x01 : 0x00));
-        dest.writeString(name);
-        if (categories == null) {
-            dest.writeByte((byte) (0x00));
-        } else {
-            dest.writeByte((byte) (0x01));
-            dest.writeList(categories);
-        }
-        dest.writeFloat(grade);
-    }
+ @Override
+ public void writeToParcel(Parcel dest, int flags) {
+     dest.writeInt(numCrHrs);
+     dest.writeByte((byte) (passFail ? 0x01 : 0x00));
+     dest.writeString(name);
+     if (categories == null) {
+         dest.writeByte((byte) (0x00));
+     } else {
+         dest.writeByte((byte) (0x01));
+         dest.writeList(categories);
+     }
+     dest.writeFloat(grade);
+ }
 
-    @SuppressWarnings("unused")
-    public static final Parcelable.Creator<Class> CREATOR = new Parcelable.Creator<Class>() {
-        @Override
-        public Class createFromParcel(Parcel in) {
-            return new Class(in);
-        }
+ @SuppressWarnings("unused")
+ public static final Parcelable.Creator<Class> CREATOR = new Parcelable.Creator<Class>() {
+     @Override
+     public Class createFromParcel(Parcel in) {
+         return new Class(in);
+     }
 
-        @Override
-        public Class[] newArray(int size) {
-            return new Class[size];
-        }
-    };
+     @Override
+     public Class[] newArray(int size) {
+         return new Class[size];
+     }
+ };
 }
