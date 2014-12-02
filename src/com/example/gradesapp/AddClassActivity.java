@@ -15,7 +15,7 @@ import android.widget.RadioGroup;
 
 // -------------------------------------------------------------------------
 /**
- *  Description of class.
+ *  This class handles when classes are added.
  *
  *  @author Zakk Lefkowitz (zakkl13)
  *  @author Jason Barrett (jason95)
@@ -27,7 +27,8 @@ public class AddClassActivity extends ActionBarActivity {
 	Classes clss;
 
 	/**
-	 * Description of onCreate method.
+	 * This method runs when an activity is creates.  It sets the content view
+	 * and gets the intent; this is all from the saved instance state
 	 * @param savedInstanceState The saved state of the instance
 	 */
 	@Override
@@ -43,7 +44,7 @@ public class AddClassActivity extends ActionBarActivity {
 	}
 
 	/**
-	 * Description of onCreateOptionsMenu method.
+	 * This method handles what happens when the options menu is used.
 	 * @param menu The menu
 	 */
 	@Override
@@ -54,7 +55,7 @@ public class AddClassActivity extends ActionBarActivity {
 	}
 
 	/**
-	 * Description of onOptionsItemSelected method.
+	 * This method handles when items in the options menu are selected.
 	 * @param item The individual item in the menu
 	 */
 	@Override
@@ -70,7 +71,8 @@ public class AddClassActivity extends ActionBarActivity {
 	}
 
 	/**
-	 * Description of the clsAdd method.
+	 * This method handles adding classes, including the entering of text to
+	 * the app's text fields as well as the selection of radio buttons.
 	 * @param v The view
 	 */
 	public void clsAdd(View v)
