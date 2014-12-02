@@ -6,10 +6,12 @@ import java.util.Observer;
 
 import br.com.kots.mob.complex.preferences.ComplexPreferences;
 
+import android.util.Log;
 import android.view.View;
 import android.widget.ArrayAdapter;
 import android.widget.EditText;
 import android.widget.Spinner;
+import android.widget.TextView;
 import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
@@ -74,24 +76,41 @@ public class AddGradesActivity
      */
     public void button2(View view)
     {
+    	double totalGrade = 0.0;
+        String grade; //hold grade ex: 15/20
+        //get the current category chosen
         Spinner spinner = (Spinner) findViewById(R.id.categories);
         String curCategory = (String) spinner.getSelectedItem();
-        currentCat = thisClass.getCategory(curCategory);
-        
-        String grade; //hold grade ex: 15/20
+        for (Category c : thisClass.getCats())
+        {
+            if ( c.getName().equals(curCategory)) // if the category chosen is already in categories
+            {
+                currentCat = c; // make it the current one
+            }
 
-        EditText nameG = (EditText) findViewById(R.id.gradeName);
-        EditText ptsRcvd = (EditText) findViewById(R.id.ptsRcv);
+        }
+        EditText nameG = (EditText) findViewById(R.id.gradeName); //get values
+        EditText ptsRcvd = (EditText) findViewById(R.id.name);
         EditText totPts = (EditText) findViewById(R.id.totPts);
 
 
-        gradeName = nameG.getText().toString();
+        gradeName = nameG.getText().toString(); //make Assignment obj
         ptsRcv = Integer.parseInt(ptsRcvd.getText().toString());
         ptsTot = Integer.parseInt(totPts.getText().toString());
         assmt = new Assignment(gradeName, ptsTot, ptsRcv);
         currentCat.addAssmt(assmt);
-        Intent intent = new Intent(this, ClassDisplayActivity.class);
-        startActivity(intent);
+
+
+        for (Category c : thisClass.getCats())
+        {
+            c.setGrade();
+            Log.d("grade", c.getGrade() + "");
+            totalGrade += c.getGrade() * c.getWeight();
+            Log.d("totalGrade", totalGrade + "");
+
+        }
+        TextView finalGrade = (TextView) findViewById(R.id.grade);
+        finalGrade.setText(totalGrade + "");
     }
     // ----------------------------------------------------------
     /**
