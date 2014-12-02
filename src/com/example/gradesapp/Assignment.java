@@ -3,18 +3,17 @@ package com.example.gradesapp;
 import android.os.Parcel;
 import android.os.Parcelable;
 
-// -------------------------------------------------------------------------
+//-------------------------------------------------------------------------
 /**
- *  Creates a new Assignment.
- *
- *  @author Zakk Lefkowitz
- *  @author Jason Barrett
- *  @author Tanner Hudson
- *  @version 2014.11.30
- */
+*  Creates a new Assignment.
+*
+*  @author Zakk Lefkowitz
+*  @author Jason Barrett
+*  @author Tanner Hudson
+*  @version 2014.11.30
+*/
 public class Assignment implements Parcelable {
 
-	private int weight;
 	private String name;
 	private int totPts;
 	private int ptsRecieved;
@@ -27,31 +26,14 @@ public class Assignment implements Parcelable {
 	 * @param totPts      The total points the assignment is worth
 	 * @param ptsRecieved The points received on the assignment
 	 */
-	public Assignment(int weight, String name, int totPts, int ptsRecieved)
+	public Assignment( String name, int totPts, int ptsRecieved)
 	{
-		this.weight = weight;
 		this.name = name;
 		this.totPts = totPts;
 		this.ptsRecieved = ptsRecieved;
 	}
 
-	// ----------------------------------------------------------
-	/**
-	 * Gets the weights of the assignment.
-	 * @return Returns the value of the weight
-	 */
-	public int getWeight() {
-		return weight;
-	}
 
-	// ----------------------------------------------------------
-	/**
-	 * Sets the weight of the assignment.
-	 * @param weight The assignment's weight
-	 */
-	public void setWeight(int weight) {
-		this.weight = weight;
-	}
 
 	// ----------------------------------------------------------
 	/**
@@ -107,37 +89,35 @@ public class Assignment implements Parcelable {
 		this.ptsRecieved = ptsRecieved;
 	}
 
-    protected Assignment(Parcel in) {
-        weight = in.readInt();
-        name = in.readString();
-        totPts = in.readInt();
-        ptsRecieved = in.readInt();
-    }
 
-    @Override
-    public int describeContents() {
-        return 0;
-    }
+ protected Assignment(Parcel in) {
+     name = in.readString();
+     totPts = in.readInt();
+     ptsRecieved = in.readInt();
+ }
 
-    @Override
-    public void writeToParcel(Parcel dest, int flags) {
-        dest.writeInt(weight);
-        dest.writeString(name);
-        dest.writeInt(totPts);
-        dest.writeInt(ptsRecieved);
-    }
+ @Override
+ public int describeContents() {
+     return 0;
+ }
 
-    @SuppressWarnings("unused")
-    public static final Parcelable.Creator<Assignment> CREATOR =
-    new Parcelable.Creator<Assignment>() {
-        @Override
-        public Assignment createFromParcel(Parcel in) {
-            return new Assignment(in);
-        }
+ @Override
+ public void writeToParcel(Parcel dest, int flags) {
+     dest.writeString(name);
+     dest.writeInt(totPts);
+     dest.writeInt(ptsRecieved);
+ }
 
-        @Override
-        public Assignment[] newArray(int size) {
-            return new Assignment[size];
-        }
-    };
+ @SuppressWarnings("unused")
+ public static final Parcelable.Creator<Assignment> CREATOR = new Parcelable.Creator<Assignment>() {
+     @Override
+     public Assignment createFromParcel(Parcel in) {
+         return new Assignment(in);
+     }
+
+     @Override
+     public Assignment[] newArray(int size) {
+         return new Assignment[size];
+     }
+ };
 }

@@ -32,6 +32,11 @@ public class AddGradesActivity
     extends ActionBarActivity implements Observer
 {
     private Class thisClass;
+    private Category currentCat;
+    private Assignment assmt;
+    private String gradeName;
+    private int ptsRcv;
+    private int ptsTot;
     
     /**
      * Description of onCreate method.
@@ -64,12 +69,28 @@ public class AddGradesActivity
     }
     // ----------------------------------------------------------
     /**
-     * Description of button2 method.
+     * Description of button2 method. CALC BUTTON
      * @param view The view
      */
     public void button2(View view)
     {
-        Intent intent = new Intent(this, GradeCalculatorActivity.class);
+        Spinner spinner = (Spinner) findViewById(R.id.categories);
+        String curCategory = (String) spinner.getSelectedItem();
+        currentCat = thisClass.getCategory(curCategory);
+        
+        String grade; //hold grade ex: 15/20
+
+        EditText nameG = (EditText) findViewById(R.id.gradeName);
+        EditText ptsRcvd = (EditText) findViewById(R.id.ptsRcv);
+        EditText totPts = (EditText) findViewById(R.id.totPts);
+
+
+        gradeName = nameG.getText().toString();
+        ptsRcv = Integer.parseInt(ptsRcvd.getText().toString());
+        ptsTot = Integer.parseInt(totPts.getText().toString());
+        assmt = new Assignment(gradeName, ptsTot, ptsRcv);
+        currentCat.addAssmt(assmt);
+        Intent intent = new Intent(this, ClassDisplayActivity.class);
         startActivity(intent);
     }
     // ----------------------------------------------------------

@@ -49,13 +49,20 @@ public class Class implements Parcelable {
 	
 	public void removeCategory(String catName)
 	{
+		categories.remove(getCategory(catName));
+	}
+	
+	public Category getCategory(String catName)
+	{
 		for (int i = 0; i < categories.size(); i++)
 		{
 			if (categories.get(i).getName() == catName)
 			{
-				categories.remove(i);
+				return categories.get(i);
 			}
 		}
+		
+		return null;
 	}
 	
 	public String[] getCatNameArray()
