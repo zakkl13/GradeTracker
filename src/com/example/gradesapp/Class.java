@@ -11,13 +11,13 @@ import android.util.Log;
 
 //-------------------------------------------------------------------------
 /**
-*  Creates a new Class.
-*
-*  @author Zakk Lefkowitz
-*  @author Jason Barrett
-*  @author Tanner Hudson (tannerh4)
-*  @version 2014.11.14
-*/
+ *  Creates a new class object.
+ *
+ *  @author Zakk Lefkowitz (zakkl13)
+ *  @author Jason Barrett (jason95)
+ *  @author Tanner Hudson (tannerh4)
+ *  @version 2014.11.30
+ */
 public class Class implements Parcelable {
 
 	private int numCrHrs;

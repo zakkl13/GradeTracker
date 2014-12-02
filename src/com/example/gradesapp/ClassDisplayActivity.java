@@ -17,9 +17,12 @@ import android.widget.Spinner;
 import android.widget.TextView;
 
 /**
+ *  Description of class.
  *
- * @author Zakk
- * @version 2014.11.29
+ *  @author Zakk Lefkowitz (zakkl13)
+ *  @author Jason Barrett (jason95)
+ *  @author Tanner Hudson (tannerh4)
+ *  @version 2014.11.29
  */
 public class ClassDisplayActivity extends ActionBarActivity
 implements Observer {

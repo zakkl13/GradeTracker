@@ -1,6 +1,4 @@
 package com.example.gradesapp;
-//edited by zakk
-//also edited by Tanner
 import java.util.Observable;
 import java.util.Observer;
 
@@ -19,6 +17,14 @@ import android.support.v7.app.ActionBarActivity;
 import android.view.Menu;
 import android.view.MenuItem;
 
+/**
+ *  Description of class.
+ *
+ *  @author Zakk Lefkowitz (zakkl13)
+ *  @author Jason Barrett (jason95)
+ *  @author Tanner Hudson (tannerh4)
+ *  @version 2014.11.30
+ */
 public class MainActivity
     extends ActionBarActivity implements Observer
 {
@@ -57,9 +63,9 @@ public class MainActivity
 		    	clss.updateModel(getApplicationContext());
 		    }
 		}
-		
 
-        
+
+
 
         updateSpinner();
 
@@ -110,7 +116,7 @@ public class MainActivity
     	clss.setCurClass(curClass);
 
     	clss.deleteClass();
-    	
+
     	clss.saveModel(getApplicationContext());
 
     	updateSpinner();
@@ -138,12 +144,12 @@ public class MainActivity
         }
         return super.onOptionsItemSelected(item);
     }
-    
+
     public Context getActivity()
     {
     	return this;
     }
-    
+
 	@Override
 	public void update(Observable arg0, Object arg1) {
 		// TODO Auto-generated method stub

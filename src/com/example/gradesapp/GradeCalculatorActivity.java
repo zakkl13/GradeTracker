@@ -5,6 +5,14 @@ import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuItem;
 
+/**
+ *  Description of class.
+ *
+ *  @author Zakk Lefkowitz (zakkl13)
+ *  @author Jason Barrett (jason95)
+ *  @author Tanner Hudson (tannerh4)
+ *  @version 2014.11.30
+ */
 public class GradeCalculatorActivity
     extends ActionBarActivity
 {

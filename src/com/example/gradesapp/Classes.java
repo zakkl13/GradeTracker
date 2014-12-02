@@ -14,9 +14,12 @@ import android.widget.Spinner;
 import br.com.kots.mob.complex.preferences.ComplexPreferences;
 
 /**
+ *  Description of class.
  *
- * @author Zakk
- *
+ *  @author Zakk Lefkowitz (zakkl13)
+ *  @author Jason Barrett (jason95)
+ *  @author Tanner Hudson (tannerh4)
+ *  @version 2014.11.30
  */
 public class Classes extends Observable implements Parcelable {
 

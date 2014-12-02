@@ -28,8 +28,8 @@ import android.view.MenuItem;
 /**
  *  Description of class.
  *
- *  @author Zakk Lefkowitz
- *  @author Jason Barrett
+ *  @author Zakk Lefkowitz (zakkl13)
+ *  @author Jason Barrett (jason95)
  *  @author Tanner Hudson (tannerh4)
  *  @version 2014.11.30
  */

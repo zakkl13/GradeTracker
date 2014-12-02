@@ -10,13 +10,13 @@ import br.com.kots.mob.complex.preferences.ComplexPreferences;
 
 //-------------------------------------------------------------------------
 /**
-*  Description of the Category class.
-*
-*  @author Zakk Lefkowitz
-*  @author Jason Barrett
-*  @author Tanner Hudson
-*  @version 2014.11.30
-*/
+ *  Description of class.
+ *
+ *  @author Zakk Lefkowitz (zakkl13)
+ *  @author Jason Barrett (jason95)
+ *  @author Tanner Hudson (tannerh4)
+ *  @version 2014.11.30
+ */
 public class Category implements Parcelable {
 
 private String name;
