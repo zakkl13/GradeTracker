@@ -37,7 +37,7 @@ public class AddGradesActivity
     private Category currentCat;
     private Assignment assmt;
     private String gradeName;
-    private int ptsRcvd;
+    private int ptsRcv;
     private int ptsTot;
 
     /**
@@ -86,14 +86,14 @@ public class AddGradesActivity
         String grade; //hold grade ex: 15/20
 
         EditText nameG = (EditText) findViewById(R.id.gradeName);
-        EditText gradeNumber = (EditText) findViewById(R.id.grade);
+        EditText ptsRcvd = (EditText) findViewById(R.id.ptsRcv);
+        EditText totPts = (EditText) findViewById(R.id.totPts);
+
 
         gradeName = nameG.getText().toString();
-        grade = gradeNumber.getText().toString();
-        ptsRcvd = Integer.parseInt(grade.substring(0, grade.indexOf("/")));
-        ptsTot = Integer.parseInt(grade.substring(grade.indexOf("/")
-            , grade.length()));
-        assmt = new Assignment(gradeName, ptsTot, ptsRcvd);
+        ptsRcv = Integer.parseInt(ptsRcvd.getText().toString());
+        ptsTot = Integer.parseInt(totPts.getText().toString());
+        assmt = new Assignment(gradeName, ptsTot, ptsRcv);
         currentCat.addAssmt(assmt);
         Intent intent = new Intent(this, ClassDisplayActivity.class);
         startActivity(intent);
@@ -124,7 +124,7 @@ public class AddGradesActivity
     {
     	Spinner spinner = (Spinner) findViewById(R.id.classSpinner);
     	String catName = (String) spinner.getSelectedItem();
-    	
+
     	thisClass.removeCategory(catName);
     	updateSpinner();
 

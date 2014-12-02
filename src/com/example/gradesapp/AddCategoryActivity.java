@@ -51,7 +51,7 @@ public class AddCategoryActivity
         //className
         //Get references to edit text fields
         EditText percent = (EditText) findViewById(R.id.percent);
-        EditText catName = (EditText) findViewById(R.id.grade);
+        EditText catName = (EditText) findViewById(R.id.ptsRcv);
 
         //Create a class object with the information from the editText fields
         Category cat = new Category(Integer.parseInt(percent.getText().

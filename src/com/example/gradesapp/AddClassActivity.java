@@ -89,7 +89,7 @@ public class AddClassActivity extends ActionBarActivity {
 
 		//Get references to edit text fields
 		EditText crHours = (EditText) findViewById(R.id.percent);
-		EditText className = (EditText) findViewById(R.id.grade);
+		EditText className = (EditText) findViewById(R.id.ptsRcv);
 
 		//Create a class object with the information from the editText fields
 		Class cls = new Class(Integer.parseInt(crHours.getText().toString()),

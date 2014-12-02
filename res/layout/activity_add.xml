@@ -9,16 +9,6 @@
     tools:context="com.example.gradesapp.AddGradesActivity" >
 
     <Button
-        android:id="@+id/addClass"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_alignParentBottom="true"
-        android:layout_alignParentLeft="true"
-        android:layout_marginBottom="96dp"
-        android:onClick="addAnother"
-        android:text="Add Another" />
-
-    <Button
         android:id="@+id/button2"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
@@ -65,31 +55,6 @@
         android:layout_marginTop="58dp"
         android:text="Add some new grades" />
 
-    <EditText
-        android:id="@+id/grade"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_alignLeft="@+id/button2"
-        android:layout_alignRight="@+id/categories"
-        android:layout_centerVertical="true"
-        android:ems="10"
-        android:hint="ex: 15/20"
-        android:inputType="numberDecimal" >
-
-        <requestFocus />
-    </EditText>
-
-    <EditText
-        android:id="@+id/gradeName"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_alignBaseline="@+id/grade"
-        android:layout_alignBottom="@+id/grade"
-        android:layout_alignLeft="@+id/clsName"
-        android:layout_alignRight="@+id/clsName"
-        android:ems="10"
-        android:hint="Name" />
-
     <Button
         android:id="@+id/button1"
         android:layout_width="wrap_content"
@@ -98,5 +63,51 @@
         android:layout_below="@+id/categories"
         android:onClick="delete"
         android:text="Delete Category" />
+
+    <Button
+        android:id="@+id/addClass"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentBottom="true"
+        android:layout_alignParentLeft="true"
+        android:layout_marginBottom="40dp"
+        android:layout_marginLeft="17dp"
+        android:onClick="addAnother"
+        android:text="Add Another" />
+
+    <EditText
+        android:id="@+id/gradeName"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignRight="@+id/clsName"
+        android:layout_centerVertical="true"
+        android:ems="10"
+        android:hint="Name" >
+
+        <requestFocus />
+    </EditText>
+
+    <EditText
+        android:id="@+id/ptsRcv"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_above="@+id/button2"
+        android:layout_alignLeft="@+id/gradeName"
+        android:layout_alignRight="@+id/addClass"
+        android:layout_marginBottom="33dp"
+        android:ems="10"
+        android:hint="pts Recieved"
+        android:inputType="numberDecimal" />
+
+    <EditText
+        android:id="@+id/totPts"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignBaseline="@+id/ptsRcv"
+        android:layout_alignBottom="@+id/ptsRcv"
+        android:layout_alignRight="@+id/button1"
+        android:layout_toRightOf="@+id/textView1"
+        android:ems="10"
+        android:hint="total Pts" />
 
 </RelativeLayout>
