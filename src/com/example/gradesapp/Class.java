@@ -68,6 +68,24 @@ public class Class implements Parcelable {
 	}
 
 	// ----------------------------------------------------------
+    /**
+     * Place a description of your method here.
+     * @param appContext
+     */
+    public void saveClass(Context appContext)
+    {
+    	ComplexPreferences cp = ComplexPreferences.getComplexPreferences(
+    	    appContext, "Classes", Context.MODE_PRIVATE);
+    	for (Category cat: categories)
+    	{
+    		cat.saveCategory(appContext);
+    	    cp.putObject(name + cat.getName(), cat);
+    	    Log.d("saveCat", cat.getName());
+    	}
+    	cp.commit();
+    }
+
+    // ----------------------------------------------------------
 	/**
 	 * Setup for adding assignments.
 	 * @param assgn An assignment object
@@ -165,25 +183,27 @@ public class Class implements Parcelable {
 	}
 
 	// ----------------------------------------------------------
-	/**
-	 * Place a description of your method here.
-	 * @param appContext
-	 */
-	public void saveClass(Context appContext)
-	{
-		ComplexPreferences cp = ComplexPreferences.getComplexPreferences(
-		    appContext, "Classes", Context.MODE_PRIVATE);
-		for (Category cat: categories)
-		{
-			cat.saveCategory(appContext);
-		    cp.putObject(name + cat.getName(), cat);
-		    Log.d("saveCat", cat.getName());
-		}
-		cp.commit();
-	}
+    /**
+     * Gets the value of the grade in the class.
+     * @return Returns the grade in the class
+     */
+    public double getGrade()
+    {
+    	double totalGrade = 0.0;
+    
+    	for (Category c : categories)
+        {
+            c.setGrade();
+            Log.d("grade", c.getGrade() + "");
+            totalGrade += c.getGrade() * c.getWeight();
+            Log.d("totalGrade", totalGrade + "");
+    
+        }
+    
+    	return totalGrade;
+    }
 
-
-	//Getters and Setters
+    //Getters and Setters
 	// ----------------------------------------------------------
 	/**
 	 * Get the number of credit hours.
@@ -257,28 +277,7 @@ public class Class implements Parcelable {
 		this.grade = grade;
 	}
 
-	// ----------------------------------------------------------
-	/**
-	 * Gets the value of the grade in the class.
-	 * @return Returns the grade in the class
-	 */
-	public double getGrade()
-	{
-    	double totalGrade = 0.0;
-
-    	for (Category c : categories)
-        {
-            c.setGrade();
-            Log.d("grade", c.getGrade() + "");
-            totalGrade += c.getGrade() * c.getWeight();
-            Log.d("totalGrade", totalGrade + "");
-
-        }
-
-    	return totalGrade;
-	}
-
-    protected Class(Parcel in) {
+	protected Class(Parcel in) {
         numCrHrs = in.readInt();
         passFail = in.readByte() != 0x00;
         name = in.readString();

@@ -21,11 +21,15 @@ public class ClassTest extends TestCase
     public void setUp()
     {
         cls = new Class(0, true, "Class");
-        cat1 = new Category(10, "cat1");
-        cat2 = new Category(10, "cat2");
-        cat3 = new Category(10, "cat3");
+        cat1 = new Category(20, "cat1");
+        cat2 = new Category(30, "cat2");
+        cat3 = new Category(50, "cat3");
     }
 
+    // ----------------------------------------------------------
+    /**
+     * Place a description of your method here.
+     */
     public void testGetCategory()
     {
         cls.addCategory(cat1);
@@ -35,6 +39,10 @@ public class ClassTest extends TestCase
         assertEquals(cls.getCategory("cat2"), cat2);
     }
 
+    // ----------------------------------------------------------
+    /**
+     * Place a description of your method here.
+     */
     public void testRemoveCategory()
     {
         cls.addCategory(cat1);
@@ -45,5 +53,24 @@ public class ClassTest extends TestCase
 
         assertEquals(cls.getCats().size(), 2);
         assertEquals(cls.getCats().get(0), cat2);
+    }
+
+    // ----------------------------------------------------------
+    /**
+     * Place a description of your method here.
+     */
+    public void testGetGrade()
+    {
+        cat1.addAssmt(new Assignment("assgn", 10, 10));
+        cat1.addAssmt(new Assignment("assgn", 7, 10));
+        cat2.addAssmt(new Assignment("assgn", 8, 10));
+        cat3.addAssmt(new Assignment("assgn", 10, 10));
+
+        cls.addCategory(cat1);
+        cls.addCategory(cat2);
+        cls.addCategory(cat3);
+
+        // 17/20*20% + 8/10*30% + 10/10 * 50% = 91
+        assertEquals(cls.getGrade(), 91.0);
     }
 }
