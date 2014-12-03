@@ -86,6 +86,15 @@ public class Assignment implements Parcelable {
 		this.ptsRecieved = ptsRecieved;
 	}
 
+	public String toString()
+	{
+	    String str = name + ": " +
+            String.valueOf(ptsRecieved)
+            + " / " + String.valueOf(totPts);
+
+	        return str;
+	}
+
 /**
  * This protected method protects the values in assignment.
  * @param in The parcel

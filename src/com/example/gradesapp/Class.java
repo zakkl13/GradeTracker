@@ -25,7 +25,6 @@ public class Class implements Parcelable {
 	private String name;
 	private ArrayList<Category> categories;
 	private double grade;
-
 	// ----------------------------------------------------------
 	/**
 	 * Create a new Class object.
@@ -40,8 +39,15 @@ public class Class implements Parcelable {
 		this.name = name;
 		this.categories = new ArrayList<Category>();
 		grade = 0.00;
+
 	}
 
+	// ----------------------------------------------------------
+	/**
+	 * Create a new Class object.
+	 * @param cls
+	 * @param appContext
+	 */
 	public Class(Class cls, Context appContext)
 	{
 		ComplexPreferences cp = ComplexPreferences.getComplexPreferences(
@@ -71,12 +77,23 @@ public class Class implements Parcelable {
 	    categories.add(cat);
 	}
 
+	// ----------------------------------------------------------
+	/**
+	 * Place a description of your method here.
+	 * @param catName
+	 */
 	public void removeCategory(String catName)
 	{
 		categories.remove(getCategory(catName));
 
 	}
 
+	// ----------------------------------------------------------
+	/**
+	 * Place a description of your method here.
+	 * @param catName
+	 * @return
+	 */
 	public Category getCategory(String catName)
 	{
 		for (int i = 0; i < categories.size(); i++)
@@ -90,17 +107,64 @@ public class Class implements Parcelable {
 		return null;
 	}
 
+	// ----------------------------------------------------------
+	/**
+	 * Place a description of your method here.
+	 * @return
+	 */
 	public String[] getCatNameArray()
 	{
-		String[] cats = new String[categories.size()];
-		for (int i = (categories.size() - 1); i >= 0; i--)
-		{
-			cats[i] = categories.get(i).getName();
-		}
+	    ArrayListStack<String> stack = new ArrayListStack<String>();
 
-		return cats;
+	    for (Category cat: categories)
+	    {
+	        stack.push(cat.getName());
+	    }
+
+	    String[] catList = new String[stack.size()];
+        for (int i = 0; i < stack.size(); i++)
+        {
+            catList[i] = stack.pop();
+        }
+
+        return catList;
 	}
 
+
+	// ----------------------------------------------------------
+	/**
+	 * Place a description of your method here.
+	 * @return
+	 */
+	public String[] getAssgnArray()
+	{
+	    ArrayListStack<String> stack = new ArrayListStack<String>();
+
+	    for (Category cat: categories)
+        {
+	        stack.push(cat.toString());
+
+            for (Assignment asgn: cat.getAssmts())
+            {
+                stack.push(asgn.toString());
+            }
+        }
+
+	    String[] assgnList = new String[stack.size()];
+	    for (int i = 0; i < stack.size(); i++)
+	    {
+	        assgnList[i] = stack.pop();
+	    }
+
+	    return assgnList;
+
+	}
+
+	// ----------------------------------------------------------
+	/**
+	 * Place a description of your method here.
+	 * @param appContext
+	 */
 	public void saveClass(Context appContext)
 	{
 		ComplexPreferences cp = ComplexPreferences.getComplexPreferences(

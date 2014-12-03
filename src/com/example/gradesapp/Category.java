@@ -19,7 +19,7 @@ import br.com.kots.mob.complex.preferences.ComplexPreferences;
 public class Category implements Parcelable {
 
 private String name;
-private ArrayListStack assmt;
+private ArrayList<Assignment> assmt;
 private int weight;
 private Double grade;
 
@@ -35,39 +35,38 @@ public Category(int weight, String name)
 {
    this.weight = weight;
    this.name = name;
-   assmt = new ArrayListStack();
+   assmt = new ArrayList<Assignment>();
    grade = 0.00;
 
 }
 
 public Category(Category cat, Context appContext)
 {
-	ComplexPreferences cp = ComplexPreferences.getComplexPreferences(appContext,
-	    "Classes", Context.MODE_PRIVATE);
+    ComplexPreferences cp = ComplexPreferences.getComplexPreferences(appContext,
+        "Classes", Context.MODE_PRIVATE);
 
-	this.weight = cat.getWeight();
-	this.name = cat.getName();
-	this.grade = cat.getGrade();
-	assmt = new ArrayListStack();
-	for ( int i = 0; i < assmt.size(); i++)
-	{
-		assmt.push(cp.getObject(name + assmt.getList().get(i).getName(),
-		    Assignment.class));
-	}
+    this.weight = cat.getWeight();
+    this.name = cat.getName();
+    this.grade = cat.getGrade();
+    assmt = new ArrayList<Assignment>();
+    for ( int i = 0; i < assmt.size(); i++)
+    {
+        assmt.add(cp.getObject(name + assmt.get(i).getName(),
+            Assignment.class));
+    }
 }
 
 public void saveCategory(Context appContext)
 {
-	ComplexPreferences cp = ComplexPreferences.getComplexPreferences(appContext,
-	    "Classes", Context.MODE_PRIVATE);
+    ComplexPreferences cp = ComplexPreferences.getComplexPreferences(appContext,
+        "Classes", Context.MODE_PRIVATE);
 
-	//for (Assignment asgn: assmt)
-	for ( int i = 0; i < assmt.size(); i++)
-	{
-		cp.putObject(name + assmt.getList().get(i).getName(),
-		    assmt.getList().get(i));
-	}
-	cp.commit();
+    for ( int i = 0; i < assmt.size(); i++)
+    {
+        cp.putObject(name + assmt.get(i).getName(),
+            assmt.get(i));
+    }
+    cp.commit();
 }
 
 // ----------------------------------------------------------
@@ -121,42 +120,49 @@ public void setGrade() {
    int totPtsGiven = 0;
    for ( int i = 0; i < assmt.size(); i++)
    {
-       totPtsRcvd += assmt.getList().get(i).getPtsRecieved();
-       totPtsGiven += assmt.getList().get(i).getTotPts();
+       totPtsRcvd += assmt.get(i).getPtsRecieved();
+       totPtsGiven += assmt.get(i).getTotPts();
    }
    if (totPtsRcvd == 0 || totPtsGiven == 0)
    {
-	   grade = 0.00;
+       grade = 0.00;
    }
    else
    {
-	   grade =  ((double)totPtsRcvd / (double)totPtsGiven);
+       grade =  ((double)totPtsRcvd / (double)totPtsGiven);
    }
 }
 
   /**
    * gets the assignment arrayList
    */
-  public ArrayListStack getAssmts() {
+  public ArrayList<Assignment> getAssmts() {
       return assmt;
   }
   /**
    * add assignment
    */
   public void addAssmt(Assignment grade) {
-      assmt.push(grade);
+      assmt.add(grade);
   }
 
   public void clearAssmt() {
-	  assmt.clear();
-	  grade = 0.00;
+      assmt.clear();
+      grade = 0.00;
   }
+
+  public String toString()
+  {
+      String str = name + ": ";
+      return str;
+  }
+
 
     protected Category(Parcel in) {
         name = in.readString();
         if (in.readByte() == 0x01) {
-            assmt = new ArrayListStack();
-            in.readList(assmt.getList(), Assignment.class.getClassLoader());
+            assmt = new ArrayList<Assignment>();
+            in.readList(assmt, Assignment.class.getClassLoader());
         } else {
             assmt = null;
         }
@@ -176,7 +182,7 @@ public void setGrade() {
             dest.writeByte((byte) (0x00));
         } else {
             dest.writeByte((byte) (0x01));
-            dest.writeList(assmt.getList());
+            dest.writeList(assmt);
         }
         dest.writeInt(weight);
         if (grade == null) {
@@ -187,8 +193,8 @@ public void setGrade() {
         }
     }
 
-    public static final Parcelable.Creator<Category> CREATOR = new
-    Parcelable.Creator<Category>() {
+    @SuppressWarnings("unused")
+    public static final Parcelable.Creator<Category> CREATOR = new Parcelable.Creator<Category>() {
         @Override
         public Category createFromParcel(Parcel in) {
             return new Category(in);

@@ -79,31 +79,9 @@ implements Observer {
 
     public void setList()
     {
-    	int totNumAsgn = 0;
-    	for (Category cat: thisClass.getCats())
-    	{
-    		totNumAsgn += cat.getAssmts().size();
-    	}
-
-    	int index = 0;
-
-    	String[] list = new String[totNumAsgn];
-    	for (int i = 0; i < thisClass.getCats().size(); i++)
-    	{
-    		Category curCat = thisClass.getCats().get(i);
-    		for (int j = index; j < curCat.getAssmts().size(); j++)
-    		{
-    			Assignment curAsgn = curCat.getAssmts().getList().get(j);
-    			list[j] = curCat.getName() + " - " + curAsgn.getName() + ": " +
-    			String.valueOf(curAsgn.getPtsRecieved())
-    					+ " / " + String.valueOf(curAsgn.getTotPts());
-    			index++;
-    		}
-    	}
-
     	ListView lsView = (ListView) findViewById(R.id.listView1);
     	ArrayAdapter<String> adapt = new ArrayAdapter<String>(this,
-    	    android.R.layout.simple_list_item_1, list);
+    	    android.R.layout.simple_list_item_1, thisClass.getAssgnArray());
     	lsView.setAdapter(adapt);
     }
 

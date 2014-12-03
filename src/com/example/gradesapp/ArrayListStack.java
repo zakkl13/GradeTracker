@@ -3,18 +3,21 @@ package com.example.gradesapp;
 import java.util.ArrayList;
 import java.util.EmptyStackException;
 
+import android.os.Parcel;
+import android.os.Parcelable;
+
 /**
  * // -------------------------------------------------------------------------
 /**
- *  This is our required Stack Implementation. Orginially we planned to use a
+ *  This is our required Stack Implementation. Originally we planned to use a
  *  Queue. Unfortunately, Parcel Objects only support generic Lists.
  *
  *  @author Jason
  *  @version Dec 2, 2014
+ * @param <E>
  */
-public class ArrayListStack
-{
-    private ArrayList<Assignment> list;
+public class ArrayListStack<E> {
+    private ArrayList<E> list;
 
     //~ Constructors .........................................................
     /**
@@ -22,7 +25,7 @@ public class ArrayListStack
      */
     public ArrayListStack()
     {
-        list = new ArrayList<Assignment>();
+        list = new ArrayList<E>();
     }
 
 
@@ -31,18 +34,18 @@ public class ArrayListStack
      * pushes the item to the top
      * @param item is an item
      */
-    public void push(Assignment item)
+    public void push(E item)
     {
-        list.remove(item);
-        list.add(0, item);
+        list.add(item);
 
     }
 
     /**
      * pops an item off the top
      */
-    public void pop()
+    public E pop()
     {
+        E item = top();
         if (list.isEmpty())
         {
             throw new EmptyStackException();
@@ -52,13 +55,15 @@ public class ArrayListStack
             list.remove(0);
         }
 
+        return item;
+
     }
 
     /**
      * top method returns top
      * @return the top
      */
-    public Assignment top()
+    public E top()
     {
         if (list.isEmpty())
         {
@@ -68,7 +73,6 @@ public class ArrayListStack
         {
             return list.get(0);
         }
-
     }
 
     /**
@@ -88,13 +92,13 @@ public class ArrayListStack
     {
         return list.isEmpty();
     }
+
     /**
      * gets the arrayList
      */
-    public ArrayList<Assignment> getList()
+    public ArrayList<E> getList()
     {
         return list;
-
     }
     /**
      * clears the list
