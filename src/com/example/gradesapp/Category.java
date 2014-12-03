@@ -1,9 +1,5 @@
 package com.example.gradesapp;
 
-import java.util.Iterator;
-import java.util.List;
-import java.util.LinkedList;
-import java.util.Queue;
 import java.util.ArrayList;
 
 import android.content.Context;
@@ -23,7 +19,7 @@ import br.com.kots.mob.complex.preferences.ComplexPreferences;
 public class Category implements Parcelable {
 
 private String name;
-private Queue assmt;
+private ArrayListStack assmt;
 private int weight;
 private Double grade;
 
@@ -39,7 +35,7 @@ public Category(int weight, String name)
 {
    this.weight = weight;
    this.name = name;
-   assmt = new LinkedList();
+   assmt = new ArrayListStack();
    grade = 0.00;
 
 }
@@ -52,11 +48,11 @@ public Category(Category cat, Context appContext)
 	this.weight = cat.getWeight();
 	this.name = cat.getName();
 	this.grade = cat.getGrade();
-	assmt = new LinkedList();
-	Iterator iterator = cat.getAssmts().iterator();
-	while (iterator.hasNext())
+	assmt = new ArrayListStack();
+	for ( int i = 0; i < assmt.size(); i++)
 	{
-		assmt.add(cp.getObject(name + ((Category)iterator.next()).getName(), Assignment.class));
+		assmt.push(cp.getObject(name + assmt.getList().get(i).getName(),
+		    Assignment.class));
 	}
 }
 
@@ -65,10 +61,11 @@ public void saveCategory(Context appContext)
 	ComplexPreferences cp = ComplexPreferences.getComplexPreferences(appContext,
 	    "Classes", Context.MODE_PRIVATE);
 
-	Iterator iterator = assmt.iterator();
-    while (iterator.hasNext())
+	//for (Assignment asgn: assmt)
+	for ( int i = 0; i < assmt.size(); i++)
 	{
-		cp.putObject(name + ((Category)iterator.next()).getName(), iterator.next());
+		cp.putObject(name + assmt.getList().get(i).getName(),
+		    assmt.getList().get(i));
 	}
 	cp.commit();
 }
@@ -122,11 +119,10 @@ public Double getGrade() {
 public void setGrade() {
    int totPtsRcvd = 0;
    int totPtsGiven = 0;
-   Iterator iterator = assmt.iterator();
-   while (iterator.hasNext())
+   for ( int i = 0; i < assmt.size(); i++)
    {
-       totPtsRcvd += ((Assignment)iterator.next()).getPtsRecieved();
-       totPtsGiven += ((Assignment)iterator.next()).getTotPts();
+       totPtsRcvd += assmt.getList().get(i).getPtsRecieved();
+       totPtsGiven += assmt.getList().get(i).getTotPts();
    }
    if (totPtsRcvd == 0 || totPtsGiven == 0)
    {
@@ -141,14 +137,14 @@ public void setGrade() {
   /**
    * gets the assignment arrayList
    */
-  public Queue getAssmts() {
+  public ArrayListStack getAssmts() {
       return assmt;
   }
   /**
    * add assignment
    */
   public void addAssmt(Assignment grade) {
-      assmt.add(grade);
+      assmt.push(grade);
   }
 
   public void clearAssmt() {
@@ -159,8 +155,8 @@ public void setGrade() {
     protected Category(Parcel in) {
         name = in.readString();
         if (in.readByte() == 0x01) {
-            assmt = new LinkedList();
-            in.readList((assmt, Assignment.class.getClassLoader());
+            assmt = new ArrayListStack();
+            in.readList(assmt.getList(), Assignment.class.getClassLoader());
         } else {
             assmt = null;
         }
@@ -180,7 +176,7 @@ public void setGrade() {
             dest.writeByte((byte) (0x00));
         } else {
             dest.writeByte((byte) (0x01));
-            dest.writeList(assmt);
+            dest.writeList(assmt.getList());
         }
         dest.writeInt(weight);
         if (grade == null) {

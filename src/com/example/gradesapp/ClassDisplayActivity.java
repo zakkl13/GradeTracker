@@ -1,6 +1,5 @@
 package com.example.gradesapp;
 
-import java.util.Iterator;
 import android.view.View;
 import java.util.Observable;
 import java.util.Observer;
@@ -87,23 +86,18 @@ implements Observer {
     	}
 
     	int index = 0;
-    	int j = 0;
-    	Iterator iterator;
 
     	String[] list = new String[totNumAsgn];
     	for (int i = 0; i < thisClass.getCats().size(); i++)
     	{
     		Category curCat = thisClass.getCats().get(i);
-
-    		iterator = curCat.getAssmts().iterator();
-    		while (iterator.hasNext())
+    		for (int j = index; j < curCat.getAssmts().size(); j++)
     		{
-    			Assignment curAsgn = (Assignment)iterator.next();
+    			Assignment curAsgn = curCat.getAssmts().getList().get(j);
     			list[j] = curCat.getName() + " - " + curAsgn.getName() + ": " +
     			String.valueOf(curAsgn.getPtsRecieved())
     					+ " / " + String.valueOf(curAsgn.getTotPts());
     			index++;
-    			j++;
     		}
     	}
 
