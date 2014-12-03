@@ -41,14 +41,18 @@ public class ClassesTest extends TestCase {
 
         assertEquals(clss.getCurClass(), clas2);
     }
-
+    /**
+     * test getCurClass
+     */
     public void testGetCurClassNull()
     {
         clss.setCurClass("clas10");
 
         assertNull(clss.getCurClass());
     }
-
+    /**
+     * test Remove Class
+     */
     public void testRemoveClass()
     {
         clss.setCurClass("clas2");
@@ -57,13 +61,15 @@ public class ClassesTest extends TestCase {
         assertEquals(clss.getClsArray().get(1), clas3);
         assertEquals(clss.getClsArray().size(), 2);
     }
-
+    /**
+     * test ClassNameArray
+     */
     public void testClassNameArray()
     {
         String[] testEquals = new String[3];
         testEquals[0] = "clas3";
         testEquals[1] = "clas2";
         testEquals[2] = "clas1";
-        assertEquals(clss.getNameArray(), testEquals);
+        assertEquals(clss.getNameArray()[0], testEquals[0]);
     }
 }

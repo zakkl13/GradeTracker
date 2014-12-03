@@ -7,7 +7,7 @@
     <uses-sdk
         android:minSdkVersion="8"
         android:targetSdkVersion="21" />
-    <instrumentation android:targetPackage="GradesApp"
+    <instrumentation android:targetPackage="com.example.gradesapp"
         android:name="android.test.InstrumentationTestRunner">
     </instrumentation>
     

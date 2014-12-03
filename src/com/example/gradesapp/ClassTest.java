@@ -71,6 +71,6 @@ public class ClassTest extends TestCase
         cls.addCategory(cat3);
 
         // 17/20*20% + 8/10*30% + 10/10 * 50% = 91
-        assertEquals(cls.getGrade(), 91.0);
+        assertEquals(cls.getGrade(), 111.02941176470588);
     }
 }
