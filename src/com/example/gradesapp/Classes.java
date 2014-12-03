@@ -1,5 +1,6 @@
 package com.example.gradesapp;
 
+import android.util.Log;
 import java.util.ArrayList;
 import java.util.Observable;
 
@@ -93,12 +94,16 @@ public class Classes extends Observable implements Parcelable {
 	    for (Class cls: clsArray)
 	    {
 	        stack.push(cls.getName());
+	        Log.d("pushName", cls.getName());
 	    }
 
 		String[] classList = new String[stack.size()];
-        for (int i = 0; i < stack.size(); i++)
+		int i = 0;
+        while (!stack.isEmpty())
         {
             classList[i] = stack.pop();
+            Log.d("popName", classList[i]);
+            i++;
         }
 
         return classList;

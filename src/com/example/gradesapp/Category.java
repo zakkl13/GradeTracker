@@ -40,6 +40,12 @@ public Category(int weight, String name)
 
 }
 
+// ----------------------------------------------------------
+/**
+ * Create a new Category object.
+ * @param cat
+ * @param appContext
+ */
 public Category(Category cat, Context appContext)
 {
     ComplexPreferences cp = ComplexPreferences.getComplexPreferences(appContext,
@@ -56,6 +62,11 @@ public Category(Category cat, Context appContext)
     }
 }
 
+// ----------------------------------------------------------
+/**
+ * Place a description of your method here.
+ * @param appContext
+ */
 public void saveCategory(Context appContext)
 {
     ComplexPreferences cp = ComplexPreferences.getComplexPreferences(appContext,
@@ -107,6 +118,7 @@ public void setName(String name) {
 
 /**
 * gets the grade
+ * @return
 */
 public Double getGrade() {
    return grade;

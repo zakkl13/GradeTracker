@@ -24,7 +24,6 @@ import android.view.MenuItem;
 public class MainActivity
     extends ActionBarActivity implements Observer
 {
-    public final static String EXTRA_MESSAGE = "com.example.myfirstapp.MESSAGE";
     private Classes clss;
 
     @Override
@@ -60,7 +59,7 @@ public class MainActivity
 		    	clss.updateModel(getApplicationContext());
 		    }
 		}
-	
+
         updateSpinner();
 
     }

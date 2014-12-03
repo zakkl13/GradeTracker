@@ -9,8 +9,7 @@ import android.os.Parcelable;
 /**
  * // -------------------------------------------------------------------------
 /**
- *  This is our required Stack Implementation. Originally we planned to use a
- *  Queue. Unfortunately, Parcel Objects only support generic Lists.
+ *
  *
  *  @author Jason
  *  @version Dec 2, 2014
@@ -36,7 +35,7 @@ public class ArrayListStack<E> {
      */
     public void push(E item)
     {
-        list.add(item);
+        list.add(0, item);
 
     }
 
@@ -95,6 +94,7 @@ public class ArrayListStack<E> {
 
     /**
      * gets the arrayList
+     * @return
      */
     public ArrayList<E> getList()
     {
