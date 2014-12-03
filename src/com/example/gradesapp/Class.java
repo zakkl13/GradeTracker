@@ -122,9 +122,11 @@ public class Class implements Parcelable {
 	    }
 
 	    String[] catList = new String[stack.size()];
-        for (int i = 0; i < stack.size(); i++)
+	    int i = 0;
+        while (!stack.isEmpty())
         {
             catList[i] = stack.pop();
+            i++;
         }
 
         return catList;
@@ -142,18 +144,20 @@ public class Class implements Parcelable {
 
 	    for (Category cat: categories)
         {
-	        stack.push(cat.toString());
-
             for (Assignment asgn: cat.getAssmts())
             {
                 stack.push(asgn.toString());
             }
+
+            stack.push(cat.toString());
         }
 
 	    String[] assgnList = new String[stack.size()];
-	    for (int i = 0; i < stack.size(); i++)
+	    int i = 0;
+	    while (!stack.isEmpty())
 	    {
 	        assgnList[i] = stack.pop();
+	        i++;
 	    }
 
 	    return assgnList;

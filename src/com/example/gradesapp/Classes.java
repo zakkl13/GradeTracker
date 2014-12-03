@@ -94,15 +94,14 @@ public class Classes extends Observable implements Parcelable {
 	    for (Class cls: clsArray)
 	    {
 	        stack.push(cls.getName());
-	        Log.d("pushName", cls.getName());
 	    }
 
 		String[] classList = new String[stack.size()];
+
 		int i = 0;
         while (!stack.isEmpty())
         {
             classList[i] = stack.pop();
-            Log.d("popName", classList[i]);
             i++;
         }
 
