@@ -135,8 +135,9 @@ public class Class implements Parcelable {
 
 	// ----------------------------------------------------------
 	/**
-	 * Place a description of your method here.
-	 * @return
+	 * Uses a stack to populate the String[] for the List view of grades
+	 * the stack allows for the most recent items to be at the top of the list
+	 * @return a String array of Categories and their assignments
 	 */
 	public String[] getAssgnArray()
 	{
@@ -148,7 +149,6 @@ public class Class implements Parcelable {
             {
                 stack.push(asgn.toString());
             }
-
             stack.push(cat.toString());
         }
 

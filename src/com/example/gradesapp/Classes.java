@@ -1,6 +1,5 @@
 package com.example.gradesapp;
 
-import android.util.Log;
 import java.util.ArrayList;
 import java.util.Observable;
 
@@ -67,7 +66,7 @@ public class Classes extends Observable implements Parcelable {
 	/**
 	 * Adds a class to the array from its sharedPreference (created in the
 	 * add class activity)
-	 * @param sharedPref
+	 * @param cls
 	 */
 	public void addClass(Class cls)
 	{
@@ -76,6 +75,10 @@ public class Classes extends Observable implements Parcelable {
 		notifyObservers();
 	}
 
+	// ----------------------------------------------------------
+	/**
+	 * Place a description of your method here.
+	 */
 	public void deleteClass()
 	{
 		clsArray.remove(getCurClass());
@@ -132,6 +135,16 @@ public class Classes extends Observable implements Parcelable {
 		}
 
 		return null;
+	}
+
+	// ----------------------------------------------------------
+	/**
+	 * Place a description of your method here.
+	 * @return
+	 */
+	public ArrayList<Class> getClsArray()
+	{
+	    return clsArray;
 	}
 
 
