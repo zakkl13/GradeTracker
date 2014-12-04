@@ -31,7 +31,7 @@ public class AddGradesActivity
     extends ActionBarActivity implements Observer, OnItemSelectedListener
 {
     private Class thisClass;
-    private Classes clss;
+    private User clss;
     private ArrayList<Category> categories;
     private Category currentCat;
     private Assignment assmt;
@@ -53,7 +53,7 @@ public class AddGradesActivity
         Bundle b = inte.getExtras();
 		if (b != null)
 		{
-			clss = (Classes) b.getParcelable("Classes");
+			clss = (User) b.getParcelable("Classes");
 		}
 		thisClass = clss.getCurClass();
 

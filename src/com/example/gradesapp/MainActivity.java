@@ -1,4 +1,9 @@
 package com.example.gradesapp;
+import android.widget.Toast;
+import android.content.DialogInterface;
+import android.widget.EditText;
+import android.app.AlertDialog;
+import android.view.LayoutInflater;
 import java.util.Observable;
 import java.util.Observer;
 
@@ -24,7 +29,7 @@ import android.view.MenuItem;
 public class MainActivity
     extends ActionBarActivity implements Observer
 {
-    private Classes clss;
+    private User clss;
 
     @Override
     /**
@@ -40,7 +45,8 @@ public class MainActivity
 		//checks if another activity passed the model back through
 		if (b != null)
 		{
-			clss = (Classes) b.getParcelable("Classes");
+			clss = (User) b.getParcelable("Classes");
+			updateSpinner();
 		}
 		else //if not then check if there is any saved date
 		{	 //if so grab it and set the model, if not create a new model
@@ -48,20 +54,52 @@ public class MainActivity
 
 		    ComplexPreferences complexPreferences = ComplexPreferences.
 		        getComplexPreferences(this, "Classes", MODE_PRIVATE);
-		    clss = complexPreferences.getObject("Model", Classes.class);
+		    clss = complexPreferences.getObject("Model", User.class);
 
 		    if (clss == null)
 		    {
-		    	clss = new Classes();
+		    	createUser();
 		    }
 		    else
 		    {
 		    	clss.updateModel(getApplicationContext());
+		    	Toast.makeText(this, "Welcome " +
+		    	            clss.getUserName(), Toast.LENGTH_SHORT).show();
+		    	updateSpinner();
 		    }
 		}
 
-        updateSpinner();
+    }
 
+    private void createUser()
+    {
+        LayoutInflater li = LayoutInflater.from(this);
+        View promptsView = li.inflate(R.layout.prompt, null);
+
+        AlertDialog.Builder alertDialogBuilder = new AlertDialog.Builder(
+                this);
+
+        alertDialogBuilder.setView(promptsView);
+
+        final EditText userName = (EditText) promptsView
+                .findViewById(R.id.dialogUserName);
+
+        // set dialog message
+        alertDialogBuilder
+            .setCancelable(false)
+            .setPositiveButton("OK",
+              new DialogInterface.OnClickListener() {
+                public void onClick(DialogInterface dialog,int id) {
+                    String usr = userName.getText().toString();
+                    clss = new User(usr);
+                }
+              });
+
+        // create alert dialog
+        AlertDialog alertDialog = alertDialogBuilder.create();
+
+        // show it
+        alertDialog.show();
     }
 
 	private void updateSpinner() {

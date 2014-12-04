@@ -20,7 +20,7 @@ import android.view.MenuItem;
 public class AddCategoryActivity
     extends ActionBarActivity
 {
-    private Classes clss;
+    private User clss;
     /**
      * This method runs when an activity is created. It sets the content view
      * and also gets the intent; this is all done using the saved instance
@@ -36,7 +36,7 @@ public class AddCategoryActivity
 		Bundle b = inte.getExtras();
 		if (b != null)
 		{
-			clss = (Classes) b.getParcelable("Classes");
+			clss = (User) b.getParcelable("Classes");
 		}
 
     }

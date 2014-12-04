@@ -13,14 +13,14 @@ import junit.framework.TestCase;
  */
 public class ClassesTest extends TestCase {
 
-    private Classes clss;
+    private User clss;
     private Class clas1;
     private Class clas2;
     private Class clas3;
 
     public void setUp()
     {
-        clss = new Classes();
+        clss = new User("user");
 
         clas1 = new Class(0, true, "clas1");
         clas2 = new Class(0, true, "clas2");

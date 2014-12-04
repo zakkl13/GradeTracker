@@ -190,17 +190,31 @@ public class Class implements Parcelable {
     public double getGrade()
     {
     	double totalGrade = 0.0;
-    
+
     	for (Category c : categories)
         {
             c.setGrade();
             Log.d("grade", c.getGrade() + "");
             totalGrade += c.getGrade() * c.getWeight();
             Log.d("totalGrade", totalGrade + "");
-    
+
         }
-    
+
     	return totalGrade;
+    }
+
+    public boolean equals(Object c)
+    {
+        if (c instanceof Class)
+        {
+            Class tmp = (Class) c;
+            if (tmp.getName().equals(name))
+            {
+                return true;
+            }
+        }
+
+        return false;
     }
 
     //Getters and Setters

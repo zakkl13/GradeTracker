@@ -1,5 +1,6 @@
 package com.example.gradesapp;
 
+import android.widget.Toast;
 import br.com.kots.mob.complex.preferences.ComplexPreferences;
 import android.support.v7.app.ActionBarActivity;
 import android.content.Context;
@@ -24,7 +25,7 @@ import android.widget.RadioGroup;
  */
 public class AddClassActivity extends ActionBarActivity {
 	private RadioGroup RadioGroup;
-	Classes clss;
+	User clss;
 
 	/**
 	 * This method runs when an activity is creates.  It sets the content view
@@ -39,7 +40,7 @@ public class AddClassActivity extends ActionBarActivity {
 		Bundle b = inte.getExtras();
 		if (b != null)
 		{
-			clss = (Classes) b.getParcelable("Classes");
+			clss = (User) b.getParcelable("Classes");
 		}
 	}
 
@@ -95,18 +96,35 @@ public class AddClassActivity extends ActionBarActivity {
 		Class cls = new Class(Integer.parseInt(crHours.getText().toString()),
 		    passFail, className.getText().toString());
 
-		clss.addClass(cls);
-		clss.saveModel(getApplicationContext());
-
-//	    ComplexPreferences complexPreferences = ComplexPreferences.
-//	        getComplexPreferences(this, "Classes", MODE_PRIVATE);
-//	    complexPreferences.putObject("Model", clss);
-//	    complexPreferences.commit();
+		if (classExist(cls))
+		{
+		    Toast.makeText(this, "You've already added this class!",
+		        Toast.LENGTH_SHORT).show();
+		}
+		else
+		{
+		    clss.addClass(cls);
+	        clss.saveModel(getApplicationContext());
+		}
 
 		//Return to main activity menu
 		Intent intent = new Intent(this, MainActivity.class);
+		intent.putExtra("Classes", clss);
         startActivity(intent);
 
+	}
+
+	private boolean classExist(Class cls)
+	{
+	    for (Class c: clss.getClsArray())
+	    {
+	        if (c.equals(cls))
+	        {
+	            return true;
+	        }
+	    }
+
+	    return false;
 	}
 }
 

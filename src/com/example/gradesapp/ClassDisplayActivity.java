@@ -27,7 +27,7 @@ import android.widget.TextView;
 public class ClassDisplayActivity extends ActionBarActivity
 implements Observer {
 	private Class thisClass;
-	private Classes clss;
+	private User clss;
 
 	/**
 	 * Gets the current class from getExtras() through the intent
@@ -42,7 +42,7 @@ implements Observer {
 		Bundle b = inte.getExtras();
 		if (b != null)
 		{
-			clss = (Classes) b.getParcelable("Classes");
+			clss = (User) b.getParcelable("Classes");
 			thisClass = clss.getCurClass();
 
 			updateDisplay();
