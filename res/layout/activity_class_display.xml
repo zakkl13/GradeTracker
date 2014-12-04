@@ -31,41 +31,13 @@
         android:maxLength="4"
         android:textAppearance="?android:attr/textAppearanceMedium" />
 
-    <TextView
-        android:id="@+id/hours"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_below="@+id/clsName"
-        android:layout_centerHorizontal="true"
-        android:text="Credit Hours:"
-        android:textAppearance="?android:attr/textAppearanceSmall" />
-
-    <TextView
-        android:id="@+id/clsName"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_alignParentTop="true"
-        android:layout_centerHorizontal="true"
-        android:text="Large Text"
-        android:textAppearance="?android:attr/textAppearanceLarge" />
-
-    <Button
-        android:id="@+id/button1"
-        style="?android:attr/buttonStyleSmall"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_alignParentRight="true"
-        android:layout_alignParentTop="true"
-        android:onClick="home"
-        android:text="Home" />
-
     <ListView
         android:id="@+id/listView1"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_above="@+id/addGrades"
         android:layout_alignParentLeft="true"
-        android:layout_below="@+id/button1" >
+        android:layout_alignParentTop="true" >
 
     </ListView>
 
@@ -78,5 +50,15 @@
         android:layout_marginBottom="16dp"
         android:onClick="addGrades"
         android:text="Add Grades" />
+
+    <Button
+        android:id="@+id/button1"
+        style="?android:attr/buttonStyleSmall"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignRight="@+id/listView1"
+        android:layout_alignTop="@+id/addGrades"
+        android:onClick="home"
+        android:text="Home" />
 
 </RelativeLayout>

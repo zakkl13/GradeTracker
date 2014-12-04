@@ -1,5 +1,6 @@
 package com.example.gradesapp;
 
+import android.widget.Toast;
 import android.content.Intent;
 import android.view.View;
 import android.widget.EditText;
@@ -57,19 +58,36 @@ public class AddCategoryActivity
         Category cat = new Category(Integer.parseInt(percent.getText().
             toString()), catName.getText().toString());
 
-        clss.getCurClass().addCategory(cat);
-        clss.saveModel(getApplicationContext());
 
-//        ComplexPreferences complexPreferences = ComplexPreferences.
-//    	        getComplexPreferences(this, "Classes", MODE_PRIVATE);
-//    	    complexPreferences.putObject("Model", clss);
-//    	    complexPreferences.commit();
+        if (categoryExist(cat))
+        {
+            Toast.makeText(this, "You've already added this category!",
+                Toast.LENGTH_SHORT).show();
+        }
+        else
+        {
+            clss.getCurClass().addCategory(cat);
+            clss.saveModel(getApplicationContext());
 
-        //Return to main activity menu
-        Intent intent = new Intent(this, AddGradesActivity.class);
-        intent.putExtra("Classes", clss);
-        startActivity(intent);
+            //Return to main activity menu
+            Intent intent = new Intent(this, AddGradesActivity.class);
+            intent.putExtra("Classes", clss);
+            startActivity(intent);
+        }
 
+    }
+
+    private boolean categoryExist(Category cat)
+    {
+        for (Category c: clss.getCurClass().getCats())
+        {
+            if (c.equals(cat))
+            {
+                return true;
+            }
+        }
+
+        return false;
     }
 
     /**

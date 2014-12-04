@@ -169,6 +169,20 @@ public void setGrade() {
       return str;
   }
 
+  public boolean equals(Object c)
+  {
+      if (c instanceof Category)
+      {
+          Category tmp = (Category) c;
+          if (tmp.getName().equals(name))
+          {
+              return true;
+          }
+      }
+
+      return false;
+  }
+
 
     protected Category(Parcel in) {
         name = in.readString();

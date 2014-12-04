@@ -25,6 +25,7 @@ public class User extends Observable implements Parcelable {
 
     /**
      * Creates the classes Object
+     * @param userName
      */
     public User(String userName)
     {
@@ -169,11 +170,21 @@ public class User extends Observable implements Parcelable {
         return totCrHrs;
     }
 
+    // ----------------------------------------------------------
+    /**
+     * Place a description of your method here.
+     * @param totCrHrs
+     */
     public void setTotCrHrs(int totCrHrs)
     {
         this.totCrHrs = totCrHrs;
     }
 
+    // ----------------------------------------------------------
+    /**
+     * Create a new User object.
+     * @param in
+     */
     protected User(Parcel in) {
         if (in.readByte() == 0x01) {
             clsArray = new ArrayList<Class>();

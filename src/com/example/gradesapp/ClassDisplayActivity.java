@@ -1,5 +1,6 @@
 package com.example.gradesapp;
 
+import android.app.ActionBar;
 import android.view.View;
 import java.util.Observable;
 import java.util.Observer;
@@ -48,6 +49,10 @@ implements Observer {
 			updateDisplay();
 		}
 
+		ActionBar ab = getActionBar();
+		ab.setTitle(thisClass.getName());
+		ab.setSubtitle("Credit Hours: " + String.valueOf(thisClass.getNumCrHrs()));
+
 		setList();
 	}
 
@@ -56,14 +61,9 @@ implements Observer {
 	 */
 	public void updateDisplay()
 	{
-		TextView name = (TextView) findViewById(R.id.clsName);
-		name.setText(thisClass.getName());
 
 		TextView grade = (TextView) findViewById(R.id.curGrade);
 		grade.setText(String.valueOf(thisClass.getGrade()));
-
-		TextView hours = (TextView) findViewById(R.id.hours);
-		hours.setText("Credit Hours: " + thisClass.getNumCrHrs());
 	}
 
     /**

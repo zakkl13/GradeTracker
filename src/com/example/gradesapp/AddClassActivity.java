@@ -105,12 +105,12 @@ public class AddClassActivity extends ActionBarActivity {
 		{
 		    clss.addClass(cls);
 	        clss.saveModel(getApplicationContext());
-		}
 
-		//Return to main activity menu
-		Intent intent = new Intent(this, MainActivity.class);
-		intent.putExtra("Classes", clss);
-        startActivity(intent);
+	        //Return to main activity menu
+	        Intent intent = new Intent(this, MainActivity.class);
+	        intent.putExtra("Classes", clss);
+	        startActivity(intent);
+		}
 
 	}
 
