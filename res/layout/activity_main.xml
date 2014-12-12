@@ -60,4 +60,25 @@
         android:onClick="deleteClass"
         android:text="Delete Class" />
 
+    <TextView
+        android:id="@+id/textView1"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignLeft="@+id/button1"
+        android:layout_below="@+id/addCat"
+        android:layout_marginTop="53dp"
+        android:text="Your Current GPA is"
+        android:textAppearance="?android:attr/textAppearanceLarge" />
+
+    <TextView
+        android:id="@+id/gpa"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignBaseline="@+id/textView1"
+        android:layout_alignBottom="@+id/textView1"
+        android:layout_alignRight="@+id/addCat"
+        android:maxLength="4"
+        android:text=" "
+        android:textAppearance="?android:attr/textAppearanceLarge" />
+
 </RelativeLayout>

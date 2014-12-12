@@ -1092,7 +1092,7 @@ containing a value of this type.
         public static final int action_menu_divider=0x7f060016;
         public static final int action_menu_presenter=0x7f060017;
         public static final int action_mode_close_button=0x7f060024;
-        public static final int action_settings=0x7f060058;
+        public static final int action_settings=0x7f060059;
         public static final int activity_chooser_view_content=0x7f060025;
         public static final int addCat=0x7f060040;
         public static final int addClass=0x7f06003d;
@@ -1112,13 +1112,14 @@ containing a value of this type.
         public static final int curGrade=0x7f06004d;
         public static final int default_activity_button=0x7f060028;
         public static final int dialog=0x7f06000e;
-        public static final int dialogUserName=0x7f060057;
+        public static final int dialogUserName=0x7f060058;
         public static final int disableHome=0x7f060008;
         public static final int dropdown=0x7f06000f;
         public static final int edit_query=0x7f060030;
         public static final int end=0x7f060013;
         public static final int expand_activities_button=0x7f060026;
         public static final int expanded_menu=0x7f06002c;
+        public static final int gpa=0x7f060055;
         public static final int grade=0x7f060046;
         public static final int gradeName=0x7f060043;
         public static final int home=0x7f060014;
@@ -1126,7 +1127,7 @@ containing a value of this type.
         public static final int icon=0x7f06002a;
         public static final int ifRoom=0x7f06000a;
         public static final int image=0x7f060027;
-        public static final int layout_root=0x7f060055;
+        public static final int layout_root=0x7f060056;
         public static final int listMode=0x7f060001;
         public static final int listView1=0x7f060050;
         public static final int list_item=0x7f060029;
@@ -1160,7 +1161,7 @@ containing a value of this type.
         public static final int submit_area=0x7f060039;
         public static final int tabMode=0x7f060002;
         public static final int textView1=0x7f060041;
-        public static final int textView2=0x7f060056;
+        public static final int textView2=0x7f060057;
         public static final int textView3=0x7f060052;
         public static final int textView4=0x7f060053;
         public static final int title=0x7f06002b;

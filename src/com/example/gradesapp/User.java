@@ -149,6 +149,57 @@ public class User extends Observable implements Parcelable {
      * Place a description of your method here.
      * @return
      */
+    public Double getGpa()
+    {
+        double gpa = 0.00;
+        int creditHours = 0;
+
+        for (Class c: clsArray)
+        {
+            creditHours += c.getNumCrHrs();
+            double thisClassGrade = c.getGrade();
+            if (thisClassGrade > 94.0)
+            {
+                gpa += 4.0;
+            }
+            else if (thisClassGrade > 90.0)
+            {
+                gpa += 3.7;
+            }
+            else if (thisClassGrade > 87.0)
+            {
+                gpa += 3.3;
+            }
+            else if (thisClassGrade > 83.0)
+            {
+                gpa += 3.0;
+            }
+            else if (thisClassGrade > 80.0)
+            {
+                gpa += 2.7;
+            }
+            else if (thisClassGrade > 77.0)
+            {
+                gpa += 2.3;
+            }
+            else if (thisClassGrade > 73.0)
+            {
+                gpa += 2.0;
+            }
+            else if (thisClassGrade > 70.0)
+            {
+                gpa += 1.7;
+            }
+        }
+
+        return gpa/ creditHours;
+    }
+
+    // ----------------------------------------------------------
+    /**
+     * Place a description of your method here.
+     * @return
+     */
     public ArrayList<Class> getClsArray()
     {
         return clsArray;

@@ -1,5 +1,8 @@
 package com.example.gradesapp;
 
+import android.util.Log;
+import android.widget.AdapterView;
+import android.widget.AdapterView.OnItemClickListener;
 import android.app.ActionBar;
 import android.view.View;
 import java.util.Observable;
@@ -54,6 +57,30 @@ implements Observer {
 		ab.setSubtitle("Credit Hours: " + String.valueOf(thisClass.getNumCrHrs()));
 
 		setList();
+		ListView lsView = (ListView) findViewById(R.id.listView1);
+
+		lsView.setOnItemClickListener(new OnItemClickListener() {
+            @Override
+            public void onItemClick(AdapterView<?> parent, View view, int position,
+                    long id) {
+
+                String asgnMent = ((TextView)view).getText().toString();
+                int lngth = 0;
+                for (int i = 0; i < asgnMent.length(); i++)
+                {
+                    String colon = ":";
+                    char chr = colon.charAt(0);
+                    if (asgnMent.charAt(i) == chr)
+                    {
+                        lngth = i;
+                    }
+                }
+                String asgnName = asgnMent.substring(0, lngth);
+                thisClass.deleteAssignment(asgnName);
+                setList();
+
+            }
+        });
 	}
 
 	/**
@@ -83,6 +110,7 @@ implements Observer {
     	ArrayAdapter<String> adapt = new ArrayAdapter<String>(this,
     	    android.R.layout.simple_list_item_1, thisClass.getAssgnArray());
     	lsView.setAdapter(adapt);
+
     }
 
     // ----------------------------------------------------------
@@ -93,6 +121,7 @@ implements Observer {
     public void home(View view)
     {
         Intent intent = new Intent(this, MainActivity.class);
+        intent.putExtra("Classes", clss);
         startActivity(intent);
     }
 

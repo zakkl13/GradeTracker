@@ -1,4 +1,5 @@
 package com.example.gradesapp;
+import android.widget.TextView;
 import android.widget.Toast;
 import android.content.DialogInterface;
 import android.widget.EditText;
@@ -63,11 +64,14 @@ public class MainActivity
 		    else
 		    {
 		    	clss.updateModel(getApplicationContext());
-		    	Toast.makeText(this, "Welcome " +
-		    	            clss.getUserName(), Toast.LENGTH_SHORT).show();
+		    	Toast.makeText(this, "Welcome Back " +
+		    	            clss.getUserName() + "!", Toast.LENGTH_SHORT).show();
 		    	updateSpinner();
 		    }
 		}
+
+		TextView gpa = (TextView) findViewById(R.id.gpa);
+		gpa.setText(String.valueOf(clss.getGpa()));
 
     }
 
@@ -100,6 +104,9 @@ public class MainActivity
 
         // show it
         alertDialog.show();
+
+        Toast.makeText(this, "Welcome " +
+            userName.getText().toString(), Toast.LENGTH_SHORT).show();
     }
 
 	private void updateSpinner() {

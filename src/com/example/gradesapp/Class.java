@@ -109,6 +109,26 @@ public class Class implements Parcelable {
 	// ----------------------------------------------------------
 	/**
 	 * Place a description of your method here.
+	 * @param asgnName
+	 */
+	public void deleteAssignment(String asgnName)
+	{
+	    for (Category c: categories)
+	    {
+	        for (Assignment a: c.getAssmts())
+	        {
+	            if (a.getName().equals(asgnName))
+	            {
+	                c.getAssmts().remove(a);
+	                Log.d("deleted", "a.getName()");
+	            }
+	        }
+	    }
+	}
+
+	// ----------------------------------------------------------
+	/**
+	 * Place a description of your method here.
 	 * @param catName
 	 * @return
 	 */
@@ -165,7 +185,7 @@ public class Class implements Parcelable {
         {
             for (Assignment asgn: cat.getAssmts())
             {
-                stack.push(asgn.toString());
+                stack.push(asgn.getName() + asgn.toString());
             }
             stack.push(cat.toString());
         }

@@ -247,7 +247,7 @@ int id action_context_bar 0x7f06001d
 int id action_menu_divider 0x7f060016
 int id action_menu_presenter 0x7f060017
 int id action_mode_close_button 0x7f060024
-int id action_settings 0x7f060058
+int id action_settings 0x7f060059
 int id activity_chooser_view_content 0x7f060025
 int id addCat 0x7f060040
 int id addClass 0x7f06003d
@@ -267,13 +267,14 @@ int id collapseActionView 0x7f06000d
 int id curGrade 0x7f06004d
 int id default_activity_button 0x7f060028
 int id dialog 0x7f06000e
-int id dialogUserName 0x7f060057
+int id dialogUserName 0x7f060058
 int id disableHome 0x7f060008
 int id dropdown 0x7f06000f
 int id edit_query 0x7f060030
 int id end 0x7f060013
 int id expand_activities_button 0x7f060026
 int id expanded_menu 0x7f06002c
+int id gpa 0x7f060055
 int id grade 0x7f060046
 int id gradeName 0x7f060043
 int id home 0x7f060014
@@ -281,7 +282,7 @@ int id homeAsUp 0x7f060005
 int id icon 0x7f06002a
 int id ifRoom 0x7f06000a
 int id image 0x7f060027
-int id layout_root 0x7f060055
+int id layout_root 0x7f060056
 int id listMode 0x7f060001
 int id listView1 0x7f060050
 int id list_item 0x7f060029
@@ -315,7 +316,7 @@ int id split_action_bar 0x7f06001e
 int id submit_area 0x7f060039
 int id tabMode 0x7f060002
 int id textView1 0x7f060041
-int id textView2 0x7f060056
+int id textView2 0x7f060057
 int id textView3 0x7f060052
 int id textView4 0x7f060053
 int id title 0x7f06002b

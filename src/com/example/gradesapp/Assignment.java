@@ -15,8 +15,8 @@ import android.os.Parcelable;
 public class Assignment implements Parcelable {
 
 	private String name;
-	private int totPts;
-	private int ptsRecieved;
+	private double totPts;
+	private double ptsRecieved;
 
 	// ----------------------------------------------------------
 	/**
@@ -25,7 +25,7 @@ public class Assignment implements Parcelable {
 	 * @param totPts      The total points the assignment is worth
 	 * @param ptsRecieved The points received on the assignment
 	 */
-	public Assignment( String name, int totPts, int ptsRecieved)
+	public Assignment( String name, double totPts, double ptsRecieved)
 	{
 		this.name = name;
 		this.totPts = totPts;
@@ -55,7 +55,7 @@ public class Assignment implements Parcelable {
 	 * Gets the total points the assignment is worth.
 	 * @return Returns the value of the total points
 	 */
-	public int getTotPts() {
+	public double getTotPts() {
 		return totPts;
 	}
 
@@ -64,7 +64,7 @@ public class Assignment implements Parcelable {
 	 * Sets the total points the assignment is worth.
 	 * @param totPts The total points the assignment is worth
 	 */
-	public void setTotPts(int totPts) {
+	public void setTotPts(double totPts) {
 		this.totPts = totPts;
 	}
 
@@ -73,7 +73,7 @@ public class Assignment implements Parcelable {
 	 * Gets the points received on the assignment.
 	 * @return Returns the value of the points received on the assignment
 	 */
-	public int getPtsRecieved() {
+	public double getPtsRecieved() {
 		return ptsRecieved;
 	}
 
@@ -82,13 +82,13 @@ public class Assignment implements Parcelable {
 	 * Sets the points received on the assignment.
 	 * @param ptsRecieved The value of the points received on the assignment.
 	 */
-	public void setPtsRecieved(int ptsRecieved) {
+	public void setPtsRecieved(double ptsRecieved) {
 		this.ptsRecieved = ptsRecieved;
 	}
 
 	public String toString()
 	{
-	    String str = name + ": " +
+	    String str = ": " +
             String.valueOf(ptsRecieved)
             + " / " + String.valueOf(totPts);
 
@@ -101,8 +101,8 @@ public class Assignment implements Parcelable {
  */
  protected Assignment(Parcel in) {
      name = in.readString();
-     totPts = in.readInt();
-     ptsRecieved = in.readInt();
+     totPts = in.readDouble();
+     ptsRecieved = in.readDouble();
  }
 
  @Override
@@ -113,8 +113,8 @@ public class Assignment implements Parcelable {
  @Override
  public void writeToParcel(Parcel dest, int flags) {
      dest.writeString(name);
-     dest.writeInt(totPts);
-     dest.writeInt(ptsRecieved);
+     dest.writeDouble(totPts);
+     dest.writeDouble(ptsRecieved);
  }
 
  /**

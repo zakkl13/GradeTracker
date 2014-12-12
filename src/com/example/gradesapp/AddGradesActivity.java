@@ -84,31 +84,32 @@ public class AddGradesActivity
         gradeName = nameG.getText().toString(); //make Assignment obj
         String ptsRcv = ptsRcvd.getText().toString();
         String ptsTot = totPts.getText().toString();
+
         if (gradeName == null)
         {
         	gradeName = "NONAME";
         }
 
-        if (!isInteger(ptsRcv))
+        if (!isDouble(ptsRcv))
         {
         	Toast.makeText(this, "Please enter a value for Points Recieved",
         	    Toast.LENGTH_SHORT).show();
         }
-        else if (!isInteger(ptsTot))
+        else if (!isDouble(ptsTot))
         {
         	Toast.makeText(this, "Please enter a value for Total Points",
         	    Toast.LENGTH_SHORT).show();
         }
         else
         {
-            assmt = new Assignment(gradeName, Integer.parseInt(ptsTot),
-                Integer.parseInt(ptsRcv));
+            assmt = new Assignment(gradeName, Double.parseDouble(ptsTot),
+                Double.parseDouble(ptsRcv));
             currentCat.addAssmt(assmt);
             clss.saveModel(getApplicationContext());
 
             currentCat.setGrade();
             TextView finalGrade = (TextView) findViewById(R.id.grade);
-            finalGrade.setText(String.valueOf(currentCat.getGrade()));
+            finalGrade.setText(String.valueOf(100*currentCat.getGrade()));
 
             clss.saveModel(getApplicationContext());
 
@@ -124,9 +125,9 @@ public class AddGradesActivity
      * This method determines whether or not a string represents an integer.
      * @return Returns true if the string is an integer, otherwise false
      */
-    private boolean isInteger(String s) {
+    private boolean isDouble(String s) {
         try {
-            Integer.parseInt(s);
+            Double.parseDouble(s);
         } catch(NumberFormatException e) {
             return false;
         }
@@ -159,20 +160,20 @@ public class AddGradesActivity
         	gradeName = "NONAME";
         }
 
-        if (!isInteger(ptsRcv))
+        if (!isDouble(ptsRcv))
         {
         	Toast.makeText(this, "Please enter a value for Points Recieved",
         	    Toast.LENGTH_SHORT).show();
         }
-        else if (!isInteger(ptsTot))
+        else if (!isDouble(ptsTot))
         {
         	Toast.makeText(this, "Please enter a value for Total Points",
         	    Toast.LENGTH_SHORT).show();
         }
         else
         {
-            assmt = new Assignment(gradeName, Integer.parseInt(ptsTot),
-                Integer.parseInt(ptsRcv));
+            assmt = new Assignment(gradeName, Double.parseDouble(ptsTot),
+                Double.parseDouble(ptsRcv));
             currentCat.addAssmt(assmt);
             clss.saveModel(getApplicationContext());
 
@@ -195,6 +196,7 @@ public class AddGradesActivity
     public void home(View view)
     {
         Intent intent = new Intent(this, MainActivity.class);
+        intent.putExtra("Classes", clss);
         startActivity(intent);
     }
     // ----------------------------------------------------------
